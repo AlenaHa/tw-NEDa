@@ -8,21 +8,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Date;
+
 @RestController
 public class EarthquakeController {
 
     @Autowired
     private EarthquakeRepository earthquakeRepository;
 
-    @RequestMapping(value = "/works", method = RequestMethod.GET)
+    @RequestMapping(value = "/works/earthquake", method = RequestMethod.GET)
     public String itWorks() {
 
         Earthquake earthquake = new Earthquake();
-        earthquake.setName("Cutremuru din 77");
+        earthquake.setLocalizationId(3);
+        Date date = new Date(22 / 11 / 2015);
+        earthquake.setDate(date);
+        earthquake.setDepth(30.0);
+        earthquake.setLatitude(79.06);
+        earthquake.setLongitude(30.67);
+        earthquake.setMagnitude(9.5);
 
         earthquakeRepository.save(earthquake);
 
-        return "it worked";
+        return "earthquake worked";
     }
 
 }

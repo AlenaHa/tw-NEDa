@@ -1,10 +1,7 @@
 package org.elena.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Table(name = "earthquake")
@@ -15,7 +12,22 @@ public class Earthquake {
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private int localizationId;
+
+    @Column(nullable = false)
+    private Double latitude;
+
+    @Column(nullable = false)
+    private Double longitude;
+
+    @Column(nullable = false)
+    private Double depth;
+
+    @Column(nullable = false)
+    private Double magnitude;
+
+    @Column
+    private Date date;
 
     public Long getId() {
         return id;
@@ -25,11 +37,52 @@ public class Earthquake {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public int getLocalizationId() {
+        return localizationId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLocalizationId(int localizationId) {
+        this.localizationId = localizationId;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getDepth() {
+        return depth;
+    }
+
+    public void setDepth(Double depth) {
+        this.depth = depth;
+    }
+
+    public Double getMagnitude() {
+        return magnitude;
+    }
+
+    public void setMagnitude(Double magnitude) {
+        this.magnitude = magnitude;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
+

@@ -8,7 +8,7 @@ spring:
   application:
      name: neda # Service name
   datasource:
-    url: jdbc:mysql://localhost/db
+    url: jdbc:mysql://localhost/neda
     username: root
     password: root
     driverClassName: com.mysql.jdbc.Driver
