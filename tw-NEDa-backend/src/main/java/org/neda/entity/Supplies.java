@@ -1,4 +1,4 @@
-package org.elena.entity;
+package org.neda.entity;
 
 import javax.persistence.*;
 

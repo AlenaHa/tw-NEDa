@@ -1,6 +1,6 @@
-package org.elena.repository;
+package org.neda.repository;
 
-import org.elena.entity.Population;
+import org.neda.entity.Population;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

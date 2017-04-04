@@ -1,6 +1,6 @@
-package org.elena.repository;
+package org.neda.repository;
 
-import org.elena.entity.Earthquake;
+import org.neda.entity.Earthquake;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

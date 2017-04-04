@@ -1,7 +1,7 @@
-package org.elena;
+package org.neda;
 
-import org.elena.entity.Population;
-import org.elena.repository.PopulationRepository;
+import org.neda.entity.Population;
+import org.neda.repository.PopulationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

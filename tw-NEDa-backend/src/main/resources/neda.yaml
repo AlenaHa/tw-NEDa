@@ -8,10 +8,11 @@ spring:
   application:
      name: neda # Service name
   datasource:
-    url: jdbc:mysql://localhost/neda
-    username: root
-    password: root
-    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: STUDENT
+    password: STUDENT
+    driver-class-name: com.oracle.jdbc.OracleDriver
   jpa:
+    database-platform: org.hibernate.dialect.Oracle10gDialect
     hibernate:
       ddl-auto: update

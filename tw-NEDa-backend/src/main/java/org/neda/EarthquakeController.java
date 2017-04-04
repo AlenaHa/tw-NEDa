@@ -1,8 +1,8 @@
-package org.elena;
+package org.neda;
 
 
-import org.elena.entity.Earthquake;
-import org.elena.repository.EarthquakeRepository;
+import org.neda.entity.Earthquake;
+import org.neda.repository.EarthquakeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,7 +22,7 @@ public class EarthquakeController {
         Earthquake earthquake = new Earthquake();
         earthquake.setLocalizationId(3);
         Date date = new Date(22 / 11 / 2015);
-        earthquake.setDate(date);
+        earthquake.setHappenedOn(date);
         earthquake.setDepth(30.0);
         earthquake.setLatitude(79.06);
         earthquake.setLongitude(30.67);

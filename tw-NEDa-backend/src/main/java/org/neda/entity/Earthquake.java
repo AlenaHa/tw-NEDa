@@ -1,4 +1,4 @@
-package org.elena.entity;
+package org.neda.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -27,7 +27,7 @@ public class Earthquake {
     private Double magnitude;
 
     @Column
-    private Date date;
+    private Date happenedOn;
 
     public Long getId() {
         return id;
@@ -77,12 +77,12 @@ public class Earthquake {
         this.magnitude = magnitude;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getHappenedOn() {
+        return happenedOn;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setHappenedOn(Date happenedOn) {
+        this.happenedOn = happenedOn;
     }
 }
 
