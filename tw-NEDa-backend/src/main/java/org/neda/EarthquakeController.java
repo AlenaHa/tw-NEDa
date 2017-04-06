@@ -6,6 +6,7 @@ import org.neda.repository.EarthquakeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Date;
@@ -13,10 +14,16 @@ import java.sql.Date;
 @RestController
 public class EarthquakeController {
 
-    @Autowired
     private EarthquakeRepository earthquakeRepository;
 
-    @RequestMapping(value = "/works/earthquake", method = RequestMethod.GET)
+
+    @Autowired
+    public EarthquakeController(EarthquakeRepository earthquakeRepository){
+        this.earthquakeRepository = earthquakeRepository;
+    }
+
+    @RequestMapping(value = "/earthquake", method = RequestMethod.GET)
+    @ResponseBody
     public String itWorks() {
 
         Earthquake earthquake = new Earthquake();
@@ -30,7 +37,7 @@ public class EarthquakeController {
 
         earthquakeRepository.save(earthquake);
 
-        return "earthquake worked";
+        return "Earthquake : " + earthquake.getLongitude() + " " + earthquake.getLatitude();
     }
 
 }

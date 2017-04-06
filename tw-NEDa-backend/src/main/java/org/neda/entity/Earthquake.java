@@ -8,25 +8,26 @@ import java.sql.Date;
 public class Earthquake {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name="eq_id")
+    private long id;
 
-    @Column(nullable = false)
-    private int localizationId;
+    @Column(name="e_location_id")
+    private long localizationId;
 
-    @Column(nullable = false)
+    @Column(name="latitude")
     private Double latitude;
 
-    @Column(nullable = false)
+    @Column(name="longitude")
     private Double longitude;
 
-    @Column(nullable = false)
+    @Column(name="eq_depth")
     private Double depth;
 
-    @Column(nullable = false)
+    @Column(name="magnitude")
     private Double magnitude;
 
-    @Column
+    @Column(name="happened_on")
     private Date happenedOn;
 
     public Long getId() {
@@ -37,11 +38,11 @@ public class Earthquake {
         this.id = id;
     }
 
-    public int getLocalizationId() {
+    public long getLocalizationId() {
         return localizationId;
     }
 
-    public void setLocalizationId(int localizationId) {
+    public void setLocalizationId(long localizationId) {
         this.localizationId = localizationId;
     }
 

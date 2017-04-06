@@ -5,24 +5,33 @@ import org.neda.repository.PopulationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PopulationController {
 
-    @Autowired
     private PopulationRepository populationRepository;
 
-    @RequestMapping(value = "/works/population", method = RequestMethod.GET)
+    @Autowired
+    public PopulationController(PopulationRepository populationRepository){
+        this.populationRepository = populationRepository;
+    }
+
+    @RequestMapping(value = "/population", method = RequestMethod.GET)
+    @ResponseBody
     public String itWorks() {
 
         Population population = new Population();
-        population.setAgeDistribution("20-30");
-        population.setPostEqProgress("not satisfied");
-        population.setOngSupport("not satisfied");
         population.setLocalizationId(2);
+        population.setAgeDistribution("20-30");
+        population.setGender("Male");
+        population.setDistrict("Brahmaputra");
+        population.setMunicipality("Asdqwtbaala");
+        // population.setPostEqProgress("not satisfied");
+       // population.setOngSupport("not satisfied");
 
         populationRepository.save(population);
-        return "worked for this population";
+        return "Population : " + population.getDistrict() + " " + population.getMunicipality();
     }
 }

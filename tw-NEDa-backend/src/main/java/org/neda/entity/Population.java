@@ -9,36 +9,46 @@ import javax.validation.constraints.NotNull;
 public class Population {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "population_id")
-    private int id;
+    private long id;
 
-    @Column(name = "localization_id")
+    @Column(name = "p_location_id")
     @NotNull
-    private int localizationId;
+    private long localizationId;
 
-    @Column(name = "age_range")
+    @Column(name = "age_distribution")
     private String ageDistribution;
 
-    @Column(name = "ong_support")
+    @Column(name="gender")
+    private String gender;
+
+    @Column(name="district")
+    private String district;
+
+    @Column(name="municipality")
+    private String municipality;
+
+    //nu avem aceste campuri in tabela
+/*    @Column(name = "ong_support")
     private String ongSupport;
 
     @Column(name = "progress")
     private String postEqProgress;
-
-    public int getId() {
+*/
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getLocalizationId() {
+    public long getLocalizationId() {
         return localizationId;
     }
 
-    public void setLocalizationId(int localizationId) {
+    public void setLocalizationId(long localizationId) {
         this.localizationId = localizationId;
     }
 
@@ -50,19 +60,48 @@ public class Population {
         this.ageDistribution = ageDistribution;
     }
 
+    /*
     public String getOngSupport() {
         return ongSupport;
     }
+
 
     public void setOngSupport(String ongSupport) {
         this.ongSupport = ongSupport;
     }
 
+
     public String getPostEqProgress() {
         return postEqProgress;
     }
 
+
     public void setPostEqProgress(String postEqProgress) {
         this.postEqProgress = postEqProgress;
+    }
+    */
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getMunicipality() {
+        return municipality;
+    }
+
+    public void setMunicipality(String municipality) {
+        this.municipality = municipality;
     }
 }
