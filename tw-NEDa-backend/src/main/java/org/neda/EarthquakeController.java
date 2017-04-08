@@ -8,28 +8,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.Calendar;
+import java.util.Date;
 
-import java.sql.Date;
 
 @RestController
 public class EarthquakeController {
 
+
+    @Autowired
     private EarthquakeRepository earthquakeRepository;
 
 
-    @Autowired
-    public EarthquakeController(EarthquakeRepository earthquakeRepository){
-        this.earthquakeRepository = earthquakeRepository;
-    }
-
+    /**
+     * Map this method to path from the value
+     * We populate an entity to see if the databese works
+     * @return string message with some values from the earthquake entity
+     */
     @RequestMapping(value = "/earthquake", method = RequestMethod.GET)
     @ResponseBody
     public String itWorks() {
 
         Earthquake earthquake = new Earthquake();
         earthquake.setLocalizationId(3);
-        Date date = new Date(22 / 11 / 2015);
-        earthquake.setHappenedOn(date);
+
+        Calendar myDate = Calendar.getInstance();
+        myDate.set(Calendar.YEAR,1988);
+        myDate.set(Calendar.MONTH, Calendar.JANUARY);
+        myDate.set(Calendar.DAY_OF_MONTH,1);
+        Date dateRepresentation = myDate.getTime();
+
+        earthquake.setHappenedOn(dateRepresentation);
         earthquake.setDepth(30.0);
         earthquake.setLatitude(79.06);
         earthquake.setLongitude(30.67);

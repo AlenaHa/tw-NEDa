@@ -4,14 +4,17 @@ package org.neda.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Make Population table with related columns
+ */
 @Entity
-@Table(name = "population", uniqueConstraints = {@UniqueConstraint(columnNames = {"population_id"})})
+@Table(name = "population")
 public class Population {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "population_id")
-    private long id;
+    private long populationId;
 
     @Column(name = "p_location_id")
     @NotNull
@@ -29,19 +32,12 @@ public class Population {
     @Column(name="municipality")
     private String municipality;
 
-    //nu avem aceste campuri in tabela
-/*    @Column(name = "ong_support")
-    private String ongSupport;
-
-    @Column(name = "progress")
-    private String postEqProgress;
-*/
-    public long getId() {
-        return id;
+    public long getPopulationId() {
+        return populationId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setPopulationId(long populationId) {
+        this.populationId = populationId;
     }
 
     public long getLocalizationId() {
@@ -59,27 +55,6 @@ public class Population {
     public void setAgeDistribution(String ageDistribution) {
         this.ageDistribution = ageDistribution;
     }
-
-    /*
-    public String getOngSupport() {
-        return ongSupport;
-    }
-
-
-    public void setOngSupport(String ongSupport) {
-        this.ongSupport = ongSupport;
-    }
-
-
-    public String getPostEqProgress() {
-        return postEqProgress;
-    }
-
-
-    public void setPostEqProgress(String postEqProgress) {
-        this.postEqProgress = postEqProgress;
-    }
-    */
 
     public String getGender() {
         return gender;

@@ -3,15 +3,16 @@ package org.neda.entity;
 
 import javax.persistence.*;
 
+/**
+ * Make Location table with related columns
+ */
 @Entity
-//@Table(name = "location", uniqueConstraints = {@UniqueConstraint(columnNames = {"location_id"})})
-
 @Table(name = "location")
 public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name="location_id")
+    @Column(nullable = false, name="location_id")
     private long locationId;
 
     @Column(name = "district")

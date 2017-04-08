@@ -9,6 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
+
+/**
+ * Configuration with our Oracle database: Neda
+ */
 @Configuration
 @ComponentScan(basePackages = {"org.neda"})
 public class NedaConfiguration {

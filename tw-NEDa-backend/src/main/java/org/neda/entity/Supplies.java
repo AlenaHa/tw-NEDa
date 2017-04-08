@@ -2,22 +2,15 @@ package org.neda.entity;
 
 import javax.persistence.*;
 
-/**
- * @author Elena Hardon
- * @date 3/13/17.
- */
 
 @Entity
-@Table(name = "suplies")
+@Table(name = "supplies")
 public class Supplies {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name="supplies_id")
     private long suppliesId;
-
-    /*@Column(name = "supplies_id")
-    private int localizationId;*/
 
     @Column(name = "s_name")
     private String supplyName;
@@ -39,15 +32,6 @@ public class Supplies {
     public void setSuppliesId(long suppliesId) {
         this.suppliesId = suppliesId;
     }
-
-    /*
-    public int getLocalizationId() {
-        return localizationId;
-    }
-
-    public void setLocalizationId(int localizationId) {
-        this.localizationId = localizationId;
-    }*/
 
     public String getSupplyName() {
         return supplyName;

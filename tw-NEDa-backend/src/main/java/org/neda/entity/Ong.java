@@ -3,17 +3,15 @@ package org.neda.entity;
 import javax.persistence.*;
 
 /**
- * @author Elena Hardon
- * @date 3/13/17.
+ * Make Ong table with related columns
  */
-
 @Entity
 @Table(name = "ong")
 public class Ong {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "ong_id")
+    @Column(nullable = false, name = "ong_id")
     private long ongId;
 
     @Column(name="o_location_id")
@@ -27,7 +25,6 @@ public class Ong {
 
     @Column(name = "activity_subtype")
     private String subactivityType;
-
 
     public long getOngId() {
         return ongId;
