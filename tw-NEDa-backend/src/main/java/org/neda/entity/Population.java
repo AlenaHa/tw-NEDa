@@ -23,13 +23,13 @@ public class Population {
     @Column(name = "age_distribution")
     private String ageDistribution;
 
-    @Column(name="gender")
+    @Column(name = "gender")
     private String gender;
 
-    @Column(name="district")
+    @Column(name = "district")
     private String district;
 
-    @Column(name="municipality")
+    @Column(name = "municipality")
     private String municipality;
 
     public long getPopulationId() {

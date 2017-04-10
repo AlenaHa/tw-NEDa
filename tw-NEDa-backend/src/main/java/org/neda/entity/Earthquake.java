@@ -12,32 +12,33 @@ public class Earthquake {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(nullable = false, name="e_id")
-    private long earthquakeId;
+    @Column(nullable = false, name = "e_id")
+    private Long earthquakeId;
 
-    @Column(nullable = false, name="e_location_id")
+    @Column(nullable = false, name = "e_location_id")
     private long localizationId;
 
-    @Column(nullable = false, name="latitude")
+    @Column(nullable = false, name = "latitude")
     private Double latitude;
 
-    @Column(nullable = false, name="longitude")
+    @Column(nullable = false, name = "longitude")
     private Double longitude;
 
-    @Column(nullable = false, name="eq_depth")
+    @Column(nullable = false, name = "eq_depth")
     private Double depth;
 
-    @Column(nullable = false, name="magnitude")
+    @Column(nullable = false, name = "magnitude")
     private Double magnitude;
 
-    @Column(name="happened_on")
+    @Column(name = "happened_on")
     private Date happenedOn;
 
-    public long getEarthquakeId() {
+
+    public Long getEarthquakeId() {
         return earthquakeId;
     }
 
-    public void setEarthquakeId(long earthquakeId) {
+    public void setEarthquakeId(Long earthquakeId) {
         this.earthquakeId = earthquakeId;
     }
 

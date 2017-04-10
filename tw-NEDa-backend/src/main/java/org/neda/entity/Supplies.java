@@ -9,7 +9,7 @@ public class Supplies {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name="supplies_id")
+    @Column(name = "supplies_id")
     private long suppliesId;
 
     @Column(name = "s_name")

@@ -14,10 +14,10 @@ public class Ong {
     @Column(nullable = false, name = "ong_id")
     private long ongId;
 
-    @Column(name="o_location_id")
+    @Column(name = "o_location_id")
     private long localizationId;
 
-    @Column(name="ong_name")
+    @Column(name = "ong_name")
     private String ongName;
 
     @Column(name = "activity_type")

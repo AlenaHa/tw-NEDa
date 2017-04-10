@@ -1,4 +1,4 @@
-package org.neda;
+package org.neda.controller;
 
 import org.neda.entity.Location;
 import org.neda.repository.LocationRepository;

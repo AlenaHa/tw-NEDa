@@ -1,4 +1,4 @@
-package org.neda;
+package org.neda.controller;
 
 import org.neda.entity.Population;
 import org.neda.repository.PopulationRepository;

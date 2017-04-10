@@ -1,11 +1,10 @@
-package org.neda;
+package org.neda.controller;
 
 import org.neda.entity.Supplies;
 import org.neda.repository.SuppliesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -21,7 +20,6 @@ public class SuppliesController {
      * @return string message with some values from the supplies entity
      */
     @RequestMapping(value = "/supplies", method = RequestMethod.GET)
-    @ResponseBody
     public String itWorks() {
 
         Supplies supplies = new Supplies();

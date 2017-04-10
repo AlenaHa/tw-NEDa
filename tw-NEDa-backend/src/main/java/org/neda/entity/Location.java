@@ -12,13 +12,13 @@ public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(nullable = false, name="location_id")
+    @Column(nullable = false, name = "location_id")
     private long locationId;
 
     @Column(name = "district")
     private String district;
 
-    @Column(name="municipality")
+    @Column(name = "municipality")
     private String municipality;
 
 
