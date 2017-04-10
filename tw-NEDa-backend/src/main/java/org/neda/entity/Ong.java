@@ -1,6 +1,8 @@
 package org.neda.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Make Ong table with related columns
@@ -12,10 +14,10 @@ public class Ong {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, name = "ong_id")
-    private long ongId;
+    private Long ongId;
 
     @Column(name = "o_location_id")
-    private long localizationId;
+    private Long localizationId;
 
     @Column(name = "ong_name")
     private String ongName;
@@ -26,7 +28,12 @@ public class Ong {
     @Column(name = "activity_subtype")
     private String subactivityType;
 
-    public long getOngId() {
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "Ong_Location", joinColumns = {@JoinColumn(name = "ong_id")},
+            inverseJoinColumns = {@JoinColumn(name = "location_id")})
+    private List<Location> locationListOng = new ArrayList<Location>();
+
+    public Long getOngId() {
         return ongId;
     }
 
@@ -34,7 +41,7 @@ public class Ong {
         this.ongId = ongId;
     }
 
-    public long getLocalizationId() {
+    public Long getLocalizationId() {
         return localizationId;
     }
 
@@ -65,4 +72,13 @@ public class Ong {
     public void setSubactivityType(String subactivityType) {
         this.subactivityType = subactivityType;
     }
+
+    public List<Location> getLocationListOng() {
+        return locationListOng;
+    }
+
+    public void setLocationListOng(List<Location> locationListOng) {
+        this.locationListOng = locationListOng;
+    }
+
 }
