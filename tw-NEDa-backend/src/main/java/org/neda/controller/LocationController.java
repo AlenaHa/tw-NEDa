@@ -15,10 +15,10 @@ public class LocationController {
     private LocationRepository locationRepository;
 
 
-
     /**
      * Map this method to path from the value
      * We populate an entity to see if the databese works
+     *
      * @return string message with some values from the location entity
      */
     @RequestMapping(value = "/location", method = RequestMethod.GET)
@@ -32,7 +32,7 @@ public class LocationController {
         locationRepository.save(location);
 
 
-        return "Location works : " + location.getMunicipality() +" " +
-                    location.getDistrict();
+        return "Location works : " + location.getMunicipality() + " " +
+                location.getDistrict();
     }
 }

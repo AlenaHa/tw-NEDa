@@ -17,6 +17,7 @@ public class SuppliesController {
     /**
      * Map this method to path from the value
      * We populate an entity to see if the databese works
+     *
      * @return string message with some values from the supplies entity
      */
     @RequestMapping(value = "/supplies", method = RequestMethod.GET)
@@ -29,7 +30,7 @@ public class SuppliesController {
         supplies.setUnit("Unit");
 
         suppliesRepository.save(supplies);
-        return "Supplies Works : " + supplies.getCategory()+"-> "
-                                + supplies.getSupplyName();
+        return "Supplies Works : " + supplies.getCategory() + "-> "
+                + supplies.getSupplyName();
     }
 }

@@ -15,7 +15,7 @@ public class OngController {
     @Autowired
     private OngRepository ongRepository;
 
-    @RequestMapping(value = "/ong",method = RequestMethod.GET)
+    @RequestMapping(value = "/ong", method = RequestMethod.GET)
     @ResponseBody
     public String insertOng() {
         Ong ong = new Ong();

@@ -18,6 +18,7 @@ public class PopulationController {
     /**
      * Map this method to path from the value
      * We populate an entity to see if the databese works
+     *
      * @return string message with some values from the population entity
      */
     @RequestMapping(value = "/population", method = RequestMethod.GET)
