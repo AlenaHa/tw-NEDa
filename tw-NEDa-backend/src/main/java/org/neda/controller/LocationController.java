@@ -23,7 +23,7 @@ public class LocationController {
      */
     @RequestMapping(value = "/location", method = RequestMethod.GET)
     @ResponseBody
-    public String itWorks() {
+    public String insertLocation() {
 
         Location location = new Location();
         location.setMunicipality("Brahmaptra");

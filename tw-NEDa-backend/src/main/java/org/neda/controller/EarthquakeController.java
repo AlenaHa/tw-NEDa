@@ -28,7 +28,7 @@ public class EarthquakeController {
      */
     @RequestMapping(value = "/earthquake", method = RequestMethod.GET)
     @ResponseBody
-    public String itWorks() {
+    public String insertEarthquake() {
 
         Earthquake earthquake = new Earthquake();
         earthquake.setLocalizationId(3);

@@ -22,7 +22,7 @@ public class PopulationController {
      */
     @RequestMapping(value = "/population", method = RequestMethod.GET)
     @ResponseBody
-    public String itWorks() {
+    public String insertPopulation() {
         Population population = new Population();
         population.setLocalizationId(2);
         population.setAgeDistribution("20-30");

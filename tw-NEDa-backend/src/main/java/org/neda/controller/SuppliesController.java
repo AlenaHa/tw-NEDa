@@ -20,7 +20,7 @@ public class SuppliesController {
      * @return string message with some values from the supplies entity
      */
     @RequestMapping(value = "/supplies", method = RequestMethod.GET)
-    public String itWorks() {
+    public String insertSupplies() {
 
         Supplies supplies = new Supplies();
         supplies.setAmount("10 Kg");

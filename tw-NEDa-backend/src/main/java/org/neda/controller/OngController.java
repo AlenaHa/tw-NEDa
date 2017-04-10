@@ -17,7 +17,7 @@ public class OngController {
 
     @RequestMapping(value = "/ong",method = RequestMethod.GET)
     @ResponseBody
-    public String itWorks(){
+    public String insertOng() {
         Ong ong = new Ong();
         ong.setLocalizationId(3);
         ong.setOngName("MyOng");
