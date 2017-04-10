@@ -4,41 +4,47 @@ package org.neda.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Make Population table with related columns
+ */
 @Entity
-@Table(name = "population", uniqueConstraints = {@UniqueConstraint(columnNames = {"population_id"})})
+@Table(name = "population")
 public class Population {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "population_id")
-    private int id;
+    private long populationId;
 
-    @Column(name = "localization_id")
+    @Column(name = "p_location_id")
     @NotNull
-    private int localizationId;
+    private long localizationId;
 
-    @Column(name = "age_range")
+    @Column(name = "age_distribution")
     private String ageDistribution;
 
-    @Column(name = "ong_support")
-    private String ongSupport;
+    @Column(name = "gender")
+    private String gender;
 
-    @Column(name = "progress")
-    private String postEqProgress;
+    @Column(name = "district")
+    private String district;
 
-    public int getId() {
-        return id;
+    @Column(name = "municipality")
+    private String municipality;
+
+    public long getPopulationId() {
+        return populationId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPopulationId(long populationId) {
+        this.populationId = populationId;
     }
 
-    public int getLocalizationId() {
+    public long getLocalizationId() {
         return localizationId;
     }
 
-    public void setLocalizationId(int localizationId) {
+    public void setLocalizationId(long localizationId) {
         this.localizationId = localizationId;
     }
 
@@ -50,19 +56,27 @@ public class Population {
         this.ageDistribution = ageDistribution;
     }
 
-    public String getOngSupport() {
-        return ongSupport;
+    public String getGender() {
+        return gender;
     }
 
-    public void setOngSupport(String ongSupport) {
-        this.ongSupport = ongSupport;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public String getPostEqProgress() {
-        return postEqProgress;
+    public String getDistrict() {
+        return district;
     }
 
-    public void setPostEqProgress(String postEqProgress) {
-        this.postEqProgress = postEqProgress;
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getMunicipality() {
+        return municipality;
+    }
+
+    public void setMunicipality(String municipality) {
+        this.municipality = municipality;
     }
 }

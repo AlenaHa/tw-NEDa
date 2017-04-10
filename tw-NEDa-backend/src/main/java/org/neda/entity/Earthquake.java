@@ -1,47 +1,52 @@
 package org.neda.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
+/**
+ * Make Earthquake table with the related columns
+ */
 @Entity
 @Table(name = "earthquake")
 public class Earthquake {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(nullable = false, name = "e_id")
+    private Long earthquakeId;
 
-    @Column(nullable = false)
-    private int localizationId;
+    @Column(nullable = false, name = "e_location_id")
+    private long localizationId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "latitude")
     private Double latitude;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "longitude")
     private Double longitude;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "eq_depth")
     private Double depth;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "magnitude")
     private Double magnitude;
 
-    @Column
+    @Column(name = "happened_on")
     private Date happenedOn;
 
-    public Long getId() {
-        return id;
+
+    public Long getEarthquakeId() {
+        return earthquakeId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setEarthquakeId(Long earthquakeId) {
+        this.earthquakeId = earthquakeId;
     }
 
-    public int getLocalizationId() {
+    public long getLocalizationId() {
         return localizationId;
     }
 
-    public void setLocalizationId(int localizationId) {
+    public void setLocalizationId(long localizationId) {
         this.localizationId = localizationId;
     }
 
