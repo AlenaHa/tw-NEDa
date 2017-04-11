@@ -1,29 +1,18 @@
 package org.neda.controller;
 
 
-import org.neda.entity.Ong;
-import org.neda.repository.OngRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/ong")
 public class OngController {
 
-    @Autowired
-    private OngRepository ongRepository;
+    // TODO: Create Ong service and autowire it here
 
     @RequestMapping(value = "/ong", method = RequestMethod.GET)
-    @ResponseBody
-    public String insertOng() {
-        Ong ong = new Ong();
-        ong.setOngName("MyOng");
-        ong.setActivityType("Building house");
-
-        ongRepository.save(ong);
-        return "ONG : " + ong.getOngName() + " " + ong.getActivityType();
+    public String itWorks() {
+        return "it works!";
     }
 }
