@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping(value = "/ong")
 public class OngController {
 
     @Autowired
@@ -19,7 +20,6 @@ public class OngController {
     @ResponseBody
     public String insertOng() {
         Ong ong = new Ong();
-        ong.setLocalizationId(3);
         ong.setOngName("MyOng");
         ong.setActivityType("Building house");
 
