@@ -26,12 +26,6 @@ public class Population {
     @Column(name = "gender")
     private String gender;
 
-    @Column(name = "district")
-    private String district;
-
-    @Column(name = "municipality")
-    private String municipality;
-
     public long getPopulationId() {
         return populationId;
     }
@@ -64,19 +58,4 @@ public class Population {
         this.gender = gender;
     }
 
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getMunicipality() {
-        return municipality;
-    }
-
-    public void setMunicipality(String municipality) {
-        this.municipality = municipality;
-    }
 }
