@@ -8,6 +8,7 @@ import org.neda.service.EarthquakeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@CrossOrigin(value = "http://localhost:4200")
 public class EarthquakeController {
 
     @Autowired
@@ -68,6 +70,16 @@ public class EarthquakeController {
         }
         Earthquake savedEarthquake = earthquakeService.save(reqEarthquake);
         return new ResponseEntity<Earthquake>(savedEarthquake, HttpStatus.OK);
+    }
+
+    /**
+     *
+     * @return
+     */
+    @RequestMapping(value = "/earthquake/all", method = RequestMethod.GET)
+    public ResponseEntity<List<Earthquake>> getAllEarthquakes() {
+        List<Earthquake> all = earthquakeService.findAll();
+        return new ResponseEntity<List<Earthquake>>(all, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/earthquake/sqlinjection", method = RequestMethod.POST)

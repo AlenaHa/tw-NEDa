@@ -10,6 +10,7 @@ import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { routing } from './app.routing';
+import { EarthquakeService } from './services/earthquake.service';
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { routing } from './app.routing';
     FlexLayoutModule,
     NgxDatatableModule
   ],
-  providers: [],
+  providers: [EarthquakeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

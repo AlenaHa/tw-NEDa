@@ -1,5 +1,7 @@
 package org.neda.service;
 
+import java.util.List;
+
 /**
  * @param <T> Gives the Object type to
  * @author Elena Hardon
@@ -13,7 +15,7 @@ public interface CrudService<T> {
 
     T findById(Long id);
 
-    Iterable<T> findAll();
+    List<T> findAll();
 
     void delete(Long id);
 }

@@ -1,5 +1,6 @@
 package org.neda.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -16,13 +17,6 @@ import org.springframework.stereotype.Service;
 /**
  * @author Elena Hardon
  * @date 4/11/17.
- */
-
-
-/*
- The @Transactional is used to make sure that the operations are running in a transaction
- and allows setting the readOnly-flag (at the class level). This causes some performance
- optimizations inside the persistence provider as well as on the database level.
  */
 @Service
 public class EarthquakeServiceImpl implements EarthquakeService {
@@ -55,8 +49,12 @@ public class EarthquakeServiceImpl implements EarthquakeService {
     }
 
     @Override
-    public Iterable<Earthquake> findAll() {
-        return this.earthquakeRepository.findAll();
+    public List<Earthquake> findAll() {
+        List<Earthquake> allEarthquakes = new ArrayList<Earthquake>();
+        for (Earthquake earthquake : earthquakeRepository.findAll()) {
+            allEarthquakes.add(earthquake);
+        }
+        return allEarthquakes;
     }
 
 
