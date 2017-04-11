@@ -12,7 +12,7 @@ public class OngController {
     // TODO: Create Ong service and autowire it here
 
     @RequestMapping(value = "/ong", method = RequestMethod.GET)
-    public String itWorks() {
+    public String ongWorks() {
         return "it works!";
     }
 }

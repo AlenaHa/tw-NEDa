@@ -11,7 +11,7 @@ public class SuppliesController {
     // TODO: Create Supplies service and autowire it here
 
     @RequestMapping(value = "/supplies", method = RequestMethod.GET)
-    public String itWorks() {
+    public String suppliesWorks() {
         return "it works!";
     }
 }

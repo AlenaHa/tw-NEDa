@@ -11,7 +11,7 @@ public class PopulationController {
     // TODO: Create Populatnio service and autowire it here
 
     @RequestMapping(value = "/population", method = RequestMethod.GET)
-    public String itWorks() {
+    public String populationWorks() {
         return "it works!";
     }
 }

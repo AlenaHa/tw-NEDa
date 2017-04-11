@@ -10,7 +10,7 @@ public class LocationController {
     // TODO: Create Location service and autowire it here
 
     @RequestMapping(value = "/location", method = RequestMethod.GET)
-    public String itWorks() {
+    public String locationWorks() {
         return "it works!";
     }
 }
