@@ -1,0 +1,43 @@
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<md-toolbar color="primary">
+  <h2>NEDa</h2>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="example-fill-remaining-space"></span>
+
+  <!-- Navigation bar -->
+  <nav>
+    <button md-raised-button color="warn" routerLink="earthquakes"
+            style="margin-left: 40px;">
+      <i class="material-icons">graphic_eq</i>
+      Earthquakes
+    </button>
+
+    <button md-raised-button color="accent">
+      <i class="material-icons">account_balance</i>
+      NGOs
+    </button>
+
+    <button md-raised-button color="accent">
+      <i class="material-icons">location_on</i>
+      Location
+    </button>
+
+    <button md-raised-button color="accent">
+      <i class="material-icons">people</i>
+      Population
+    </button>
+
+    <button md-raised-button color="accent">
+      <i class="material-icons">add_shopping_cart</i>
+      Supplies
+    </button>
+  </nav>
+
+
+</md-toolbar>
+
+<router-outlet></router-outlet>
