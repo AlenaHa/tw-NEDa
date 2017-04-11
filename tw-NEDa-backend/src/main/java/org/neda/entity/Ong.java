@@ -16,9 +16,6 @@ public class Ong {
     @Column(nullable = false, name = "ong_id")
     private Long ongId;
 
-    @Column(name = "o_location_id")
-    private Long localizationId;
-
     @Column(name = "ong_name")
     private String ongName;
 
@@ -39,14 +36,6 @@ public class Ong {
 
     public void setOngId(long ongId) {
         this.ongId = ongId;
-    }
-
-    public Long getLocalizationId() {
-        return localizationId;
-    }
-
-    public void setLocalizationId(long localizationId) {
-        this.localizationId = localizationId;
     }
 
     public String getOngName() {
