@@ -28,10 +28,8 @@ public class PopulationController {
         population.setLocalizationId(2);
         population.setAgeDistribution("20-30");
         population.setGender("Male");
-        population.setDistrict("Brahmaputra");
-        population.setMunicipality("Asdqwtbaala");
 
         populationRepository.save(population);
-        return "Population : " + population.getDistrict() + " " + population.getMunicipality();
+        return "Population : ";
     }
 }

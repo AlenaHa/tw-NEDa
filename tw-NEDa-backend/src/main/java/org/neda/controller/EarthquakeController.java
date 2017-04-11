@@ -24,6 +24,7 @@ public class EarthquakeController {
     /**
      * Map this method to path from the value
      * We populate an entity to see if the databese works
+     *
      * @return string message with some values from the earthquake entity
      */
     @RequestMapping(value = "/earthquake", method = RequestMethod.GET)
@@ -34,9 +35,9 @@ public class EarthquakeController {
         earthquake.setLocalizationId(3);
 
         Calendar myDate = Calendar.getInstance();
-        myDate.set(Calendar.YEAR,1988);
+        myDate.set(Calendar.YEAR, 1988);
         myDate.set(Calendar.MONTH, Calendar.JANUARY);
-        myDate.set(Calendar.DAY_OF_MONTH,1);
+        myDate.set(Calendar.DAY_OF_MONTH, 1);
         Date dateRepresentation = myDate.getTime();
 
         earthquake.setHappenedOn(dateRepresentation);
