@@ -15,19 +15,19 @@ public class Earthquake {
     @Column(nullable = false, name = "e_id")
     private Long earthquakeId;
 
-    @Column(nullable = false, name = "e_location_id")
+    @Column(name = "e_location_id")
     private long localizationId;
 
-    @Column(nullable = false, name = "latitude")
+    @Column(name = "latitude")
     private Double latitude;
 
-    @Column(nullable = false, name = "longitude")
+    @Column(name = "longitude")
     private Double longitude;
 
-    @Column(nullable = false, name = "eq_depth")
+    @Column(name = "eq_depth")
     private Double depth;
 
-    @Column(nullable = false, name = "magnitude")
+    @Column(name = "magnitude")
     private Double magnitude;
 
     @Column(name = "happened_on")
