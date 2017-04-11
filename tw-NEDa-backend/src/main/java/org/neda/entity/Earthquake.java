@@ -27,7 +27,7 @@ public class Earthquake {
     @Column(name = "eq_depth")
     private Double depth;
 
-    @Column(name = "magnitude")
+    @Column(nullable = false, name = "magnitude")
     private Double magnitude;
 
     @Column(name = "happened_on")
