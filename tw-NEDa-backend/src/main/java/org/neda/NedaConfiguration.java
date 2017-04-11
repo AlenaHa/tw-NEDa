@@ -14,7 +14,6 @@ import java.sql.SQLException;
  * Configuration with our Oracle database: Neda
  */
 @Configuration
-
 @ComponentScan(basePackages = {"org.neda"})
 public class NedaConfiguration {
     @Value("${spring.datasource.username}")
