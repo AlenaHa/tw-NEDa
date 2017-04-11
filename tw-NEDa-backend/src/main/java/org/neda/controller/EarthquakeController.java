@@ -1,12 +1,18 @@
 package org.neda.controller;
 
 
+import java.util.List;
+
 import org.neda.entity.Earthquake;
 import org.neda.service.EarthquakeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
@@ -62,6 +68,12 @@ public class EarthquakeController {
         }
         Earthquake savedEarthquake = earthquakeService.save(reqEarthquake);
         return new ResponseEntity<Earthquake>(savedEarthquake, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/earthquake/sqlinjection", method = RequestMethod.POST)
+    public ResponseEntity<List<Earthquake>> sqlInjectionExample(@RequestBody String sqlInjectionId) {
+        List<Earthquake> earthquakeSqlInjectionExample = earthquakeService.findEarthquakeSqlInjectionExample(sqlInjectionId);
+        return new ResponseEntity<List<Earthquake>>(earthquakeSqlInjectionExample, HttpStatus.OK);
     }
 
 
