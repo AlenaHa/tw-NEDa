@@ -38,17 +38,30 @@ public class EarthquakeController {
     @RequestMapping(value = "/earthquake/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Earthquake> deleteEarthquake(@PathVariable Long id) {
         earthquakeService.delete(id);
-        return new ResponseEntity<Earthquake>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<Earthquake>(HttpStatus.NO_CONTENT);
     }
 
     /**
-     * @param earthquake
+     * @param reqEarthquake
      * @return
      */
     @RequestMapping(value = "/earthquake", method = RequestMethod.POST)
-    public ResponseEntity<Earthquake> createEarthquake(@RequestBody Earthquake earthquake) {
-        Earthquake savedEarthquake = earthquakeService.save(earthquake);
+    public ResponseEntity<Earthquake> createEarthquake(@RequestBody Earthquake reqEarthquake) {
+        Earthquake savedEarthquake = earthquakeService.save(reqEarthquake);
         return new ResponseEntity<Earthquake>(savedEarthquake, HttpStatus.CREATED);
+    }
+
+    /**
+     * @param reqEarthquake
+     * @return
+     */
+    @RequestMapping(value = "/earthquake/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Earthquake> updateEarthquake(@RequestBody Earthquake reqEarthquake, @PathVariable Long id) {
+        if (id != reqEarthquake.getEarthquakeId()) {
+            return new ResponseEntity<Earthquake>(HttpStatus.BAD_REQUEST);
+        }
+        Earthquake savedEarthquake = earthquakeService.save(reqEarthquake);
+        return new ResponseEntity<Earthquake>(savedEarthquake, HttpStatus.OK);
     }
 
 
