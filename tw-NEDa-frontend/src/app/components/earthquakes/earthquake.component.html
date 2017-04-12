@@ -1,20 +1,42 @@
-<div>
-  <input
-    type='text'
-    style='padding:8px;margin:15px auto;width:30%;'
-    placeholder='Type to filter the name column...'
-    (keyup)='updateFilter($event)'
-  />
+<div class="page-content">
+  <div>
+    <md-card>
+      <md-card-header>
+        <md-card-title>Earthquakes title</md-card-title>
+        <md-card-subtitle>Earthquakes subtitle</md-card-subtitle>
+      </md-card-header>
 
-  <ngx-datatable
-    id="eq-table"
-    #table
-    class='material'
-    [columns]="columns"
-    [columnMode]="'force'"
-    [footerHeight]="50"
-    [rowHeight]="'auto'"
-    [limit]="10"
-    [rows]='rows'>
-  </ngx-datatable>
+      <md-card-content>
+        <md-input-container>
+          <input
+            class="eq-id-filter-input"
+            mdInput
+            type='text'
+            placeholder='Type to filter the Earthquake ID column...'
+            (keyup)='updateFilter($event)'
+          />
+        </md-input-container>
+      </md-card-content>
+      <md-card-actions>
+        <button md-button>Button 1</button>
+        <button md-button>Button 2</button>
+      </md-card-actions>
+    </md-card>
+
+
+  </div>
+
+  <div>
+    <ngx-datatable
+      id="eq-table"
+      #table
+      class='material'
+      [columns]="columns"
+      [columnMode]="'force'"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [limit]="10"
+      [rows]='rows'>
+    </ngx-datatable>
+  </div>
 </div>

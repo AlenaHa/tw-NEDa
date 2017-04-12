@@ -9,6 +9,13 @@ $icon-font-path: "../node_modules/bootstrap-sass/assets/fonts/bootstrap/";
 @import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
 
 // Write SCSS here
-h1{
+h1 {
   font-size: 40px;
 }
+
+.page-content {
+  margin-top: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
