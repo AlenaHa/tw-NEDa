@@ -4,6 +4,7 @@
  */
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
+import { Earthquake } from '../model/earthquake.model';
 @Injectable()
 export class EarthquakeService {
 
@@ -21,6 +22,18 @@ export class EarthquakeService {
       this.backendUrl + '/earthquake/all',
       { headers: headers})
       .map(res => res.json());
+  }
 
+  addEarthquake(earthquake: Earthquake) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    let earthquakeString = JSON.stringify(earthquake);
+
+    return this.http.post(
+      this.backendUrl + '/earthquake',
+      earthquakeString,
+      { headers: headers })
+      .map(res => res.json());
   }
 }

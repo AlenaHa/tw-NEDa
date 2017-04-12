@@ -11,12 +11,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { routing } from './app.routing';
 import { EarthquakeService } from './services/earthquake.service';
+import { EarthquakeDialog } from './components/earthquakes/earthquake.dialog';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    EarthquakeComponent
+    EarthquakeComponent,
+    EarthquakeDialog
   ],
   imports: [
     BrowserModule,
@@ -29,6 +31,7 @@ import { EarthquakeService } from './services/earthquake.service';
     NgxDatatableModule
   ],
   providers: [EarthquakeService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [EarthquakeDialog]
 })
 export class AppModule { }

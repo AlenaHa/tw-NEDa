@@ -65,7 +65,7 @@ public class EarthquakeController {
      */
     @RequestMapping(value = "/earthquake/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Earthquake> updateEarthquake(@RequestBody Earthquake reqEarthquake, @PathVariable Long id) {
-        if (id != reqEarthquake.getEarthquakeId()) {
+        if (!id.equals(reqEarthquake.getEarthquakeId())) {
             return new ResponseEntity<Earthquake>(HttpStatus.BAD_REQUEST);
         }
         Earthquake savedEarthquake = earthquakeService.save(reqEarthquake);
