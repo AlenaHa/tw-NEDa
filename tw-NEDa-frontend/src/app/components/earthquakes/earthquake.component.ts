@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { EarthquakeService } from '../../services/earthquake.service';
 import { Earthquake } from '../../model/earthquake.model';
@@ -134,7 +134,7 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
     console.log(earthquake);
 
     let earthquakeIndex = earthquake.$$index;
-    console.log("Editing row: " +  earthquakeIndex);
+    console.log("Editing row: " + earthquakeIndex);
 
     let dialogRef = this.dialog.open(EarthquakeDialog);
     dialogRef.componentInstance.earthquake = new Earthquake(earthquake);
@@ -164,9 +164,25 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
    * @param earthquake
    */
   delete(earthquake: any) {
+    // TODO: implement confirmation dialog
+
     console.log(earthquake);
     console.log("Deleting row: " + earthquake.$$index);
 
-    // TODO: implement confirmation dialog
+    for (let index = 0; index < this.table.rows.length; index++) {
+      let eq = this.table.rows[index];
+      // console.log(eq);
+      if (eq.earthquakeId === earthquake.earthquakeId) {
+
+        console.log('found it');
+        // TODO call the server and delete in UI **ONLY IF** that succeded.
+        // You don't want to delete on UI if the delete on the DB failed, right?
+        this.table.rows.splice(index, 1);
+
+        return;
+      }
+
+    }
+
   }
 }
