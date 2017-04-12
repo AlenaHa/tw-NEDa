@@ -22,8 +22,6 @@
         <button md-button>Button 2</button>
       </md-card-actions>
     </md-card>
-
-
   </div>
 
   <div>
@@ -35,8 +33,31 @@
       [columnMode]="'force'"
       [footerHeight]="50"
       [rowHeight]="'auto'"
+      (rowContextmenu)="onContextMenu($event)"
       [limit]="10"
       [rows]='rows'>
     </ngx-datatable>
+
+    <template #hdrTpl>
+
+    </template>
+    <template #editTmpl let-row="row" let-value="value" let-i="index">
+      <button md-icon-button [mdMenuTriggerFor]="rowMenu">
+        <md-icon>more_vert</md-icon>
+      </button>
+
+      <md-menu #rowMenu="mdMenu">
+        <button md-menu-item (click)="edit(row)">
+          <md-icon>edit</md-icon>
+          Edit
+        </button>
+
+        <button md-menu-item (click)="delete(row)">
+          <md-icon>delete</md-icon>
+          Delete
+        </button>
+      </md-menu>
+    </template>
+
   </div>
 </div>

@@ -13,10 +13,4 @@ export class EarthquakeDialog {
 
   constructor(public dialogRef: MdDialogRef<EarthquakeDialog>) {
   }
-
-  close(closeType: boolean) {
-    console.log(closeType);
-    this.dialogRef.close(closeType);
-    console.log(this.earthquake);
-  }
 }
