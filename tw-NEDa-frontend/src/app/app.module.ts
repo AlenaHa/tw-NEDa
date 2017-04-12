@@ -12,6 +12,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { routing } from './app.routing';
 import { EarthquakeService } from './services/earthquake.service';
 import { EarthquakeDialog } from './components/earthquakes/earthquake.dialog';
+import { Md2DatepickerModule } from 'md2-datepicker';
+import { Md2DateUtil } from 'md2-datepicker/datepicker/dateUtil';
 
 
 @NgModule({
@@ -28,9 +30,10 @@ import { EarthquakeDialog } from './components/earthquakes/earthquake.dialog';
 
     MaterialModule.forRoot(),
     FlexLayoutModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    Md2DatepickerModule
   ],
-  providers: [EarthquakeService],
+  providers: [EarthquakeService, Md2DateUtil],
   bootstrap: [AppComponent],
   entryComponents: [EarthquakeDialog]
 })

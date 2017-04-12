@@ -1,6 +1,15 @@
 <h1 md-dialog-title>Add a new earthquake</h1>
-<div md-dialog-content>
-  <md-card-content>
+<div md-dialog-content class="eq-dialog">
+  <div>
+    <div>
+      <!--HappenedOn-->
+      <md2-datepicker
+        [(ngModel)]="earthquake.happenedOn"
+        type="datetime" format="YYYY-MM-DD HH:mm"
+        placeholder="Earthquake date and time">
+      </md2-datepicker>
+    </div>
+
     <div>
       <!--Location ID-->
       <md-input-container>
@@ -65,21 +74,7 @@
         />
       </md-input-container>
     </div>
-
-    <div>
-      <!--Longitude-->
-      <md-input-container>
-        <input
-          id='date-input'
-          mdInput
-          [(ngModel)]="earthquake.happenedOn"
-          type='date'
-          placeholder='Date'
-        />
-      </md-input-container>
-    </div>
-
-  </md-card-content>
+  </div>
 </div>
 <div md-dialog-actions>
   <button id="add-eq-dialog-btn" md-button (click)="dialogRef.close(earthquake)">Add</button>
