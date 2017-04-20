@@ -12,6 +12,7 @@ import {EarthquakeService} from "./services/earthquake.service";
 import {EarthquakeDialog} from "./components/earthquakes/earthquake.dialog";
 import {HomeComponent} from "./components/home/home.component";
 import {AgmCoreModule} from "angular2-google-maps/core";
+import {LogoComponent} from "./components/logo/logo.component";
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {AgmCoreModule} from "angular2-google-maps/core";
     AppComponent,
     EarthquakeComponent,
     EarthquakeDialog,
-    HomeComponent
+    HomeComponent,
+    LogoComponent
   ],
   imports: [
     BrowserModule,
