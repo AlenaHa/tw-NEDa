@@ -5,6 +5,7 @@ import {HomeComponent} from "./components/home/home.component";
 
 export const appRoutes: Routes = [
 
+  {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
   {path: 'earthquakes', component: EarthquakeComponent}
 
