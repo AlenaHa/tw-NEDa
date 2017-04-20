@@ -12,13 +12,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { routing } from './app.routing';
 import { EarthquakeService } from './services/earthquake.service';
 import { EarthquakeDialog } from './components/earthquakes/earthquake.dialog';
+import {HomeComponent} from './components/home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     EarthquakeComponent,
-    EarthquakeDialog
+    EarthquakeDialog,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

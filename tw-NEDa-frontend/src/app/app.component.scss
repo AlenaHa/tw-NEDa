@@ -3,3 +3,11 @@
   // Every toolbar row uses a flexbox row layout.
   flex: 1 1 auto;
 }
+
+md-toolbar {
+  background-color: #273758;
+}
+
+md-toolbar h2 {
+  color: white;
+}
