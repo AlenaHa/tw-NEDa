@@ -10,8 +10,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <!--title form-->
-                        <h2 class="panel-title text-center" color="black">
+                        <h2 class="panel-title text-center">
                             Search Locations
+                            <!--insert icon-->
                             <span class="glyphicon glyphicon-map-marker"></span>
                         </h2>
                     </div>
@@ -20,6 +21,7 @@
                     <div class="panel-body">
                         <form name="cityForm" novalidate>
                             <div class="form-group">
+                                <!--selects names for the cities from location.component.ts -->
                                 <md-select placeholder="City">
                                     <md-option *ngFor="let city of cities" [value]="city.value">
                                         {{ city.viewValue }}

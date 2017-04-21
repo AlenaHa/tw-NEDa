@@ -4,20 +4,11 @@
   flex: 1 1 auto;
 }
 
+/** style the toolbar **/
 md-toolbar {
   background-color: #273758;
 }
 
 md-toolbar h2 {
   color: white;
-}
-
-header ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-header li {
-  display: inline;
 }

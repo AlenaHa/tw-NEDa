@@ -5,7 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LocationComponent } from './components/location/location.component';
 
 export const appRoutes: Routes = [
-
+  /** routes for all our pages in the app **/
   {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
   {path: 'earthquakes', component: EarthquakeComponent},

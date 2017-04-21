@@ -1,3 +1,4 @@
+/**style for map and made it responsive **/
 .sebm-google-map-container {
 
   height: 645px;
@@ -30,7 +31,7 @@ h2 {
   height: 0;
 }
 
-//responsive form ?
+/** this style will be used when de width is like 800px **/
 @media screen and (max-width: 800px) {
   body {
     padding: 10px 15px;
@@ -47,8 +48,5 @@ h2 {
     width: 100%;
     display: block;
     float: none;
-  }
-  #city-form textarea {
-    width: 85%;
   }
 }

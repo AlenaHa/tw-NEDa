@@ -1,10 +1,11 @@
-
+/** bootstrap class <=> responsive container for different divs **/
 .jumbotron {
   text-align: center;
   background-color: #273758;
   color: white;
 }
 
+/** styled the line **/
 hr.style {
   border-top: 3px double white;
   size: 100px;

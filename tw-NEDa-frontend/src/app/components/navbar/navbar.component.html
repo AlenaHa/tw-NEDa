@@ -1,18 +1,20 @@
+<!-- make navbar with Bootstrap classes -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
-        <div class="navbar-header">
 
+        <div class="navbar-header">
             <!--btn for small screen -->
             <button type="button"
                     class="navbar-toggle collapsed"
-                    (click)="toggleState()" (clickOutside)="close()">
+                    (click)="toggleState()">
                 <span class="sr-only">Toggle navigation</span>
+                <!--lines in the button that appears when screen si small -->
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
 
-            <!--logo-->
+            <!--inserted svg logo-->
             <a class="navbar-brand" href="home">
                 <svg class="shake-slow hide-if-small-menu" width="150" height="50">
                     <g logo-svg></g>
