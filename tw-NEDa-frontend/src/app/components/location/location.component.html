@@ -4,15 +4,9 @@
   <div class="jumbotron">
 
     <div class="row content">
-      <!--google map-->
-      <div class="col-md-7 map-responsive">
-        <sebm-google-map [latitude]="lat" [longitude]="lng">
-          <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
-        </sebm-google-map>
 
-      </div>
       <!-- form -->
-      <div class="col-md-5 ng-scope">
+      <div name="city-form" class="col-md-5 ng-scope">
         <div class="panel panel-default">
           <div class="panel-heading">
             <!--title form-->
@@ -39,10 +33,20 @@
               </div>
             </form>
           </div>
+
         </div>
 
 
       </div>
+
+      <!--google map-->
+      <div class="col-md-7 map-responsive">
+        <sebm-google-map [latitude]="lat" [longitude]="lng">
+          <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
+        </sebm-google-map>
+
+      </div>
+
 
     </div>
 
