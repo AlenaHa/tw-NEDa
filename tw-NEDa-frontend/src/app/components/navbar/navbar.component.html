@@ -1,78 +1,79 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
+    <div class="container-fluid">
+        <div class="navbar-header">
 
-      <!--btn for small screen -->
-      <button type="button"
-              class="navbar-toggle collapsed"
-              (click)="toggleState()" (clickOutside)="close()">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+            <!--btn for small screen -->
+            <button type="button"
+                    class="navbar-toggle collapsed"
+                    (click)="toggleState()" (clickOutside)="close()">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
-      <!--logo-->
-      <a class="navbar-brand" href="home">
-        <svg class="shake-slow hide-if-small-menu" width="150" height="50">
-          <g logo-svg></g>
-        </svg>
-      </a>
+            <!--logo-->
+            <a class="navbar-brand" href="home">
+                <svg class="shake-slow hide-if-small-menu" width="150" height="50">
+                    <g logo-svg></g>
+                </svg>
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse in"
+             [ngClass]="{ 'in': isIn }">
+            <ul class="nav navbar-nav">
+
+                <!--home btn-->
+                <li>
+                    <button md-button routerLink="home">
+                        <md-icon>home</md-icon>
+                        Home
+                    </button>
+                </li>
+
+                <!--eq btn-->
+                <li>
+                    <button md-button routerLink="earthquakes">
+                        <i class="material-icons">graphic_eq</i>
+                        Earthquakes
+                    </button>
+                </li>
+
+                <!--ong btn-->
+                <li>
+                    <button md-button>
+                        <i class="material-icons">account_balance</i>
+                        NGOs
+                    </button>
+                </li>
+
+                <!--location btn-->
+                <li>
+                    <button md-button routerLink="location">
+                        <i class="material-icons">location_on</i>
+                        Location
+                    </button>
+                </li>
+
+                <!--population btn-->
+                <li>
+                    <button md-button>
+                        <i class="material-icons">people</i>
+                        Population
+                    </button>
+                </li>
+
+                <!--Supplies btn-->
+                <li>
+                    <button md-button>
+                        <i class="material-icons">add_shopping_cart</i>
+                        Supplies
+                    </button>
+                </li>
+
+
+            </ul>
+        </div>
     </div>
-
-    <div class="collapse navbar-collapse in"
-         [ngClass]="{ 'in': isIn }">
-      <ul class="nav navbar-nav">
-
-        <!--eq btn-->
-        <li>
-          <button md-button routerLink="earthquakes">
-            <i class="material-icons">graphic_eq</i>
-            Earthquakes
-          </button>
-        </li>
-
-        <!--ong btn-->
-        <li>
-          <button md-button>
-            <i class="material-icons">account_balance</i>
-            NGOs
-          </button>
-        </li>
-
-        <!--location btn-->
-        <li>
-          <button md-button routerLink="location">
-            <i class="material-icons">location_on</i>
-            Location
-          </button>
-        </li>
-
-        <!--population btn-->
-        <li>
-          <button md-button>
-            <i class="material-icons">people</i>
-            Population
-          </button>
-        </li>
-
-        <!--Supplies btn-->
-        <li>
-          <button md-button>
-            <i class="material-icons">add_shopping_cart</i>
-            Supplies
-          </button>
-        </li>
-
-        <!--home btn-->
-        <li>
-          <button md-button routerLink="home">
-            <md-icon>home</md-icon>
-            Home
-          </button>
-        </li>
-
-      </ul>
-    </div>
-  </div>
 </nav>

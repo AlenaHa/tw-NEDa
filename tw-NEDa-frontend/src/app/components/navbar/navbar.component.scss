@@ -4,7 +4,15 @@ nav {
   border-bottom: none;
 }
 
+.navbar-header {
+  border: none;
+}
+
 button {
   margin-top: 15px;
   color: white;
+}
+
+.collapse .navbar-collapse .in {
+  border-bottom: none;
 }

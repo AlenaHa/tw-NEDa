@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {DatatableComponent} from "@swimlane/ngx-datatable";
-import {EarthquakeService} from "../../services/earthquake.service";
-import {Earthquake} from "../../model/earthquake.model";
-import {MdDialog} from "@angular/material";
-import {EarthquakeDialog} from "./earthquake.dialog";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { EarthquakeService } from '../../services/earthquake.service';
+import { Earthquake } from '../../model/earthquake.model';
+import { MdDialog } from '@angular/material';
+import { EarthquakeDialog } from './earthquake.dialog';
 
 @Component({
   selector: 'filter-demo',

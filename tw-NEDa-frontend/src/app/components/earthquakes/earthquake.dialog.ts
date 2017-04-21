@@ -1,6 +1,6 @@
-import {Component} from "@angular/core";
-import {MdDialogRef} from "@angular/material";
-import {Earthquake} from "../../model/earthquake.model";
+import { Component } from '@angular/core';
+import { MdDialogRef } from '@angular/material';
+import { Earthquake } from '../../model/earthquake.model';
 
 @Component({
   selector: 'earthquake-dialog',
