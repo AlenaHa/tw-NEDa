@@ -1,12 +1,11 @@
 <!-- make navbar with Bootstrap classes -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
         <div class="navbar-header">
             <!--btn for small screen -->
             <button type="button"
-                    class="navbar-toggle collapsed"
-                    (click)="toggleState()">
+                    class="navbar-toggle"
+                    data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <!--lines in the button that appears when screen si small -->
                 <span class="icon-bar"></span>
@@ -26,17 +25,32 @@
              [ngClass]="{ 'in': isIn }">
             <ul class="nav navbar-nav navbar-right">
 
-                <!--home btn-->
-                <li>
-                    <button md-button routerLink="home">
+                <!--HOME btn-->
+                <li class="active">
+                    <!--home btn which will show on normal screen-->
+                    <button class="hidden-xs" md-button routerLink="home">
+                        <md-icon>home</md-icon>
+                        Home
+                    </button>
+                    <!--home btn which whill show on small screen(on click toggle menu will go up)-->
+                    <button class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" md-button
+                            routerLink="home">
                         <md-icon>home</md-icon>
                         Home
                     </button>
                 </li>
 
-                <!--eq btn-->
+                <!--EARTHQUAKE btn-->
                 <li>
-                    <button md-button routerLink="earthquakes">
+                    <!--eq btn which will show on normal screen-->
+                    <button class="hidden-xs" md-button routerLink="earthquakes">
+                        <i class="material-icons">graphic_eq</i>
+                        Earthquakes
+                    </button>
+
+                    <!--eq btn which whill show on small screen(on click toggle menu will go up)-->
+                    <button class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" md-button
+                            routerLink="earthquakes">
                         <i class="material-icons">graphic_eq</i>
                         Earthquakes
                     </button>
@@ -44,7 +58,13 @@
 
                 <!--ong btn-->
                 <li>
-                    <button md-button>
+                    <button class="hidden-xs" md-button>
+                        <i class="material-icons">account_balance</i>
+                        NGOs
+                    </button>
+
+
+                    <button class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" md-button>
                         <i class="material-icons">account_balance</i>
                         NGOs
                     </button>
@@ -52,7 +72,13 @@
 
                 <!--location btn-->
                 <li>
-                    <button md-button routerLink="location">
+                    <button class="hidden-xs" md-button routerLink="location">
+                        <i class="material-icons">location_on</i>
+                        Location
+                    </button>
+
+                    <button class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" md-button
+                            routerLink="location">
                         <i class="material-icons">location_on</i>
                         Location
                     </button>
@@ -60,7 +86,12 @@
 
                 <!--population btn-->
                 <li>
-                    <button md-button>
+                    <button class="hidden-xs" md-button>
+                        <i class="material-icons">people</i>
+                        Population
+                    </button>
+
+                    <button class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" md-button>
                         <i class="material-icons">people</i>
                         Population
                     </button>
@@ -68,7 +99,12 @@
 
                 <!--Supplies btn-->
                 <li>
-                    <button md-button>
+                    <button class="hidden-xs" md-button>
+                        <i class="material-icons">add_shopping_cart</i>
+                        Supplies
+                    </button>
+
+                    <button class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse" md-button>
                         <i class="material-icons">add_shopping_cart</i>
                         Supplies
                     </button>

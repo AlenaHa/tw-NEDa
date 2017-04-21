@@ -8,12 +8,6 @@ import { Component, OnInit } from '@angular/core';
 
 export class NavbarComponent implements OnInit {
 
-  isIn = false;
-
-  toggleState() {
-    let bool = this.isIn;
-    this.isIn = bool === false ? true : false;
-  }
 
   constructor() {
   }
