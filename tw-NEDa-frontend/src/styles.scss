@@ -8,6 +8,10 @@ $icon-font-path: "../node_modules/bootstrap-sass/assets/fonts/bootstrap/";
 
 @import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
 
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
 h1 {
   font-size: 40px;
 }
