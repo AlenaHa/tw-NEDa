@@ -14,6 +14,7 @@ import {HomeComponent} from "./components/home/home.component";
 import {AgmCoreModule} from "angular2-google-maps/core";
 import {LogoComponent} from "./components/logo/logo.component";
 import {NepalmapComponent} from "./components/nepalmap/nepalmap.component";
+import {NavbarComponent} from "./components/navbar/navbar.component";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {NepalmapComponent} from "./components/nepalmap/nepalmap.component";
     EarthquakeDialog,
     HomeComponent,
     LogoComponent,
-    NepalmapComponent
+    NepalmapComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
