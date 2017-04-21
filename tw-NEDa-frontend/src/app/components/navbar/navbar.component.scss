@@ -1,11 +1,18 @@
+#nav-cont {
+  height: 90px;
+}
 nav {
-  height: 80px;
-  background-color: #273758;
   border-bottom: none;
+
+  background-color: #18121E;
 }
 
-.navbar-header {
-  border: none;
+.navbar-brand {
+  margin-top: -14px;
+}
+
+ul {
+  margin-bottom: 10px;
 }
 
 button {
@@ -15,4 +22,6 @@ button {
 
 .collapse .navbar-collapse .in {
   border-bottom: none;
+  background-color: #273758;
 }
+
