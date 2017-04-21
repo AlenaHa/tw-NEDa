@@ -1,9 +1,43 @@
 <div class="page-content">
 
+  <h2>Find information about a particular city</h2>
   <div class="jumbotron">
-    <sebm-google-map [latitude]="lat" [longitude]="lng">
-      <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
-    </sebm-google-map>
+
+    <div class="row content">
+      <!--google map-->
+      <div class="col-md-7">
+        <sebm-google-map [latitude]="lat" [longitude]="lng">
+          <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
+        </sebm-google-map>
+      </div>
+      <!-- form -->
+      <div class="col-md-5 ng-scope">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <!--title form-->
+            <h2 class="panel-title text-center" color="black">
+              Search Locations
+              <span class="glyphicon glyphicon-map-marker"></span>
+            </h2>
+          </div>
+
+          <!--panel body-->
+          <div class="panel-body">
+            <form name="addForm" novalidate>
+              <div class="form-group">
+                <label>City <span class="badge">All fields requiered</span> </label>
+                <input type="text" class="form-control" placeholder="ex: Kathmandu">
+              </div>
+            </form>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+
   </div>
 
 </div>
