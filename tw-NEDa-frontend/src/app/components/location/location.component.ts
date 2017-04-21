@@ -10,6 +10,12 @@ export class LocationComponent implements OnInit {
   lat: number = 28;
   lng: number = 84;
 
+  cities = [
+    {value: 'kathmandu-0', viewValue: 'Kathmandu'},
+    {value: 'bhaktapur-1', viewValue: 'Bhaktapur'},
+    {value: 'pyuthan-2', viewValue: 'Pyuthan-3'}
+  ]
+
   constructor() {
   }
 
