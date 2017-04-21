@@ -15,6 +15,7 @@ import {AgmCoreModule} from "angular2-google-maps/core";
 import {LogoComponent} from "./components/logo/logo.component";
 import {NepalmapComponent} from "./components/nepalmap/nepalmap.component";
 import {NavbarComponent} from "./components/navbar/navbar.component";
+import {LocationComponent} from "./components/location/location.component";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {NavbarComponent} from "./components/navbar/navbar.component";
     HomeComponent,
     LogoComponent,
     NepalmapComponent,
-    NavbarComponent
+    NavbarComponent,
+    LocationComponent
   ],
   imports: [
     BrowserModule,
