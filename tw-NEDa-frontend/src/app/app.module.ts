@@ -16,6 +16,9 @@ import {LogoComponent} from "./components/logo/logo.component";
 import {NepalmapComponent} from "./components/nepalmap/nepalmap.component";
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import {LocationComponent} from "./components/location/location.component";
+import { Md2DatepickerModule } from 'md2-datepicker';
+import { Md2DateUtil } from 'md2-datepicker/datepicker/dateUtil';
+
 
 @NgModule({
   declarations: [
@@ -37,11 +40,12 @@ import {LocationComponent} from "./components/location/location.component";
     MaterialModule.forRoot(),
     FlexLayoutModule,
     NgxDatatableModule,
+    Md2DatepickerModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBCUrIt3JLF2DlRX6pgDA9ulLZl41uHnTY'
     })
   ],
-  providers: [EarthquakeService],
+  providers: [EarthquakeService, Md2DateUtil],
   bootstrap: [AppComponent],
   entryComponents: [EarthquakeDialog]
 })
