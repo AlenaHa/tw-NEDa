@@ -24,12 +24,15 @@
                         <form name="cityForm" novalidate>
                             <div class="form-group">
                                 <!--selects names for the cities from location.component.ts -->
-                                <md-select placeholder="City">
-                                    <md-option *ngFor="let city of cities" [value]="city.value">
-                                        {{ city.viewValue }}
-                                    </md-option>
-                                </md-select>
-                                <button id="city" md-button>Search City</button>
+                                <!-- (change)- sort of function which will keep up with every change-->
+                                <!-- I send the City name to trigger function -->
+                                <select (change)="trigger($event.target.value)">
+                                    <option *ngFor="let city of cities" [value]="city.value">
+                                        {{ city.viewValue}}
+                                    </option>
+                                </select>
+                                <!--each city has it's coordinates goToCity() moves google map to those coordinates-->
+                                <button (click)="goToCity()" id="city" md-button>Search City</button>
                             </div>
                         </form>
                     </div>
@@ -70,7 +73,7 @@
 
             <!--google map-->
             <div class="col-md-7 map-responsive">
-                <sebm-google-map [latitude]="lat" [longitude]="lng">
+                <sebm-google-map id="map" [latitude]="lat" [longitude]="lng">
                     <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
                 </sebm-google-map>
 

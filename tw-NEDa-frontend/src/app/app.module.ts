@@ -19,7 +19,6 @@ import { LocationComponent } from './components/location/location.component';
 import { Md2DatepickerModule } from 'md2-datepicker';
 import { Md2DateUtil } from 'md2-datepicker/datepicker/dateUtil';
 
-
 @NgModule({
   declarations: [
     AppComponent,
