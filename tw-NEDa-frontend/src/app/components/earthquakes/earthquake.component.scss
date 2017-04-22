@@ -5,6 +5,7 @@
   margin: 0 auto;
   line-height: 1.4em;
 }
+
 #eq-table {
   margin-top: 40px;
 }
@@ -17,6 +18,9 @@
   margin-top: 30px;
 }
 
+/**
+  Made responsive for phone view
+ */
 @media screen and(max-width: 360px) {
 
   .page-content {

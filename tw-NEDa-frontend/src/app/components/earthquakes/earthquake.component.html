@@ -1,69 +1,71 @@
 <div class="page-content">
+
+    <!--card where we insert the ID for Eq-->
     <div id="first-card">
-    <md-card>
-      <md-card-header>
-          <md-card-title>Filter Earthquakes By Id</md-card-title>
-      </md-card-header>
+        <md-card>
+            <md-card-header>
+                <md-card-title>Filter Earthquakes By Id</md-card-title>
+            </md-card-header>
 
-      <md-card-content>
-        <md-input-container>
-          <input
-                  class="eq-id-filter-input"
-                  mdInput
-                  type='text'
-                  placeholder='Type to filter '
-                  (keyup)='updateFilter($event)'
-          />
-        </md-input-container>
-      </md-card-content>
+            <md-card-content>
+                <md-input-container>
+                    <input
+                            class="eq-id-filter-input"
+                            mdInput
+                            type='text'
+                            placeholder='Type to filter '
+                            (keyup)='updateFilter($event)'
+                    />
+                </md-input-container>
+            </md-card-content>
 
-      <md-card-actions>
-        <button md-button (click)="addEarthquake()">Add earthquake</button>
-        <button md-button>Button 2</button>
-      </md-card-actions>
-    </md-card>
-  </div>
+            <md-card-actions>
+                <button md-button (click)="addEarthquake()">Add earthquake</button>
+                <button md-button>Button 2</button>
+            </md-card-actions>
+        </md-card>
+    </div>
 
-  <div>
+    <div>
+        <!--table-->
+        <ngx-datatable
+                id="eq-table"
+                #table
+                class='material'
+                [columns]='columns'
+                [columnMode]="'force'"
+                [footerHeight]="50"
+                [rowHeight]="'auto'"
+                (rowContextmenu)="onContextMenu($event)"
+                [limit]="10"
+                [rows]='rows'
+                [loadingIndicator]="loadingIndicator"
+                [headerHeight]="50"
+        >
+        </ngx-datatable>
 
-    <ngx-datatable
-            id="eq-table"
-            #table
-            class='material'
-            [columns]='columns'
-            [columnMode]="'force'"
-            [footerHeight]="50"
-            [rowHeight]="'auto'"
-            (rowContextmenu)="onContextMenu($event)"
-            [limit]="10"
-            [rows]='rows'
-            [loadingIndicator]="loadingIndicator"
-            [headerHeight]="50"
-    >
-    </ngx-datatable>
 
+        <!--butoane-->
+        <template #hdrTpl>
 
-      <!--butoane-->
-    <template #hdrTpl>
+        </template>
+        <template #editTmpl let-row="row" let-value="value" let-i="index">
+            <button md-icon-button [mdMenuTriggerFor]="rowMenu">
+                <md-icon>more_vert</md-icon>
+            </button>
 
-    </template>
-    <template #editTmpl let-row="row" let-value="value" let-i="index">
-      <button md-icon-button [mdMenuTriggerFor]="rowMenu">
-        <md-icon>more_vert</md-icon>
-      </button>
+            <md-menu #rowMenu="mdMenu">
+                <button md-menu-item (click)="edit(row)">
+                    <md-icon>edit</md-icon>
+                    Edit
+                </button>
 
-      <md-menu #rowMenu="mdMenu">
-        <button md-menu-item (click)="edit(row)">
-          <md-icon>edit</md-icon>
-          Edit
-        </button>
+                <button md-menu-item (click)="delete(row)">
+                    <md-icon>delete</md-icon>
+                    Delete
+                </button>
+            </md-menu>
+        </template>
 
-        <button md-menu-item (click)="delete(row)">
-          <md-icon>delete</md-icon>
-          Delete
-        </button>
-      </md-menu>
-    </template>
-
-  </div>
+    </div>
 </div>

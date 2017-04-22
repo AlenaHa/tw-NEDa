@@ -14,6 +14,9 @@ svg {
 
 }
 
+/**
+  Made responsive for phone view
+ */
 @media screen and(max-width: 360px) {
   svg {
     width: 100%;
