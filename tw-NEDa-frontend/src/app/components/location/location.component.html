@@ -128,10 +128,15 @@
             </div>
 
 
-            <!--google map-->
+            <!--google map- when you click on the pin Info Window will show-->
             <div class="col-md-7 map-responsive">
                 <sebm-google-map id="map" [latitude]="lat" [longitude]="lng">
-                    <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
+                    <sebm-google-map-marker [latitude]="lat" [longitude]="lng">
+                        <sebm-google-map-info-window [disableAutoPan]="true">
+                            Hi, this is the content of the <strong>{{districtValue }}</strong>
+                        </sebm-google-map-info-window>
+
+                    </sebm-google-map-marker>
                 </sebm-google-map>
             </div>
 

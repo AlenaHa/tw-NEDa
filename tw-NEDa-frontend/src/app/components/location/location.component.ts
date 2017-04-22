@@ -50,7 +50,7 @@ export class LocationComponent implements OnInit {
    *
    * @param event
    */
-  //TODO: validate input(check if is numeric)
+  //TODO: validate input(check if is numeric)and make magnitude case(?)
   checkMagnitude(event) {
     const val = event.target.value;
     console.log(val);
@@ -103,7 +103,9 @@ export class LocationComponent implements OnInit {
     this.lastEq = Date.now();
     this.highestMagnitude = 8.9;
     this.lowestMagnitude = 2.3;
+
   }
+
 
   constructor() {
   }
