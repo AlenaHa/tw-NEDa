@@ -1,4 +1,13 @@
 /**style for map and made it responsive **/
+.page-content {
+  height: 100%;
+}
+
+#full {
+  display: flex;
+  flex-direction: column;
+}
+
 .sebm-google-map-container {
 
   height: 645px;
@@ -31,8 +40,16 @@ h2 {
   height: 0;
 }
 
+md-card-header md-card-title {
+  text-align: center;
+}
+
+b {
+  color: red;
+}
+
 /** this style will be used when de width is like 800px **/
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 360px) {
   body {
     padding: 10px 15px;
   }
@@ -49,4 +66,23 @@ h2 {
     display: block;
     float: none;
   }
+  input {
+    width: 100%;
+  }
+  md-card-content p {
+    font-size: 9px;
+  }
+
+  md-card-content b {
+    font-size: 9px;
+  }
+
+  span.mat-button-wrapper {
+    font-size: 50%;
+  }
+
+  #info {
+    margin-bottom: 30px;
+  }
+
 }

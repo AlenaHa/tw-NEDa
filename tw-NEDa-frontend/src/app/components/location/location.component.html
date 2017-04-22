@@ -1,20 +1,20 @@
 <div class="page-content">
 
-    <h2>Find information about a particular city</h2>
+    <h2>Location</h2>
     <div class="jumbotron">
 
         <div class="row content">
 
             <!-- 2 boxes where we filter the data (City Search/Magnitude search)-->
-            <div name="city-form" class="col-md-5 ng-scope">
-                <!-- form for city -->
+            <div class="col-md-5 ng-scope" id="full">
+                <!-- DISTRICT SEARCH -->
                 <div class="panel panel-default">
 
                     <!--City search -->
                     <div class="panel-heading">
                         <!--title form-->
                         <h2 class="panel-title text-center">
-                            Search Locations
+                            Search By District
                             <!--insert icon-->
                             <span class="glyphicon glyphicon-map-marker"></span>
                         </h2>
@@ -26,27 +26,64 @@
                                 <!--selects names for the cities from location.component.ts -->
                                 <!-- (change)- sort of function which will keep up with every change-->
                                 <!-- I send the City name to trigger function -->
-                                <select (change)="trigger($event.target.value)">
-                                    <option *ngFor="let city of cities" [value]="city.value">
+                                <select (change)="triggerDistrict($event.target.value)">
+                                    <option
+                                            *ngFor="let city of cities"
+                                            [value]="city.value">
                                         {{ city.viewValue}}
                                     </option>
                                 </select>
                                 <!--each city has it's coordinates goToCity() moves google map to those coordinates-->
-                                <button (click)="goToCity()" id="city" md-button>Search City</button>
+                                <button (click)="goToDistrict()" id="city" md-button>Search District</button>
                             </div>
                         </form>
                     </div>
 
                 </div>
 
-                <!--City search -->
+                <!-- MUNICIPALITY SEARCH -->
+                <div class="panel panel-default">
+
+                    <!--City search -->
+                    <div class="panel-heading">
+                        <!--title form-->
+                        <h2 class="panel-title text-center">
+                            Search By Municipality
+                            <!--insert icon-->
+                            <span class="glyphicon glyphicon-map-marker"></span>
+                        </h2>
+                    </div>
+                    <!--panel body-->
+                    <div class="panel-body">
+                        <form name="municipalityForm" novalidate>
+                            <div class="form-group">
+                                <!--selects names for the cities from location.component.ts -->
+                                <!-- (change)- sort of function which will keep up with every change-->
+                                <!-- I send the City name to trigger function -->
+                                <select (change)="triggerMunicipality($event.target.value)">
+                                    <option
+                                            *ngFor="let city of cities"
+                                            [value]="city.value">
+                                        {{ city.viewValue}}
+                                    </option>
+                                </select>
+                                <!--each city has it's coordinates goToCity() moves google map to those coordinates-->
+                                <button (click)="goToMunicipality()" md-button>Search</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+
+                <!--MAGNITUDE SEARCH -->
                 <div class="panel panel-default">
 
                     <!-- Earthquake magnitude search -->
                     <div class="panel-heading">
                         <!--title form-->
                         <h2 class="panel-title text-center">
-                            Search Earthquake by Magnitude
+                            Search by Magnitude
                             <!--insert icon-->
                             <span class="glyphicon glyphicon-map-marker"></span>
                         </h2>
@@ -57,8 +94,12 @@
                         <form name="earthquakeForm" novalidate>
                             <div class="form-group">
                                 <!--selects names for the cities from location.component.ts -->
-                                <input placeholder="Magnitude" type="text">
-                                <button id="earthquake" md-button>Search City</button>
+                                <input
+
+                                        (keyup)='checkMagnitude($event)'
+                                        placeholder="Magnitude"
+                                        type="text">
+                                <button (click)="goToCityMagnitude()" id="earthquake" md-button>Search City</button>
                             </div>
                         </form>
 
@@ -67,6 +108,22 @@
 
                 </div>
 
+                <!--INFORMATION CARD-->
+                <md-card id="info" class="example-card">
+                    <md-card-header>
+                        <md-card-title style="text-align: center">Earthquake Informations</md-card-title>
+                    </md-card-header>
+                    <md-card-content (click)="goToDistrict(); goToMunicipality()" required>
+                        <p>District <b>{{districtValue}}</b></p>
+                        <p>Municipality <b>{{municipalityValue}}</b></p>
+                        <p>Number of earhquakes <b>{{nrOfEq}}</b></p>
+                        <p>Last Earthquake <b>{{lastEq}}</b></p>
+                        <p>Highest Magnitude <b>{{highestMagnitude}}</b></p>
+                        <p>Lowest Magnitude <b>{{lowestMagnitude}}</b></p>
+
+                    </md-card-content>
+
+                </md-card>
 
             </div>
 
@@ -76,7 +133,6 @@
                 <sebm-google-map id="map" [latitude]="lat" [longitude]="lng">
                     <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
                 </sebm-google-map>
-
             </div>
 
 

@@ -23,28 +23,68 @@ export class LocationComponent implements OnInit {
    * Function - get coordonates for the specific city and
    * see the city on map
    */
-  public cityValue: string;
+  public districtValue: string;
+  public municipalityValue: string;
+  public nrOfEq: number;
+  public lastEq: number;
+  public highestMagnitude;
+  public lowestMagnitude;
 
   /**
    * Trigger function from select form
    * @param value
    */
-  public trigger(value) {
-    this.cityValue = value;
+  public triggerDistrict(value) {
+    this.districtValue = value;
+    console.log(value);
+  }
+
+  public triggerMunicipality(value) {
+    this.municipalityValue = value;
     console.log(value);
   }
 
   /**
-   * Calls initMap with location coordinates
+   * using keyup in html I called this function
+   * keep in val what the user wrote
+   *
+   * @param event
    */
-  goToCity() {
-    if (this.cityValue === 'kathmandu-0') {
+  //TODO: validate input(check if is numeric)
+  checkMagnitude(event) {
+    const val = event.target.value;
+    console.log(val);
+  }
+
+  /**
+   * Calls initMap with location coordinates
+   * Search By Location
+   */
+  goToDistrict() {
+    if (this.districtValue === 'kathmandu-0') {
       this.initMap(27.700769, 85.300140);
-    } else if (this.cityValue === 'bhaktapur-1') {
+    } else if (this.districtValue === 'bhaktapur-1') {
       this.initMap(27.6673400, 85.4167300);
-    } else if (this.cityValue === 'pyuthan-2') {
+    } else if (this.districtValue === 'pyuthan-2') {
       this.initMap(28.083333, 82.83333);
     }
+  }
+
+  goToMunicipality() {
+    if (this.municipalityValue === 'kathmandu-0') {
+      this.initMap(27.700769, 85.300140);
+    } else if (this.municipalityValue === 'bhaktapur-1') {
+      this.initMap(27.6673400, 85.4167300);
+    } else if (this.municipalityValue === 'pyuthan-2') {
+      this.initMap(28.083333, 82.83333);
+    }
+  }
+
+  /**
+   * Search By Magnitude
+   */
+  goToCityMagnitude() {
+
   }
 
   /**
@@ -56,6 +96,13 @@ export class LocationComponent implements OnInit {
     this.lat = input1;
     this.lng = input2;
 
+    /**
+     * populate pseudo-information for the info card
+     */
+    this.nrOfEq = 100;
+    this.lastEq = Date.now();
+    this.highestMagnitude = 8.9;
+    this.lowestMagnitude = 2.3;
   }
 
   constructor() {
