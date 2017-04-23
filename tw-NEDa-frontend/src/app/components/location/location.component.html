@@ -120,6 +120,7 @@
                 <!--INFORMATION CARD-->
                 <md-card id="info" class="example-card">
                     <md-card-header>
+                      <!-- TODO: (Cati) Move style in .scss file-->
                         <md-card-title style="text-align: center">Earthquake Informations</md-card-title>
                     </md-card-header>
                     <md-card-content (click)="goToDistrict(); goToMunicipality()" required>
@@ -136,8 +137,10 @@
 
 
                 <!--showing top 3 earthquakes for the picked location-->
+                <!-- TODO: (Cati) Move style in .scss file-->
                 <md-card id="top-eq" style="margin-top: 10px" layout="row" layout-sm="column">
                     <md-card-header>
+                        <!-- TODO: (Cati) Move style in .scss file-->
                         <md-card-title style="text-align: center">
                             <h3>Top 3 earthquakes
                                 <i class="material-icons">grade</i>
@@ -219,11 +222,6 @@
                     </sebm-google-map-marker>
                 </sebm-google-map>
             </div>
-
-
         </div>
-
-
     </div>
-
 </div>
