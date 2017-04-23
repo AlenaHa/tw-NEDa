@@ -30,7 +30,6 @@ import { Md2DateUtil } from 'md2-datepicker/datepicker/dateUtil';
     NavbarComponent,
     LocationComponent,
 
-
   ],
   imports: [
     BrowserModule,

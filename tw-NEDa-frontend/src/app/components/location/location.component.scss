@@ -48,6 +48,14 @@ b {
   color: red;
 }
 
+#my-map {
+  border: 10px solid white;
+}
+
+md-card h2 {
+  color: black;
+}
+
 /** this style will be used when de width is like 800px **/
 @media screen and (max-width: 360px) {
   body {

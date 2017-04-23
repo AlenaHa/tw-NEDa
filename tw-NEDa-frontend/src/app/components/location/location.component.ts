@@ -38,6 +38,18 @@ export class LocationComponent implements OnInit {
   public lastEq: number;
   public highestMagnitude;
   public lowestMagnitude;
+
+  /** variables for populating the Top **/
+  public oneYear: number;
+  public twoYear: number;
+  public threeYear: number;
+  public oneMagnitude: number;
+  public twoMagnitude: number;
+  public threeMagnitude: number;
+
+  /** object of type coordinates**/
+  public selectedCoordinates: coordinates;
+
   /**
    * Createad array of object in which we keep the coordinates for a district/municipality
    * @type {[{place: string; lat: number; lng: number},{place: string; lat: number; lng: number},{place: string; lat: number; lng: number}]}
@@ -47,8 +59,6 @@ export class LocationComponent implements OnInit {
     {place: 'bhaktapur-1', lat: 27.6673400, lng: 85.4167300},
     {place: 'pyuthan-2', lat: 28.083333, lng: 82.83333}
   ];
-  public selectedCoordinates: coordinates;
-
 
   /**
    * Trigger function from select form
@@ -94,24 +104,42 @@ export class LocationComponent implements OnInit {
 
     this.initMap(this.selectedCoordinates.lat, this.selectedCoordinates.lng);
     /**
-     * populate pseudo-information for the info card
+     * populate pseudo-information for the info card - delete after presentation
      */
     this.nrOfEq = 80;
     this.lastEq = Date.now();
     this.highestMagnitude = 8;
     this.lowestMagnitude = 2;
+
+    this.oneYear = Date.now();
+    this.twoYear = Date.now();
+    this.threeYear = Date.now();
+    this.oneMagnitude = 8.6;
+    this.twoMagnitude = 6.5
+    this.threeMagnitude = 4.5
+
+
   }
 
   goToMunicipality() {
 
     this.initMap(this.selectedCoordinates.lat, this.selectedCoordinates.lng);
     /**
-     * populate pseudo-information for the info card
+     * populate pseudo-information for the info card - delete after presentation
      */
     this.nrOfEq = 100;
     this.lastEq = Date.now();
     this.highestMagnitude = 8.9;
     this.lowestMagnitude = 2.3;
+
+
+    this.oneYear = 1997;
+    this.twoYear = 2015;
+    this.threeYear = 1980;
+    this.oneMagnitude = 8.9;
+    this.twoMagnitude = 7.5
+    this.threeMagnitude = 4.5
+
   }
 
   /**

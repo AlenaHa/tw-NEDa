@@ -1,6 +1,15 @@
 <div class="page-content">
 
-    <h2>Location</h2>
+    <!--header card-->
+    <md-card>
+        <md-card-content>
+
+            <h2>Location</h2>
+
+        </md-card-content>
+    </md-card>
+
+    <!--all the content-->
     <div class="jumbotron">
 
         <div class="row content">
@@ -125,11 +134,76 @@
 
                 </md-card>
 
+
+                <!--showing top 3 earthquakes for the picked location-->
+                <md-card id="top-eq" style="margin-top: 10px">
+                    <md-card-header>
+                        <md-card-title style="text-align: center">
+                            <h3>Top 3 earthquakes for the location
+                                <i class="material-icons">grade</i>
+                            </h3>
+                        </md-card-title>
+                    </md-card-header>
+                    <md-card-content (click)="goToDistrict(); goToMunicipality()" required>
+
+                        <md-grid-list cols="4" [rowHeight]="basicRowHeight">
+                            <!-- first earthquake-->
+                            <md-grid-tile>
+                                <md-card>
+                                    <!--header for the card-->
+                                    <md-card-header>
+                                        <md-card-title>
+                                            <h3>One</h3>
+                                        </md-card-title>
+                                    </md-card-header>
+                                    <!--content ( order by magnitude)-->
+                                    <md-card-content>
+                                        <p>Year <b>{{oneYear}}</b></p>
+                                        <p>Magnitude <b>{{oneMagnitude}}</b></p>
+                                    </md-card-content>
+                                </md-card>
+                            </md-grid-tile>
+
+                            <!--second earthquake-->
+                            <md-grid-tile>
+                                <md-card>
+                                    <md-card-header>
+                                        <md-card-title>
+                                            <h3>Two</h3>
+                                        </md-card-title>
+                                    </md-card-header>
+                                    <md-card-content>
+                                        <p>Year <b>{{twoYear}}</b></p>
+                                        <p>Magnitude <b>{{twoMagnitude}}</b></p>
+                                    </md-card-content>
+                                </md-card>
+                            </md-grid-tile>
+
+                            <!--third earthquake-->
+                            <md-grid-tile>
+                                <md-card>
+                                    <md-card-header>
+                                        <md-card-title>
+                                            <h3>Three</h3>
+                                        </md-card-title>
+                                    </md-card-header>
+                                    <md-card-content>
+                                        <p>Year <b>{{threeYear}}</b></p>
+                                        <p>Magnitude <b>{{threeMagnitude}}</b></p>
+                                    </md-card-content>
+                                </md-card>
+                            </md-grid-tile>
+                        </md-grid-list>
+                    </md-card-content>
+
+                </md-card>
+
+
             </div>
 
 
             <!--google map- when you click on the pin Info Window will show-->
-            <div class="col-md-7 map-responsive">
+            <div class="col-md-7 map-responsive" id="my-map">
                 <sebm-google-map
                         id="map"
                         [latitude]="lat"
