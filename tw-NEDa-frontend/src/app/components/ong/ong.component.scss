@@ -1,0 +1,84 @@
+#eq-table {
+  margin-top: 40px;
+}
+
+.tttable {
+  padding-left: 40%;
+}
+
+.eq-id-filter-input {
+  width: 350px;
+}
+
+@media screen and(max-width: 360px) {
+  #eq-table {
+    width: auto;
+    margin-right: 0%;
+    margin-left: 0%;
+    padding-left: 0%;
+    padding-right: 0%;
+  }
+  .donate {
+  }
+}
+
+.donate {
+  background-image: url("https://scontent.fotp3-1.fna.fbcdn.net/v/t34.0-12/18109517_1522443797788928_1820901389_n.png?oh=57e7d3ac1707848d08c8b604cdb9ac08&oe=58FCABE3");
+  weight: 100%;
+  height: 100%;
+  //padding: 3em;
+  //clear: left;
+  text-align: center;
+  //padding-right: 40px;
+  //padding-left: 40px;
+  padding-top: 3em;
+  padding-bottom: 3em;
+
+  background-repeat: no-repeat;
+  background-position: center;
+
+  //position: absolute;
+  //width:300px;
+  //height:300px;
+  bottom: 0px;
+  right: 25%;
+  left: 50%;
+}
+
+.table-photo {
+  weight: 100%;
+  height: 100%;
+  //padding: 3em;
+  //clear: left;
+  text-align: center;
+  padding-right: 40px;
+  padding-left: 600px;
+  padding-top: 3em;
+  padding-bottom: 3em;
+
+  background-repeat: no-repeat;
+  background-position: center;
+
+  margin: 0 auto;
+}
+
+.table-text {
+  margin: 0 auto;
+  padding-right: 10px;
+  padding-left: 10px;
+  min-width: 200px;
+  table-layout: fixed;
+  max-width: 300px;
+}
+
+footer {
+  padding: 1em;
+  clear: left;
+  text-align: center;
+}
+
+#text-title {
+  width: 20%;
+}
+
+

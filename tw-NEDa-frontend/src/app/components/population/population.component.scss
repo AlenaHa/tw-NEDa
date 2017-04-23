@@ -1,0 +1,63 @@
+.chart-pop-1, .chart-pop-2 {
+  display: block;
+  width: 100%;
+  float: left;
+  //padding-bottom: 40%;
+  position: relative;
+  width: 50%;
+}
+
+.chart-pop-bar {
+  display: block;
+  width: 100%;
+  float: left;
+  //padding-bottom: 40%;
+  position: relative;
+  width: 70%;
+}
+
+.search {
+  display: block;
+  width: 100%;
+  float: left;
+  //padding-bottom: 40%;
+  position: relative;
+  width: 20%;
+}
+
+.charts {
+  display: block;
+  width: 100%;
+  float: right;
+  //padding-bottom: 40%;
+  position: relative;
+  width: 80%;
+}
+
+@media screen and(max-width: 360px) {
+  .image-pop {
+    width: 200%;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .page-header {
+    width: 150%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  .search {
+    width: 100%;
+  }
+  .charts {
+    width: 150%;
+    margin-left: 0%;
+    float: left;
+  }
+  .chart-pop-1, .chart-pop-2 {
+    width: 100%;
+    margin-bottom: 5%;
+  }
+  .chart-pop-bar {
+    width: 100%;
+  }
+}

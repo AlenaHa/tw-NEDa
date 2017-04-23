@@ -1,0 +1,93 @@
+<div class="page-content">
+
+
+  <table class="table-photo" style="; background-color: antiquewhite;">
+    <tr>
+      <th class="table-text">
+        <h2>Deliver Lasting Change.</h2>
+        <p class="text-title">CARE cuts poverty off at its roots. We
+          provide tools for sustainable change
+          to the people most vulnerable to
+          hunger, violence and disease.</p>
+      </th>
+      <th style="float: right;" class="photo-header">
+        <img style="width: auto; height: auto"
+             src="http://www.care.org/sites/default/files/styles/hero_slash_620x300/public/images/KEN-2011-EH-0144.jpg?itok=uwB7ClRa&timestamp=1381341347">
+      </th>
+    </tr>
+  </table>
+
+
+  <div>
+    <!--<md-card>-->
+    <!--<md-card-header>-->
+    <!--<md-card-title>Ong</md-card-title>-->
+    <!--</md-card-header>-->
+
+    <!--<md-card-content>-->
+    <!--<md-input-container>-->
+    <!--<input-->
+    <!--class="eq-id-filter-input"-->
+    <!--mdInput-->
+    <!--type='text'-->
+    <!--placeholder='Type to filter the Ong ID column...'-->
+    <!--(keyup)='updateFilter($event)'-->
+    <!--/>-->
+    <!--</md-input-container>-->
+    <!--</md-card-content>-->
+    <!--</md-card>-->
+  </div>
+
+
+  <div class="tttable">
+    <ngx-datatable
+      id="eq-table"
+      #table
+      class='material'
+      [columns]="columns"
+      [columnMode]="'force'"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      (rowContextmenu)="onContextMenu($event)"
+      [limit]="10"
+      [rows]='rows'>
+    </ngx-datatable>
+
+    <template #hdrTpl>
+
+    </template>
+    <template #editTmpl let-row="row" let-value="value" let-i="index">
+      <button md-icon-button [mdMenuTriggerFor]="rowMenu">
+        <md-icon>more_vert</md-icon>
+      </button>
+
+      <md-menu #rowMenu="mdMenu">
+        <button md-menu-item (click)="edit(row)">
+          <md-icon>edit</md-icon>
+          Edit
+        </button>
+
+        <button md-menu-item (click)="delete(row)">
+          <md-icon>delete</md-icon>
+          Delete
+        </button>
+      </md-menu>
+    </template>
+
+  </div>
+
+  <br>
+
+  <div>
+    <div>
+      <div class="donate">
+        <!--<h3 >Help earthquake victims in Nepal rebuild lives and restore health.</h3>-->
+        <button md-raised-button color="accent" md-button (click)="donateNow()">
+          Donate Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+

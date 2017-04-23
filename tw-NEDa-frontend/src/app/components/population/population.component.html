@@ -1,0 +1,83 @@
+<div class="page-content-pop">
+  <div class="image-pop">
+    <img
+      src="https://scontent.fotp3-1.fna.fbcdn.net/v/t35.0-12/18110121_1522407781125863_1860674748_o.png?oh=9c52cc1e1be7ffd52b546782921fa1c8&oe=58FCB1F9"
+      alt="Smiley face" height=100% width=100%>
+  </div>
+
+
+  <div class='container'>
+    <div class="page-header">
+      <h1 style="color: floralwhite">Nepal Population</h1>
+      <br>
+      <h4 style="color: floralwhite">Help for survivors. Collaborating with local groups who already work in the region,
+        AmeriCares is bringing community-based psychosocial health programs to remote and
+        isolated earthquake-affected communities. In a public space, trained performers act
+        out the range of stress symptoms that can afflict earthquake survivors. The training
+        adds to health workers’ knowledge of mental health and psychosocial issues, building
+        local capacity that will help the community for years to come. The program will reach
+        more than 1,000 communities and train more than 2,900 community health workers through
+        June 2017. Over 550 performances thus far have reached an estimated audience of 172,000
+        community members in 6 districts.</h4>
+
+    </div>
+
+    <br>
+    <br>
+
+    <md-card class="search">
+      <md-input-container>
+        <input mdInput placeholder="Search by location">
+      </md-input-container>
+      <md-card-actions>
+        <button md-button>Search</button>
+      </md-card-actions>
+    </md-card>
+
+
+    <md-card class="charts">
+
+      <div class="chart-pop-1">
+        <md-card>
+          <canvas baseChart
+                  [data]="polarAreaChartData"
+                  [labels]="polarAreaChartLabels"
+                  [legend]="polarAreaLegend"
+                  [chartType]="polarAreaChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+          <p>Age distribution</p>
+        </md-card>
+      </div>
+
+
+      <div class="chart-pop-2">
+        <md-card>
+          <canvas baseChart
+                  [data]="doughnutChartData"
+                  [labels]="doughnutChartLabels"
+                  [chartType]="doughnutChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+          <p>Gender</p>
+        </md-card>
+      </div>
+
+      <div>
+        <div class="chart-pop-bar">
+          <md-card>
+            <canvas baseChart
+                    [datasets]="barChartData"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+            <p>Earthquakes</p>
+          </md-card>
+        </div>
+      </div>
+    </md-card>
+  </div>
+</div>

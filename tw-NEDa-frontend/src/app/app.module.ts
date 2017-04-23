@@ -18,17 +18,30 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LocationComponent } from './components/location/location.component';
 import { Md2DatepickerModule } from 'md2-datepicker';
 import { Md2DateUtil } from 'md2-datepicker/datepicker/dateUtil';
+import { OngComponent } from './components/ong/ong.component';
+import { OngService } from './services/ong.service';
+import { OngDialog } from './components/ong/ong.dialog';
+
+import { PopulationComponent } from './components/population/population.component';
+import { PopulationService } from './services/population.service';
+
+
+// import { ChartModule } from 'angular2-highcharts';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
     AppComponent,
     EarthquakeComponent,
     EarthquakeDialog,
+    OngDialog,
     HomeComponent,
     LogoComponent,
     NepalmapComponent,
     NavbarComponent,
     LocationComponent,
+    OngComponent,
+    PopulationComponent
 
   ],
   imports: [
@@ -36,6 +49,7 @@ import { Md2DateUtil } from 'md2-datepicker/datepicker/dateUtil';
     routing,
     FormsModule,
     HttpModule,
+    ChartsModule,
 
     MaterialModule.forRoot(),
     FlexLayoutModule,
@@ -45,9 +59,9 @@ import { Md2DateUtil } from 'md2-datepicker/datepicker/dateUtil';
       apiKey: 'AIzaSyBCUrIt3JLF2DlRX6pgDA9ulLZl41uHnTY'
     })
   ],
-  providers: [EarthquakeService, Md2DateUtil],
+  providers: [EarthquakeService, Md2DateUtil, OngService, PopulationService],
   bootstrap: [AppComponent],
-  entryComponents: [EarthquakeDialog]
+  entryComponents: [EarthquakeDialog, OngDialog]
 })
 export class AppModule {
 }
