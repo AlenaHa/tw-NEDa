@@ -4,7 +4,6 @@
 
 import { Component } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
-import { Ong } from '../../model/ong.model';
 
 @Component({
   selector: 'ong-dialog',

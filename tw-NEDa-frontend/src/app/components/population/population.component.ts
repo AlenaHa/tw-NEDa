@@ -1,9 +1,7 @@
 /**
  * Created by Cami on 2017-04-21.
  */
-import {
-  Component,
-} from '@angular/core';
+import { Component } from '@angular/core';
 import 'chart.js/dist/Chart.bundle.min.js';
 
 @Component({

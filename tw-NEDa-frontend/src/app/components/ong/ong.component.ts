@@ -100,6 +100,7 @@ export class OngComponent implements OnInit, AfterViewInit {
     this.table.offset = 0;
   }
 
+
   /**
    * Handles table's context menu event
    * @param contextMenuEvent
