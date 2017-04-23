@@ -6,3 +6,7 @@ md-toolbar {
 md-toolbar h2 {
   color: white;
 }
+
+#wrapper {
+  min-height: calc(100vh - 50px);
+}

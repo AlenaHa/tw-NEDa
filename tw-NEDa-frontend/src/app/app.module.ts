@@ -24,9 +24,8 @@ import { OngDialog } from './components/ong/ong.dialog';
 
 import { PopulationComponent } from './components/population/population.component';
 import { PopulationService } from './services/population.service';
+import { FooterComponent } from './components/footer/footer.component';
 
-
-// import { ChartModule } from 'angular2-highcharts';
 import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
@@ -41,7 +40,8 @@ import { ChartsModule } from 'ng2-charts';
     NavbarComponent,
     LocationComponent,
     OngComponent,
-    PopulationComponent
+    PopulationComponent,
+    FooterComponent
 
   ],
   imports: [
