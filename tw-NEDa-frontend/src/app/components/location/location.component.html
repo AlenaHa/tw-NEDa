@@ -136,20 +136,21 @@
 
 
                 <!--showing top 3 earthquakes for the picked location-->
-                <md-card id="top-eq" style="margin-top: 10px">
+                <md-card id="top-eq" style="margin-top: 10px" layout="row" layout-sm="column">
                     <md-card-header>
                         <md-card-title style="text-align: center">
-                            <h3>Top 3 earthquakes for the location
+                            <h3>Top 3 earthquakes
                                 <i class="material-icons">grade</i>
                             </h3>
                         </md-card-title>
                     </md-card-header>
-                    <md-card-content (click)="goToDistrict(); goToMunicipality()" required>
+                    <!--content-->
+                    <md-card-content (click)="goToDistrict(); goToMunicipality()" required class="md-padding">
 
-                        <md-grid-list cols="4" [rowHeight]="basicRowHeight">
+                        <md-grid-list cols="4" [rowHeight]="basicRowHeight" layout="row" layout-sm="column">
                             <!-- first earthquake-->
-                            <md-grid-tile>
-                                <md-card>
+                            <md-grid-tile layout="row" layout-sm="column">
+                                <md-card id="top-eq1">
                                     <!--header for the card-->
                                     <md-card-header>
                                         <md-card-title>
@@ -166,7 +167,7 @@
 
                             <!--second earthquake-->
                             <md-grid-tile>
-                                <md-card>
+                                <md-card layout="row" layout-sm="column">
                                     <md-card-header>
                                         <md-card-title>
                                             <h3>Two</h3>
@@ -181,7 +182,7 @@
 
                             <!--third earthquake-->
                             <md-grid-tile>
-                                <md-card>
+                                <md-card layout="row" layout-sm="column">
                                     <md-card-header>
                                         <md-card-title>
                                             <h3>Three</h3>
@@ -197,11 +198,10 @@
                     </md-card-content>
 
                 </md-card>
-
-
             </div>
 
 
+            <!--TODO : Make this responsive -->
             <!--google map- when you click on the pin Info Window will show-->
             <div class="col-md-7 map-responsive" id="my-map">
                 <sebm-google-map

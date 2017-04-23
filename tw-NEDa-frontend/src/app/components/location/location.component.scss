@@ -56,7 +56,7 @@ md-card h2 {
   color: black;
 }
 
-/** this style will be used when de width is like 800px **/
+/** this style will be used when de width is like 360px **/
 @media screen and (max-width: 360px) {
   body {
     padding: 10px 15px;
@@ -74,6 +74,7 @@ md-card h2 {
     display: block;
     float: none;
   }
+
   input {
     width: 100%;
   }
@@ -91,6 +92,21 @@ md-card h2 {
 
   #info {
     margin-bottom: 30px;
+  }
+
+  h3 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  #top-eq {
+    width: 40%;
+  }
+
+  h3, .h3 {
+    font-size: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
   }
 
 }

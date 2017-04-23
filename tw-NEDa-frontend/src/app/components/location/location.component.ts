@@ -91,6 +91,11 @@ export class LocationComponent implements OnInit {
    */
   //TODO: validate input(check if is numeric)and make magnitude case(?)
   //TODO: see how to make more markers for google map(show more pins on the map)
+  /**
+   * User enters a value for magnitude on the map should apear all location which had
+   * a earthquake with this magnitude
+   * @param event
+   */
   checkMagnitude(event) {
     const val = event.target.value;
     console.log(val);
@@ -111,9 +116,9 @@ export class LocationComponent implements OnInit {
     this.highestMagnitude = 8;
     this.lowestMagnitude = 2;
 
-    this.oneYear = Date.now();
-    this.twoYear = Date.now();
-    this.threeYear = Date.now();
+    this.oneYear = 2016;
+    this.twoYear = 1976;
+    this.threeYear = 1998;
     this.oneMagnitude = 8.6;
     this.twoMagnitude = 6.5
     this.threeMagnitude = 4.5
