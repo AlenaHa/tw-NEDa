@@ -1,0 +1,227 @@
+<div class="page-content">
+
+    <!--header card-->
+    <md-card>
+        <md-card-content>
+
+            <h2>Location</h2>
+
+        </md-card-content>
+    </md-card>
+
+    <!--all the content-->
+    <div class="jumbotron">
+
+        <div class="row content">
+
+            <!-- 2 boxes where we filter the data (City Search/Magnitude search)-->
+            <div class="col-md-5 ng-scope" id="full">
+                <!-- DISTRICT SEARCH -->
+                <div class="panel panel-default">
+
+                    <!--City search -->
+                    <div class="panel-heading">
+                        <!--title form-->
+                        <h2 class="panel-title text-center">
+                            Search By District
+                            <!--insert icon-->
+                            <span class="glyphicon glyphicon-map-marker"></span>
+                        </h2>
+                    </div>
+                    <!--panel body-->
+                    <div class="panel-body">
+                        <form name="cityForm" novalidate>
+                            <div class="form-group">
+                                <!--selects names for the cities from location.component.ts -->
+                                <!-- (change)- sort of function which will keep up with every change-->
+                                <!-- I send the City name to trigger function -->
+                                <select (change)="triggerDistrict($event.target.value)">
+                                    <option
+                                            *ngFor="let city of cities"
+                                            [value]="city.value">
+                                        {{ city.viewValue}}
+                                    </option>
+                                </select>
+                                <!--each city has it's coordinates goToCity() moves google map to those coordinates-->
+                                <button (click)="goToDistrict()" id="city" md-button>Search District</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+                <!-- MUNICIPALITY SEARCH -->
+                <div class="panel panel-default">
+
+                    <!--City search -->
+                    <div class="panel-heading">
+                        <!--title form-->
+                        <h2 class="panel-title text-center">
+                            Search By Municipality
+                            <!--insert icon-->
+                            <span class="glyphicon glyphicon-map-marker"></span>
+                        </h2>
+                    </div>
+                    <!--panel body-->
+                    <div class="panel-body">
+                        <form name="municipalityForm" novalidate>
+                            <div class="form-group">
+                                <!--selects names for the cities from location.component.ts -->
+                                <!-- (change)- sort of function which will keep up with every change-->
+                                <!-- I send the City name to trigger function -->
+                                <select (change)="triggerMunicipality($event.target.value)">
+                                    <option
+                                            *ngFor="let city of cities"
+                                            [value]="city.value">
+                                        {{ city.viewValue}}
+                                    </option>
+                                </select>
+                                <!--each city has it's coordinates goToCity() moves google map to those coordinates-->
+                                <button (click)="goToMunicipality()" md-button>Search</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+
+                <!--MAGNITUDE SEARCH -->
+                <div class="panel panel-default">
+
+                    <!-- Earthquake magnitude search -->
+                    <div class="panel-heading">
+                        <!--title form-->
+                        <h2 class="panel-title text-center">
+                            Search by Magnitude
+                            <!--insert icon-->
+                            <span class="glyphicon glyphicon-map-marker"></span>
+                        </h2>
+                    </div>
+
+                    <!--panel body-->
+                    <div class="panel-body">
+                        <form name="earthquakeForm" novalidate>
+                            <div class="form-group">
+                                <!--selects names for the cities from location.component.ts -->
+                                <input
+
+                                        (keyup)='checkMagnitude($event)'
+                                        placeholder="Magnitude"
+                                        type="text">
+                                <button (click)="goToCityMagnitude()" id="earthquake" md-button>Search Cities</button>
+                            </div>
+                        </form>
+
+
+                    </div>
+
+                </div>
+
+                <!--INFORMATION CARD-->
+                <md-card id="info" class="example-card">
+                    <md-card-header>
+                      <!-- TODO: (Cati) Move style in .scss file-->
+                        <md-card-title style="text-align: center">Earthquake Informations</md-card-title>
+                    </md-card-header>
+                    <md-card-content (click)="goToDistrict(); goToMunicipality()" required>
+                        <p>District <b>{{districtValue}}</b></p>
+                        <p>Municipality <b>{{municipalityValue}}</b></p>
+                        <p>Number of earhquakes <b>{{nrOfEq}}</b></p>
+                        <p>Last Earthquake <b>{{lastEq}}</b></p>
+                        <p>Highest Magnitude <b>{{highestMagnitude}}</b></p>
+                        <p>Lowest Magnitude <b>{{lowestMagnitude}}</b></p>
+
+                    </md-card-content>
+
+                </md-card>
+
+
+                <!--showing top 3 earthquakes for the picked location-->
+                <!-- TODO: (Cati) Move style in .scss file-->
+                <md-card id="top-eq" style="margin-top: 10px" layout="row" layout-sm="column">
+                    <md-card-header>
+                        <!-- TODO: (Cati) Move style in .scss file-->
+                        <md-card-title style="text-align: center">
+                            <h3>Top 3 earthquakes
+                                <i class="material-icons">grade</i>
+                            </h3>
+                        </md-card-title>
+                    </md-card-header>
+                    <!--content-->
+                    <md-card-content (click)="goToDistrict(); goToMunicipality()" required class="md-padding">
+
+                        <md-grid-list cols="4" [rowHeight]="basicRowHeight" layout="row" layout-sm="column">
+                            <!-- first earthquake-->
+                            <md-grid-tile layout="row" layout-sm="column">
+                                <md-card id="top-eq1">
+                                    <!--header for the card-->
+                                    <md-card-header>
+                                        <md-card-title>
+                                            <h3>One</h3>
+                                        </md-card-title>
+                                    </md-card-header>
+                                    <!--content ( order by magnitude)-->
+                                    <md-card-content>
+                                        <p>Year <b>{{oneYear}}</b></p>
+                                        <p>Magnitude <b>{{oneMagnitude}}</b></p>
+                                    </md-card-content>
+                                </md-card>
+                            </md-grid-tile>
+
+                            <!--second earthquake-->
+                            <md-grid-tile>
+                                <md-card layout="row" layout-sm="column">
+                                    <md-card-header>
+                                        <md-card-title>
+                                            <h3>Two</h3>
+                                        </md-card-title>
+                                    </md-card-header>
+                                    <md-card-content>
+                                        <p>Year <b>{{twoYear}}</b></p>
+                                        <p>Magnitude <b>{{twoMagnitude}}</b></p>
+                                    </md-card-content>
+                                </md-card>
+                            </md-grid-tile>
+
+                            <!--third earthquake-->
+                            <md-grid-tile>
+                                <md-card layout="row" layout-sm="column">
+                                    <md-card-header>
+                                        <md-card-title>
+                                            <h3>Three</h3>
+                                        </md-card-title>
+                                    </md-card-header>
+                                    <md-card-content>
+                                        <p>Year <b>{{threeYear}}</b></p>
+                                        <p>Magnitude <b>{{threeMagnitude}}</b></p>
+                                    </md-card-content>
+                                </md-card>
+                            </md-grid-tile>
+                        </md-grid-list>
+                    </md-card-content>
+
+                </md-card>
+            </div>
+
+
+            <!--TODO : Make this responsive -->
+            <!--google map- when you click on the pin Info Window will show-->
+            <div class="col-md-7 map-responsive" id="my-map">
+                <sebm-google-map
+                        id="map"
+                        [latitude]="lat"
+                        [longitude]="lng">
+                    <sebm-google-map-marker
+                            [latitude]="lat"
+                            [longitude]="lng">
+                        <sebm-google-map-info-window
+                                [disableAutoPan]="true">
+                            Hi, this is the content of the <strong>{{districtValue }}</strong>
+                        </sebm-google-map-info-window>
+
+                    </sebm-google-map-marker>
+                </sebm-google-map>
+            </div>
+        </div>
+    </div>
+</div>

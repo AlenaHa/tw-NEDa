@@ -1,0 +1,112 @@
+/**
+ * Map styles
+ */
+.page-content {
+  height: 100%;
+}
+
+#full {
+  display: flex;
+  flex-direction: column;
+}
+
+.sebm-google-map-container {
+  height: 645px;
+  width: 645px;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.jumbotron {
+  background-color: #233237;
+}
+
+h2 {
+  color: white;
+  text-align: center;
+}
+
+.panel-heading h2 {
+  color: black;
+}
+
+.map-responsive {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+
+md-card-header md-card-title {
+  text-align: center;
+}
+
+b {
+  color: red;
+}
+
+#my-map {
+  border: 10px solid white;
+}
+
+md-card h2 {
+  color: black;
+}
+
+/** this style will be used when de width is like 360px **/
+@media screen and (max-width: 360px) {
+  body {
+    padding: 10px 15px;
+  }
+  .jumbotron {
+    width: 100%;
+  }
+  #city-form {
+    width: 100%;
+    float: none;
+    display: block;
+  }
+  #city-form {
+    width: 100%;
+    display: block;
+    float: none;
+  }
+
+  input {
+    width: 100%;
+  }
+  md-card-content p {
+    font-size: 9px;
+  }
+
+  md-card-content b {
+    font-size: 9px;
+  }
+
+  span.mat-button-wrapper {
+    font-size: 50%;
+  }
+
+  #info {
+    margin-bottom: 30px;
+  }
+
+  h3 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  #top-eq {
+    width: 40%;
+  }
+
+  h3, .h3 {
+    font-size: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+}

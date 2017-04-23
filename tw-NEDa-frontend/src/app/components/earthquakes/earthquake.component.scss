@@ -1,7 +1,48 @@
+.page-content {
+  font-family: 'Montserrat', sans-serif;
+  width: 960px;
+  position: relative;
+  margin: 0 auto;
+  line-height: 1.4em;
+  text-align: center;
+}
+
 #eq-table {
   margin-top: 40px;
 }
 
 .eq-id-filter-input {
   width: 350px;
+}
+
+#first-card {
+  margin-top: 30px;
+}
+
+h2 {
+  color: white;
+}
+
+/**
+ * Phone responsive
+ */
+@media screen and(max-width: 360px) {
+
+  .page-content {
+    width: 97%;
+  }
+  md-card-header md-card-title {
+    font-size: 11px;
+  }
+  md-input-container {
+    font-size: 10px;
+  }
+
+  .mat-input-container.mat-input-container {
+    font-size: 10px;
+    width: 140px;
+  }
+  .mat-input-placeholder .mat-empty .mat-float .mat-input-placeholder {
+    font-size: 60%;
+  }
 }
