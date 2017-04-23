@@ -4,8 +4,8 @@ import { EarthquakeComponent } from './components/earthquakes/earthquake.compone
 import { HomeComponent } from './components/home/home.component';
 import { LocationComponent } from './components/location/location.component';
 
+/** Routes for all our pages in the app **/
 export const appRoutes: Routes = [
-  /** routes for all our pages in the app **/
   {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
   {path: 'earthquakes', component: EarthquakeComponent},
