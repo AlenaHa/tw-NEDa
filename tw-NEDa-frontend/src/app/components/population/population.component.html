@@ -1,4 +1,5 @@
 <div class="page-content-pop">
+  <!--Cover picture-->
   <div class="image-pop">
     <img
       src="https://scontent.fotp3-1.fna.fbcdn.net/v/t35.0-12/18110121_1522407781125863_1860674748_o.png?oh=9c52cc1e1be7ffd52b546782921fa1c8&oe=58FCB1F9"
@@ -6,11 +7,14 @@
   </div>
 
 
-  <div class='container'>
+  <!--main page-->
+  <div class='container' id="container-population">
+
+    <!--text information-->
     <div class="page-header">
       <h1 style="color: floralwhite">Nepal Population</h1>
       <br>
-      <h4 style="color: floralwhite; text-align: justify">Help for survivors. Collaborating with local groups who
+      <h4 style="color: floralwhite; ">Help for survivors. Collaborating with local groups who
         already work in the region,
         AmeriCares is bringing community-based psychosocial health programs to remote and
         isolated earthquake-affected communities. In a public space, trained performers act
@@ -26,44 +30,35 @@
     <br>
     <br>
 
-    <md-card class="search">
-      <md-input-container>
-        <input mdInput placeholder="Search by location">
-      </md-input-container>
-      <md-card-actions>
-        <button md-button>Search</button>
-      </md-card-actions>
-    </md-card>
+    <!--Serach by District-->
+    <div class="column-search">
+      <div class="panel panel-default">
 
+        <div class="panel-heading">
+          <h2 class="panel-title text-center">
+            Search by District
+            <span class="glyphicon glyphicon-map-marker"></span>
+          </h2>
+        </div>
 
-    <md-card class="charts">
-
-      <div class="chart-pop-1">
-        <md-card>
-          <canvas baseChart
-                  [data]="polarAreaChartData"
-                  [labels]="polarAreaChartLabels"
-                  [legend]="polarAreaLegend"
-                  [chartType]="polarAreaChartType"
-                  (chartHover)="chartHovered($event)"
-                  (chartClick)="chartClicked($event)"></canvas>
-          <p>Age distribution</p>
-        </md-card>
+        <div class="panel-body">
+          <form name="earthquakeForm" novalidate>
+            <div class="form-group input-search">
+              <input
+                placeholder="District"
+                type="text">
+              <button md-button>Search</button>
+            </div>
+          </form>
+        </div>
       </div>
+    </div>
 
 
-      <div class="chart-pop-2">
-        <md-card>
-          <canvas baseChart
-                  [data]="doughnutChartData"
-                  [labels]="doughnutChartLabels"
-                  [chartType]="doughnutChartType"
-                  (chartHover)="chartHovered($event)"
-                  (chartClick)="chartClicked($event)"></canvas>
-          <p>Gender</p>
-        </md-card>
-      </div>
+    <!--All the charts-->
+    <md-card class="charts ">
 
+      <!--Bar chart-->
       <div>
         <div class="chart-pop-bar">
           <md-card>
@@ -75,10 +70,58 @@
                     [chartType]="barChartType"
                     (chartHover)="chartHovered($event)"
                     (chartClick)="chartClicked($event)"></canvas>
-            <p>Earthquakes</p>
+
+            <!--chart name-->
+            <div class="panel-heading">
+              <h2 class="panel-title text-center">
+                Earthquakes
+              </h2>
+            </div>
+
           </md-card>
         </div>
       </div>
+
+      <!--Area chart-->
+      <div class="chart-pop-1">
+        <md-card>
+          <canvas baseChart
+                  [data]="polarAreaChartData"
+                  [labels]="polarAreaChartLabels"
+                  [legend]="polarAreaLegend"
+                  [chartType]="polarAreaChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+
+          <!--chart name-->
+          <div class="panel-heading">
+            <h1 class="panel-title text-center">
+              Age distribution
+            </h1>
+          </div>
+        </md-card>
+      </div>
+
+
+      <!--Doughnut chart-->
+      <div class="chart-pop-2">
+        <md-card>
+          <canvas baseChart
+                  [data]="doughnutChartData"
+                  [labels]="doughnutChartLabels"
+                  [chartType]="doughnutChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+
+          <!--chart name-->
+          <div class="panel-heading">
+            <h1 class="panel-title text-center">
+              Gender
+            </h1>
+          </div>
+        </md-card>
+      </div>
+
     </md-card>
   </div>
 </div>

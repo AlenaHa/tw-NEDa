@@ -24,10 +24,41 @@
 
 .charts {
   display: block;
-  width: 100%;
   float: right;
   position: relative;
-  width: 80%;
+  width: 65%;
+  background-color: whitesmoke;
+  margin-right: 18%;
+}
+
+.chart-pop-1, .chart-pop-2 {
+  width: 100%;
+  margin-bottom: 5%;
+}
+
+.chart-pop-bar {
+  width: 100%;
+  margin-bottom: 5%;
+
+}
+
+#full {
+  display: flex;
+  flex-direction: column;
+}
+
+.column-search {
+  float: right;
+  width: 65%;
+  margin-right: 18%;
+}
+
+.input-search {
+  padding-left: 10%;
+}
+
+#container-population {
+  padding-left: 0%;
 }
 
 @media screen and(max-width: 360px) {
