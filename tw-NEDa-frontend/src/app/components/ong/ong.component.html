@@ -17,42 +17,147 @@
     </tr>
   </table>
 
-  <div class="tttable">
-    <ngx-datatable
-      id="eq-table"
-      #table
-      class='material'
-      [columns]="columns"
-      [columnMode]="'force'"
-      [footerHeight]="50"
-      [rowHeight]="'auto'"
-      (rowContextmenu)="onContextMenu($event)"
-      [limit]="10"
-      [rows]='rows'>
-    </ngx-datatable>
 
-    <template #hdrTpl>
+  <!--all the content-->
+  <div class="jumbotron">
 
-    </template>
-    <template #editTmpl let-row="row" let-value="value" let-i="index">
-      <button md-icon-button [mdMenuTriggerFor]="rowMenu">
-        <md-icon>more_vert</md-icon>
-      </button>
+    <div class="row content">
 
-      <md-menu #rowMenu="mdMenu">
-        <button md-menu-item (click)="edit(row)">
-          <md-icon>edit</md-icon>
-          Edit
-        </button>
+      <div class="col-md-4 ng-scope" id="full">
 
-        <button md-menu-item (click)="delete(row)">
-          <md-icon>delete</md-icon>
-          Delete
-        </button>
-      </md-menu>
-    </template>
 
+        <!--ONG NAME SEARCH -->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <!--title form-->
+            <h2 class="panel-title text-center">
+              Search by ONG Name
+            </h2>
+          </div>
+
+          <!--panel body-->
+          <div class="panel-body">
+            <form name="earthquakeForm" novalidate>
+              <div class="form-group">
+                <input
+
+                  (keyup)='checkMagnitude($event)'
+                  placeholder="NGO name"
+                  type="text">
+                <button md-button>Search</button>
+              </div>
+            </form>
+
+
+          </div>
+
+        </div>
+
+
+        <!--LOCATION SEARCH -->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <!--title form-->
+            <h2 class="panel-title text-center">
+              Search by Location
+            </h2>
+          </div>
+
+          <!--panel body-->
+          <div class="panel-body">
+            <form name="earthquakeForm" novalidate>
+              <div class="form-group">
+                <input
+
+                  (keyup)='checkMagnitude($event)'
+                  placeholder="Location"
+                  type="text">
+                <button md-button>Search</button>
+              </div>
+            </form>
+
+
+          </div>
+
+        </div>
+
+
+        <!--ACTIVITY SEARCH -->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <!--title form-->
+            <h2 class="panel-title text-center">
+              Search by Activty
+            </h2>
+          </div>
+
+          <!--panel body-->
+          <div class="panel-body">
+            <form name="earthquakeForm" novalidate>
+              <div class="form-group">
+                <input
+
+                  (keyup)='checkMagnitude($event)'
+                  placeholder="Activity"
+                  type="text">
+                <button md-button>Search</button>
+              </div>
+            </form>
+
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="col-md-8 table-responsive">
+
+
+        <div class="tttable">
+          <ngx-datatable
+            id="eq-table"
+            #table
+            class='material'
+            [columns]="columns"
+            [columnMode]="'force'"
+            [footerHeight]="50"
+            [rowHeight]="'auto'"
+            (rowContextmenu)="onContextMenu($event)"
+            [limit]="10"
+            [rows]='rows'>
+          </ngx-datatable>
+
+          <template #hdrTpl>
+
+          </template>
+          <template #editTmpl let-row="row" let-value="value" let-i="index">
+            <button md-icon-button [mdMenuTriggerFor]="rowMenu">
+              <md-icon>more_vert</md-icon>
+            </button>
+
+            <md-menu #rowMenu="mdMenu">
+              <button md-menu-item (click)="edit(row)">
+                <md-icon>edit</md-icon>
+                Edit
+              </button>
+
+              <button md-menu-item (click)="delete(row)">
+                <md-icon>delete</md-icon>
+                Delete
+              </button>
+            </md-menu>
+          </template>
+
+        </div>
+
+
+      </div>
+    </div>
   </div>
+
 
   <br>
 

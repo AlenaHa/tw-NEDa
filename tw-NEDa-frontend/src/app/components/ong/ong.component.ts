@@ -37,13 +37,14 @@ export class OngComponent implements OnInit, AfterViewInit {
     // Init table's columns
     this.columns = [
       {prop: 'ongName', name: 'Ong Name'},
+      {prop: 'location', name: 'Location'},
       {prop: 'activityType', name: 'Activity Type'},
       {prop: 'activitySubtype', name: 'Activity Subtype'},
       {
         cellTemplate: this.editTmpl,
         headerTemplate: this.hdrTpl,
         name: 'Actions',
-        width: 30
+        width: 60
       }
     ];
   }
