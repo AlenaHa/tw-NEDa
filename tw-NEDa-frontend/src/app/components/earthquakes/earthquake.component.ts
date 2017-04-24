@@ -194,4 +194,18 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
     }
 
   }
+
+  /**just for presentation**/
+  public magnitude: number = 8.9;
+  public place: string = 'Kathmandu';
+  public depth: string = '12 km';
+
+
+  public year: any;
+
+  checkYear(event) {
+    this.year = event.target.value;
+    console.log(this.year);
+  }
+
 }

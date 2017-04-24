@@ -1,71 +1,152 @@
 <div class="page-content">
 
-    <h2>Table View</h2>
-    <!--card where we insert the ID for Eq-->
-    <div id="first-card">
-        <md-card>
-            <md-card-header>
-                <md-card-title>Filter Earthquakes By Id</md-card-title>
-            </md-card-header>
+    <md-card id="first" class="card">
+        <md-card-content>
+            <h2>Earthquake search</h2>
+        </md-card-content>
+    </md-card>
 
-            <md-card-content>
-                <md-input-container>
-                    <input
-                            class="eq-id-filter-input"
-                            mdInput
-                            type='text'
-                            placeholder='Type to filter '
-                            (keyup)='updateFilter($event)'
-                    />
-                </md-input-container>
-            </md-card-content>
+    <!-- first part of the page -->
+    <div class="jumbotron">
 
-            <md-card-actions>
-                <button md-button (click)="addEarthquake()">Add earthquake</button>
-            </md-card-actions>
-        </md-card>
+        <div class="row content">
+            <div class="col-md-5 ng-scope">
+
+                <!--input field where the user will write year-->
+                <md-card class="card-input">
+                    <md-card-content>
+
+                        <form name="significantEarthquakeForm" novalidate>
+                            <div class="form-group">
+                                <!--selects names for the cities from location.component.ts -->
+                                <h3>Search By Year</h3>
+                                <input
+
+                                        (keyup)='checkYear($event)'
+                                        placeholder="Year"
+                                        type="text">
+                                <button
+                                        (click)="addEarthquakeInfo()"
+                                        md-button>
+                                    Search Earthquakes
+                                </button>
+                            </div>
+                        </form>
+
+                    </md-card-content>
+                </md-card>
+            </div><!--final col-md-5-->
+
+            <div class="col-md-7 map-responsive">
+                <md-card class="earthquake-year">
+                    <md-card-content>
+                        <p> Magnitude <b>{{magnitude}}</b> Place <b>{{place}}</b> Depth <b>{{depth}}</b></p>
+
+                        <p> Magnitude <b>{{magnitude}}</b> Place <b>{{place}}</b> Depth <b>{{depth}}</b></p>
+                        <p> Magnitude <b>{{magnitude}}</b> Place <b>{{place}}</b> Depth <b>{{depth}}</b></p>
+                        <p> Magnitude <b>{{magnitude}}</b> Place <b>{{place}}</b> Depth <b>{{depth}}</b></p>
+                        <p> Magnitude <b>{{magnitude}}</b> Place <b>{{place}}</b> Depth <b>{{depth}}</b></p>
+                        <p> Magnitude <b>{{magnitude}}</b> Place <b>{{place}}</b> Depth <b>{{depth}}</b></p>
+
+
+                    </md-card-content>
+                </md-card>
+
+            </div><!--final col-md07-->
+
+
+        </div><!--final row content-->
+
+        <!--final jumbotron-->
     </div>
 
-    <div>
-        <!-- NGX Datatable used for table view of the earthquakes-->
-        <ngx-datatable
-                id="eq-table"
-                #table
-                class='material'
-                [columns]='columns'
-                [columnMode]="'force'"
-                [footerHeight]="50"
-                [rowHeight]="'auto'"
-                (rowContextmenu)="onContextMenu($event)"
-                [limit]="10"
-                [rows]='rows'
-                [loadingIndicator]="loadingIndicator"
-                [headerHeight]="50"
-        >
-        </ngx-datatable>
+
+    <md-card id="first" class="card">
+        <md-card-content>
+
+            <h2>Table View</h2>
+
+        </md-card-content>
+    </md-card>
+
+    <div class="jumbotron">
+        <div class="row content">
+            <div class="col-md-5 ng-scope">
+
+                <md-card class="card-filter">
+                    <md-card-header>
+                        <md-card-title>Filter Earthquakes By Id</md-card-title>
+                    </md-card-header>
+
+                    <md-card-content>
+                        <md-input-container>
+                            <input
+                                    class="eq-id-filter-input"
+                                    mdInput
+                                    type='text'
+                                    placeholder='Type to filter '
+                                    (keyup)='updateFilter($event)'
+                            />
+                        </md-input-container>
+                    </md-card-content>
+
+                    <md-card-actions>
+                        <button md-button (click)="addEarthquake()">Add earthquake</button>
+                    </md-card-actions>
+                </md-card>
+            </div><!--final col-md-5-->
+
+            <!--table-->
+            <div class="col-md-7 map-responsive">
 
 
-        <!-- Templates for the last cell in the table-->
-        <template #hdrTpl>
+                <!-- NGX Datatable used for table view of the earthquakes-->
+                <div class="table-eq">
+                    <ngx-datatable
+                            id="eq-table"
+                            #table
+                            class='material'
+                            [columns]='columns'
+                            [columnMode]="'force'"
+                            [footerHeight]="50"
+                            [rowHeight]="'auto'"
+                            (rowContextmenu)="onContextMenu($event)"
+                            [limit]="10"
+                            [rows]='rows'
+                            [loadingIndicator]="loadingIndicator"
+                            [headerHeight]="50"
+                    >
+                    </ngx-datatable>
 
-        </template>
-        <template #editTmpl let-row="row" let-value="value" let-i="index">
-            <button md-icon-button [mdMenuTriggerFor]="rowMenu">
-                <md-icon>more_vert</md-icon>
-            </button>
 
-            <md-menu #rowMenu="mdMenu">
-                <button md-menu-item (click)="edit(row)">
-                    <md-icon>edit</md-icon>
-                    Edit
-                </button>
+                    <!-- Templates for the last cell in the table-->
+                    <template #hdrTpl>
 
-                <button md-menu-item (click)="delete(row)">
-                    <md-icon>delete</md-icon>
-                    Delete
-                </button>
-            </md-menu>
-        </template>
+                    </template>
+                    <template #editTmpl let-row="row" let-value="value" let-i="index">
+                        <button md-icon-button [mdMenuTriggerFor]="rowMenu">
+                            <md-icon>more_vert</md-icon>
+                        </button>
 
-    </div>
+                        <md-menu #rowMenu="mdMenu">
+                            <button md-menu-item (click)="edit(row)">
+                                <md-icon>edit</md-icon>
+                                Edit
+                            </button>
+
+                            <button md-menu-item (click)="delete(row)">
+                                <md-icon>delete</md-icon>
+                                Delete
+                            </button>
+                        </md-menu>
+                    </template>
+
+                </div>
+
+            </div> <!--final col-md-7-->
+
+        </div><!--final row content-->
+
+    </div><!--final jumbotron-->
+
 </div>
