@@ -28,8 +28,7 @@ import { Md2DateUtil } from 'md2-datepicker/datepicker/dateUtil';
     LogoComponent,
     NepalmapComponent,
     NavbarComponent,
-    LocationComponent,
-
+    LocationComponent
   ],
   imports: [
     BrowserModule,

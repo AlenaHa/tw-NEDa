@@ -1,48 +1,71 @@
-.page-content {
-  font-family: 'Montserrat', sans-serif;
-  width: 960px;
-  position: relative;
-  margin: 0 auto;
-  line-height: 1.4em;
+.card {
+  background-color: #18121E;
+  text-align: center;
+  border: 1px solid white;
+}
+
+.card h2 {
+
+  color: white;
+  font-size: 20px;
+
+}
+
+.jumbotron {
+  background-color: #233237;
+}
+
+.card-input {
   text-align: center;
 }
 
-#eq-table {
-  margin-top: 40px;
+.earthquake-year b {
+  color: red;
 }
 
-.eq-id-filter-input {
-  width: 350px;
-}
-
-#first-card {
-  margin-top: 30px;
-}
-
-h2 {
-  color: white;
+.card-input {
+  margin-top: 50px;
 }
 
 /**
  * Phone responsive
  */
-@media screen and(max-width: 360px) {
+@media screen and(max-width: 768px) {
 
-  .page-content {
-    width: 97%;
+  .card {
+    width: 100%;
   }
-  md-card-header md-card-title {
-    font-size: 11px;
+  .card h2 {
+    font-size: 20px;
   }
-  md-input-container {
+  .card-input h3 {
+    font-size: 15px;
+  }
+
+  .card-input input {
+    width: 70%;
+  }
+
+  .card-input button {
+    font-size: 10px;
+    background-color: #273758;
+    margin-top: 5px;
+    color: white;
+  }
+
+  .earthquake-year {
+    margin-top: 10px;
+  }
+  .earthquake-year p {
+    font-size: 10px;
+  }
+  .card-filter md-card-title {
     font-size: 10px;
   }
 
-  .mat-input-container.mat-input-container {
-    font-size: 10px;
-    width: 140px;
+  .table-eq {
+    margin-top: 10px;
+    font-size: 5px;
   }
-  .mat-input-placeholder .mat-empty .mat-float .mat-input-placeholder {
-    font-size: 60%;
-  }
+
 }
