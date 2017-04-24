@@ -1,7 +1,3 @@
-/**
- * Created by Cami on 2017-04-21.
- */
-
 import { Component } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
 

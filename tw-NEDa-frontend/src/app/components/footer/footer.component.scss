@@ -1,0 +1,28 @@
+.app-footer {
+  font-size: 14px;
+}
+
+.container-fluid {
+  padding-right: 15px;
+  padding-left: 35px;
+  padding-top: 5px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#footer {
+  text-align: center;
+  color: lightslategrey;
+  width: 100%;
+  height: 30px;
+  background-color: #18121E;
+}
+
+#footer > .container {
+  margin: 0 auto;
+}
+
+.my-icons {
+  color: lightslategrey;
+  padding-left: 1%;
+}

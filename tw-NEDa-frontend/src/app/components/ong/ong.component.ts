@@ -1,6 +1,3 @@
-/**
- * Created by Cami on 2017-04-20.
- */
 import { AfterViewInit, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { OngService } from '../../services/ong.service';
