@@ -1,9 +1,8 @@
 <div class="page-content">
 
     <!--header card-->
-    <md-card>
+    <md-card id="first" class="card">
         <md-card-content>
-
             <h2>Location</h2>
 
         </md-card-content>
@@ -18,8 +17,6 @@
             <div class="col-md-5 ng-scope" id="full">
                 <!-- DISTRICT SEARCH -->
                 <div class="panel panel-default">
-
-                    <!--City search -->
                     <div class="panel-heading">
                         <!--title form-->
                         <h2 class="panel-title text-center">
@@ -28,6 +25,7 @@
                             <span class="glyphicon glyphicon-map-marker"></span>
                         </h2>
                     </div>
+
                     <!--panel body-->
                     <div class="panel-body">
                         <form name="cityForm" novalidate>
@@ -52,8 +50,6 @@
 
                 <!-- MUNICIPALITY SEARCH -->
                 <div class="panel panel-default">
-
-                    <!--City search -->
                     <div class="panel-heading">
                         <!--title form-->
                         <h2 class="panel-title text-center">
@@ -87,7 +83,6 @@
 
                 <!--MAGNITUDE SEARCH -->
                 <div class="panel panel-default">
-
                     <!-- Earthquake magnitude search -->
                     <div class="panel-heading">
                         <!--title form-->
@@ -120,8 +115,7 @@
                 <!--INFORMATION CARD-->
                 <md-card id="info" class="example-card">
                     <md-card-header>
-                      <!-- TODO: (Cati) Move style in .scss file-->
-                        <md-card-title style="text-align: center">Earthquake Informations</md-card-title>
+                        <md-card-title>Earthquake Informations</md-card-title>
                     </md-card-header>
                     <md-card-content (click)="goToDistrict(); goToMunicipality()" required>
                         <p>District <b>{{districtValue}}</b></p>
@@ -137,23 +131,22 @@
 
 
                 <!--showing top 3 earthquakes for the picked location-->
-                <!-- TODO: (Cati) Move style in .scss file-->
-                <md-card id="top-eq" style="margin-top: 10px" layout="row" layout-sm="column">
+                <md-card class="top-eq" layout="row" layout-sm="column">
                     <md-card-header>
-                        <!-- TODO: (Cati) Move style in .scss file-->
-                        <md-card-title style="text-align: center">
+                        <md-card-title>
                             <h3>Top 3 earthquakes
                                 <i class="material-icons">grade</i>
                             </h3>
                         </md-card-title>
                     </md-card-header>
+
                     <!--content-->
                     <md-card-content (click)="goToDistrict(); goToMunicipality()" required class="md-padding">
 
                         <md-grid-list cols="4" [rowHeight]="basicRowHeight" layout="row" layout-sm="column">
                             <!-- first earthquake-->
                             <md-grid-tile layout="row" layout-sm="column">
-                                <md-card id="top-eq1">
+                                <md-card class="top-eq1">
                                     <!--header for the card-->
                                     <md-card-header>
                                         <md-card-title>
@@ -170,7 +163,7 @@
 
                             <!--second earthquake-->
                             <md-grid-tile>
-                                <md-card layout="row" layout-sm="column">
+                                <md-card class="top-eq2" layout="row" layout-sm="column">
                                     <md-card-header>
                                         <md-card-title>
                                             <h3>Two</h3>
@@ -185,7 +178,7 @@
 
                             <!--third earthquake-->
                             <md-grid-tile>
-                                <md-card layout="row" layout-sm="column">
+                                <md-card class="top-eq3" layout="row" layout-sm="column">
                                     <md-card-header>
                                         <md-card-title>
                                             <h3>Three</h3>
@@ -204,9 +197,9 @@
             </div>
 
 
-            <!--TODO : Make this responsive -->
             <!--google map- when you click on the pin Info Window will show-->
-            <div class="col-md-7 map-responsive" id="my-map">
+            <div class="col-md-7 map-responsive map"
+                 id="my-map">
                 <sebm-google-map
                         id="map"
                         [latitude]="lat"

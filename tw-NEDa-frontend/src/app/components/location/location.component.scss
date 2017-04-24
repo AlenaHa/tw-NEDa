@@ -1,6 +1,4 @@
-/**
- * Map styles
- */
+
 .page-content {
   height: 100%;
 }
@@ -56,8 +54,26 @@ md-card h2 {
   color: black;
 }
 
+/** header card **/
+.card {
+  background-color: #18121E;
+  border: 2px solid white;
+}
+
+.card h2 {
+  color: white;
+}
+
+.example-card md-card-title {
+  text-align: center;
+}
+
+.top-eq {
+  margin-top: 10px;
+}
+
 /** this style will be used when de width is like 360px **/
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 768px) {
   body {
     padding: 10px 15px;
   }
@@ -99,14 +115,15 @@ md-card h2 {
     margin-bottom: 0px;
   }
 
-  #top-eq {
-    width: 40%;
-  }
-
   h3, .h3 {
     font-size: 20px;
     margin-top: 0px;
     margin-bottom: 0px;
   }
-
+  .map {
+    margin-top: 40px;
+  }
+  .top-eq1 .top-eq2 .top-eq3 {
+    height: 400px;
+  }
 }

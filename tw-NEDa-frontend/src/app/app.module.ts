@@ -42,7 +42,6 @@ import { ChartsModule } from 'ng2-charts';
     OngComponent,
     PopulationComponent,
     FooterComponent
-
   ],
   imports: [
     BrowserModule,
