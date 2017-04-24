@@ -1,0 +1,62 @@
+<h1 md-dialog-title>Donate</h1>
+<div md-dialog-content class="donate-dialog">
+  <div>
+    <div>
+      <!--Name-->
+      <md-input-container>
+        <input
+          placeholder='Name'
+        />
+      </md-input-container>
+    </div>
+
+
+    <form action="/action_page.php">
+      <input type="radio" name="gender"> $15
+      <input type="radio" name="gender"> $25 &ensp;
+      <input type="radio" name="gender"> $50 &ensp;
+      <input type="radio" name="gender"> $100 &ensp;
+    </form>
+
+    <div>
+      <!--Money-->
+      <md-input-container>
+        <input
+          placeholder='$ Other Amount'
+        />
+      </md-input-container>
+    </div>
+
+
+    <div>
+      <!--Card-->
+      <md-input-container>
+        <form action="/action_page.php">
+          <select name="cards">
+            <option value="" disabled selected>Select Credit Card</option>
+            <option value="visa">VISA</option>
+            <option value="masterCard">MasterCard</option>
+            <option value="americanExpress">American Express</option>
+            <option value="discoverNetwork">Discover Network</option>
+          </select>
+        </form>
+      </md-input-container>
+    </div>
+
+
+    <div>
+      <!--Credit Card-->
+      <md-input-container>
+        <input
+          placeholder='Credit Card Number'
+        />
+      </md-input-container>
+    </div>
+
+
+  </div>
+</div>
+<div md-dialog-actions>
+  <button id="donate-dialog-btn" md-button (click)="dialogRef.close(ong)">Donate</button>
+  <button id="close-ong-dialog-btn" md-button (click)="dialogRef.close(false)">Cancel</button>
+</div>
