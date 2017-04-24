@@ -22,13 +22,12 @@
 
             <md-card-actions>
                 <button md-button (click)="addEarthquake()">Add earthquake</button>
-                <button md-button>Button 2</button>
             </md-card-actions>
         </md-card>
     </div>
 
     <div>
-        <!--table-->
+        <!-- NGX Datatable used for table view of the earthquakes-->
         <ngx-datatable
                 id="eq-table"
                 #table
@@ -46,7 +45,7 @@
         </ngx-datatable>
 
 
-        <!--butoane-->
+        <!-- Templates for the last cell in the table-->
         <template #hdrTpl>
 
         </template>

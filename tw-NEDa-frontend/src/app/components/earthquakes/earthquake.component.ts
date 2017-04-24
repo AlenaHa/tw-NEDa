@@ -47,12 +47,17 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    // Get all the earthquakes from the backend
     this.earthquakeService.getAllEarthquakes()
       .subscribe(
         (data) => this.retrieveData(data),
         (err) => this.showError());
   }
 
+  /**
+   * Adds the data retrieved from the server to the table
+   * @param responseData
+   */
   retrieveData(responseData: any) {
     let allEarthquakes = [];
 
@@ -72,7 +77,7 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   *
+   * Adds a new earthquake.
    */
   addEarthquake() {
     let dialogRef = this.dialog.open(EarthquakeDialog);
@@ -98,15 +103,18 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
     });
   }
 
+  /**
+   * Updates table's filter
+   * @param event
+   */
   updateFilter(event) {
     const val = event.target.value;
 
-    // filter our data
+    // Filter the data
     const temp = this.temp.filter(function (d) {
       return d.earthquakeId.toString().toLowerCase().indexOf(val) !== -1 || !val;
     });
 
-    // update the rows
     this.rows = temp;
     // Whenever the filter changes, always go back to the first page
     this.table.offset = 0;
@@ -136,6 +144,7 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
     let earthquakeIndex = earthquake.$$index;
     console.log("Editing row: " + earthquakeIndex);
 
+    // TODO: dialog should be opened with different title when editing
     let dialogRef = this.dialog.open(EarthquakeDialog);
     dialogRef.componentInstance.earthquake = new Earthquake(earthquake);
 

@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-
+// TODO: (Cati) Move this in a model .ts file under the model folder
 export interface coordinates {
   place: string;
   lat: number;
   lng: number;
 }
-;
 
 @Component({
   selector: 'app-location',
@@ -26,7 +25,7 @@ export class LocationComponent implements OnInit {
     {value: 'kathmandu-0', viewValue: 'Kathmandu'},
     {value: 'bhaktapur-1', viewValue: 'Bhaktapur'},
     {value: 'pyuthan-2', viewValue: 'Pyuthan'}
-  ]
+  ];
 
   /**
    * Function - get coordonates for the specific city and
@@ -120,7 +119,7 @@ export class LocationComponent implements OnInit {
     this.twoYear = 1976;
     this.threeYear = 1998;
     this.oneMagnitude = 8.6;
-    this.twoMagnitude = 6.5
+    this.twoMagnitude = 6.5;
     this.threeMagnitude = 4.5
 
 

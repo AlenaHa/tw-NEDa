@@ -1,82 +1,82 @@
 <h1 md-dialog-title>Add a new earthquake</h1>
 <div md-dialog-content class="eq-dialog">
+  <div>
     <div>
-        <div>
-            <!--HappenedOn-->
-            <md2-datepicker
-                    [(ngModel)]="earthquake.happenedOn"
-                    type="datetime" format="YYYY-MM-DD HH:mm"
-                    placeholder="Earthquake date and time">
-            </md2-datepicker>
-        </div>
-
-        <div>
-            <!--Location ID-->
-            <md-input-container>
-                <input
-                        id='location-id-input'
-                        mdInput
-                        [(ngModel)]="earthquake.localizationId"
-                        type='number'
-                        placeholder='Location ID'
-                />
-            </md-input-container>
-        </div>
-
-        <div>
-            <!--Magnitude-->
-            <md-input-container>
-                <input
-                        id='magnitude-input'
-                        mdInput
-                        [(ngModel)]="earthquake.magnitude"
-                        type='number'
-                        placeholder='Magnitude'
-                />
-            </md-input-container>
-        </div>
-
-        <div>
-            <!--Latitude-->
-            <md-input-container>
-                <input
-                        id='latitude-input'
-                        mdInput
-                        [(ngModel)]="earthquake.latitude"
-                        type='number'
-                        placeholder='Latitude'
-                />
-            </md-input-container>
-        </div>
-
-        <div>
-            <!--Longitude-->
-            <md-input-container>
-                <input
-                        id='longitude-input'
-                        mdInput
-                        [(ngModel)]="earthquake.longitude"
-                        type='number'
-                        placeholder='Longitude'
-                />
-            </md-input-container>
-        </div>
-
-        <div>
-            <!--Depth-->
-            <md-input-container>
-                <input
-                        id='depth-input'
-                        mdInput
-                        [(ngModel)]="earthquake.depth"
-                        type='number'
-                        placeholder='Depth'
-                />
-            </md-input-container>
-        </div>
+      <!--HappenedOn-->
+      <md2-datepicker
+        [(ngModel)]="earthquake.happenedOn"
+        type="datetime" format="YYYY-MM-DD HH:mm"
+        placeholder="Earthquake date and time">
+      </md2-datepicker>
     </div>
+
+    <div>
+      <!--Location ID-->
+      <md-input-container>
+        <input
+          id='location-id-input'
+          mdInput
+          [(ngModel)]="earthquake.localizationId"
+          type='number'
+          placeholder='Location ID'
+        />
+      </md-input-container>
+    </div>
+
+    <div>
+      <!--Magnitude-->
+      <md-input-container>
+        <input
+          id='magnitude-input'
+          mdInput
+          [(ngModel)]="earthquake.magnitude"
+          type='number'
+          placeholder='Magnitude'
+        />
+      </md-input-container>
+    </div>
+
+    <div>
+      <!--Latitude-->
+      <md-input-container>
+        <input
+          id='latitude-input'
+          mdInput
+          [(ngModel)]="earthquake.latitude"
+          type='number'
+          placeholder='Latitude'
+        />
+      </md-input-container>
+    </div>
+
+    <div>
+      <!--Longitude-->
+      <md-input-container>
+        <input
+          id='longitude-input'
+          mdInput
+          [(ngModel)]="earthquake.longitude"
+          type='number'
+          placeholder='Longitude'
+        />
+      </md-input-container>
+    </div>
+
+    <div>
+      <!--Depth-->
+      <md-input-container>
+        <input
+          id='depth-input'
+          mdInput
+          [(ngModel)]="earthquake.depth"
+          type='number'
+          placeholder='Depth'
+        />
+      </md-input-container>
+    </div>
+  </div>
 </div>
 <div md-dialog-actions>
-    <button id="add-eq-dialog-btn" md-button (click)="dialogRef.close(earthquake)">Add</button>
-    <button id="close-eq-dialog-btn" md-button (click)="dialogRef.close(false)">Cancel</button>
+  <button id="add-eq-dialog-btn" md-button (click)="dialogRef.close(earthquake)">Add</button>
+  <button id="close-eq-dialog-btn" md-button (click)="dialogRef.close(false)">Cancel</button>
 </div>
