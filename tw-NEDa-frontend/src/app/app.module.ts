@@ -18,6 +18,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LocationComponent } from './components/location/location.component';
 import { Md2DatepickerModule } from 'md2-datepicker';
 import { Md2DateUtil } from 'md2-datepicker/datepicker/dateUtil';
+import { SuppliesComponent } from './components/supplies/supplies.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { Md2DateUtil } from 'md2-datepicker/datepicker/dateUtil';
     NepalmapComponent,
     NavbarComponent,
     LocationComponent,
-
+    SuppliesComponent
   ],
   imports: [
     BrowserModule,
