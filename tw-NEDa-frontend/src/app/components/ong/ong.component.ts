@@ -36,15 +36,16 @@ export class OngComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // Init table's columns
     this.columns = [
-      {prop: 'ongName', name: 'Ong Name'},
       {prop: 'location', name: 'Location'},
+      {prop: 'ongName', name: 'Ong Name'},
       {prop: 'activityType', name: 'Activity Type'},
       {prop: 'activitySubtype', name: 'Activity Subtype'},
+      {prop: 'supplies', name: 'Supplies'},
       {
         cellTemplate: this.editTmpl,
         headerTemplate: this.hdrTpl,
         name: 'Actions',
-        width: 60
+        width: 100
       }
     ];
   }

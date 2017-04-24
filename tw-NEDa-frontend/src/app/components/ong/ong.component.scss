@@ -2,10 +2,6 @@
   margin-top: 0;
 }
 
-.eq-id-filter-input {
-  width: 250px;
-}
-
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
   margin: auto;
@@ -26,13 +22,13 @@
     padding-left: 0%;
     padding-right: 0%;
   }
-
 }
 
-#ong-name-search {
-  width: 30%;
-  float: left;
-}
+//
+//#ong-name-search {
+//  width: 30%;
+//  float: left;
+//}
 
 .donate {
   background-image: url("https://scontent.fotp3-1.fna.fbcdn.net/v/t34.0-12/18109517_1522443797788928_1820901389_n.png?oh=57e7d3ac1707848d08c8b604cdb9ac08&oe=58FCABE3");
@@ -41,46 +37,16 @@
   text-align: center;
   padding-top: 3em;
   padding-bottom: 3em;
-
   background-repeat: no-repeat;
   background-position: center;
-
   right: 50%;
   left: 50%;
-}
-
-.table-photo {
-  weight: 100%;
-  height: 100%;
-  text-align: center;
-  padding-right: 40px;
-  padding-left: 600px;
-  padding-top: 3em;
-  padding-bottom: 3em;
-
-  background-repeat: no-repeat;
-  background-position: center;
-
-  margin: 0 auto;
-}
-
-.table-text {
-  margin: 0 auto;
-  padding-right: 10px;
-  padding-left: 10px;
-  min-width: 200px;
-  table-layout: fixed;
-  max-width: 300px;
 }
 
 footer {
   padding: 1em;
   clear: left;
   text-align: center;
-}
-
-#text-title {
-  width: 20%;
 }
 
 .jumbotron {
