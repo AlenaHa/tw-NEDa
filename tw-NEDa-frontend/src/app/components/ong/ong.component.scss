@@ -2,13 +2,21 @@
   margin-top: 0;
 }
 
-.tttable {
-}
-
 .eq-id-filter-input {
   width: 250px;
 }
 
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  margin: auto;
+}
+
+.container {
+  min-width: 210px;
+  max-width: 83%;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
 
 @media screen and(max-width: 360px) {
   #eq-table {
@@ -18,8 +26,7 @@
     padding-left: 0%;
     padding-right: 0%;
   }
-  .donate {
-  }
+
 }
 
 #ong-name-search {
@@ -38,8 +45,7 @@
   background-repeat: no-repeat;
   background-position: center;
 
-  bottom: 0px;
-  right: 25%;
+  right: 50%;
   left: 50%;
 }
 
