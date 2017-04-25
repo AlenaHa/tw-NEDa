@@ -1,3 +1,7 @@
+.timeline-heading {
+  color: papayawhip;
+}
+
 .my-header h2 {
   text-align: center;
   color: white;
@@ -7,9 +11,20 @@
 .my-header {
   background-color: #18121E;
   margin-top: 20px;
-  border : 1px solid white;
+  border: 1px solid white;
 }
 
+.timeline-body md-input-container {
+  color: navajowhite;
+}
+
+.timeline-body input {
+  color: white;
+}
+
+.timeline-body {
+  color: navajowhite;
+}
 .my-header img {
   height: 80px;
   width: 80px;
