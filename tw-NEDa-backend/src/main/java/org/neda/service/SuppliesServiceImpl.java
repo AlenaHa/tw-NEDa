@@ -19,9 +19,6 @@ import org.springframework.stereotype.Service;
 public class SuppliesServiceImpl implements SuppliesService {
     private static final Logger LOGGER = LoggerFactory.getLogger(SuppliesServiceImpl.class);
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
     @Autowired
     private SuppliesRepository suppliesRepository;
 

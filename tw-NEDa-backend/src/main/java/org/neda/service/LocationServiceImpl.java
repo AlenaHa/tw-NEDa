@@ -18,9 +18,6 @@ import org.springframework.stereotype.Service;
 public class LocationServiceImpl implements LocationService {
     private static final Logger LOGGER = LoggerFactory.getLogger(LocationServiceImpl.class);
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
     @Autowired
     private LocationRepository LocationRepository;
 

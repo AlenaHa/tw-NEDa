@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping(value = "/population")
 public class PopulationController {
 
     @Autowired
@@ -21,10 +22,9 @@ public class PopulationController {
 
     /**
      * @param id
-     *
      * @return
      */
-    @RequestMapping(value = "/population/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Population> readPopulation(@PathVariable Long id) {
         Population population = populationService.findById(id);
         if (population != null) {
@@ -37,10 +37,9 @@ public class PopulationController {
 
     /**
      * @param id
-     *
      * @return
      */
-    @RequestMapping(value = "/population/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Population> deletePopulation(@PathVariable Long id) {
         populationService.delete(id);
         return new ResponseEntity<Population>(HttpStatus.NO_CONTENT);
@@ -48,10 +47,9 @@ public class PopulationController {
 
     /**
      * @param reqPopulation
-     *
      * @return
      */
-    @RequestMapping(value = "/population", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Population> createPopulation(@RequestBody Population reqPopulation) {
         Population savedPopulation = populationService.save(reqPopulation);
         return new ResponseEntity<Population>(savedPopulation, HttpStatus.CREATED);
@@ -59,10 +57,9 @@ public class PopulationController {
 
     /**
      * @param reqPopulation
-     *
      * @return
      */
-    @RequestMapping(value = "/population/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Population> updatePopulation(@RequestBody Population reqPopulation, @PathVariable Long id) {
         if (!id.equals(reqPopulation.getPopulationId())) {
             return new ResponseEntity<Population>(HttpStatus.BAD_REQUEST);
@@ -74,7 +71,7 @@ public class PopulationController {
     /**
      * @return
      */
-    @RequestMapping(value = "/population/all", method = RequestMethod.GET)
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<List<Population>> getAllPopulations() {
         List<Population> all = populationService.findAll();
         return new ResponseEntity<List<Population>>(all, HttpStatus.OK);

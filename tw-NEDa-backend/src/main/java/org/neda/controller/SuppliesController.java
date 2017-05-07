@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@RequestMapping(value = "/supplies")
 public class SuppliesController {
 
     @Autowired
@@ -24,10 +25,9 @@ public class SuppliesController {
 
     /**
      * @param id
-     *
      * @return
      */
-    @RequestMapping(value = "/supplies/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Supplies> readSupplies(@PathVariable Long id) {
         Supplies supplies = suppliesService.findById(id);
         if (supplies != null) {
@@ -40,10 +40,9 @@ public class SuppliesController {
 
     /**
      * @param id
-     *
      * @return
      */
-    @RequestMapping(value = "/supplies/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Supplies> deleteSupplies(@PathVariable Long id) {
         suppliesService.delete(id);
         return new ResponseEntity<Supplies>(HttpStatus.NO_CONTENT);
@@ -51,10 +50,9 @@ public class SuppliesController {
 
     /**
      * @param reqSupplies
-     *
      * @return
      */
-    @RequestMapping(value = "/supplies", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Supplies> createSupplies(@RequestBody Supplies reqSupplies) {
         Supplies savedSupplies = suppliesService.save(reqSupplies);
         return new ResponseEntity<Supplies>(savedSupplies, HttpStatus.CREATED);
@@ -62,10 +60,9 @@ public class SuppliesController {
 
     /**
      * @param reqSupplies
-     *
      * @return
      */
-    @RequestMapping(value = "/supplies/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Supplies> updateSupplies(@RequestBody Supplies reqSupplies, @PathVariable Long id) {
         if (!id.equals(reqSupplies.getSuppliesId())) {
             return new ResponseEntity<Supplies>(HttpStatus.BAD_REQUEST);
@@ -77,7 +74,7 @@ public class SuppliesController {
     /**
      * @return
      */
-    @RequestMapping(value = "/supplies/all", method = RequestMethod.GET)
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<List<Supplies>> getAllSupplies() {
         List<Supplies> all = suppliesService.findAll();
         return new ResponseEntity<List<Supplies>>(all, HttpStatus.OK);

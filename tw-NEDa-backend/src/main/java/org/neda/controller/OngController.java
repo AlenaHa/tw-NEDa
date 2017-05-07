@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping(value = "/ong")
 public class OngController {
 
     @Autowired
@@ -24,10 +25,9 @@ public class OngController {
 
     /**
      * @param id
-     *
      * @return
      */
-    @RequestMapping(value = "/ong/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Ong> readOng(@PathVariable Long id) {
         Ong ong = ongService.findById(id);
         if (ong != null) {
@@ -39,10 +39,9 @@ public class OngController {
 
     /**
      * @param id
-     *
      * @return
      */
-    @RequestMapping(value = "/ong/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Ong> deleteOng(@PathVariable Long id) {
         ongService.delete(id);
         return new ResponseEntity<Ong>(HttpStatus.NO_CONTENT);
@@ -50,10 +49,9 @@ public class OngController {
 
     /**
      * @param reqOng
-     *
      * @return
      */
-    @RequestMapping(value = "/ong", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Ong> createOng(@RequestBody Ong reqOng) {
         Ong savedOng = ongService.save(reqOng);
         return new ResponseEntity<Ong>(savedOng, HttpStatus.CREATED);
@@ -61,10 +59,9 @@ public class OngController {
 
     /**
      * @param reqOng
-     *
      * @return
      */
-    @RequestMapping(value = "/ong/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Ong> updateOng(@RequestBody Ong reqOng, @PathVariable Long id) {
         if (!id.equals(reqOng.getOngId())) {
             return new ResponseEntity<Ong>(HttpStatus.BAD_REQUEST);
@@ -76,7 +73,7 @@ public class OngController {
     /**
      * @return
      */
-    @RequestMapping(value = "/ong/all", method = RequestMethod.GET)
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<List<Ong>> getAllOngs() {
         List<Ong> all = ongService.findAll();
         return new ResponseEntity<List<Ong>>(all, HttpStatus.OK);

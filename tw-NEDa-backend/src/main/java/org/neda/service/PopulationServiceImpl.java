@@ -20,9 +20,6 @@ import org.springframework.stereotype.Service;
 public class PopulationServiceImpl implements PopulationService {
     private static final Logger LOGGER = LoggerFactory.getLogger(PopulationServiceImpl.class);
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
     @Autowired
     private PopulationRepository populationRepository;
 

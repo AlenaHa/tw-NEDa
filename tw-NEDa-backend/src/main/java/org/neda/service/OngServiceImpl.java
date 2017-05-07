@@ -21,9 +21,6 @@ import org.springframework.stereotype.Service;
 public class OngServiceImpl implements OngService {
     private static final Logger LOGGER = LoggerFactory.getLogger(OngServiceImpl.class);
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
     @Autowired
     private OngRepository ongRepository;
 

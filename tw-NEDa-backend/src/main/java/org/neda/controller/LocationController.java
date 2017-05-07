@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@RequestMapping(value = "/location")
 public class LocationController {
 
     @Autowired
@@ -24,10 +25,9 @@ public class LocationController {
 
     /**
      * @param id
-     *
      * @return
      */
-    @RequestMapping(value = "/location/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Location> readLocation(@PathVariable Long id) {
         Location location = locationService.findById(id);
         if (location != null) {
@@ -40,10 +40,9 @@ public class LocationController {
 
     /**
      * @param id
-     *
      * @return
      */
-    @RequestMapping(value = "/location/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Location> deleteLocation(@PathVariable Long id) {
         locationService.delete(id);
         return new ResponseEntity<Location>(HttpStatus.NO_CONTENT);
@@ -51,10 +50,9 @@ public class LocationController {
 
     /**
      * @param reqLocation
-     *
      * @return
      */
-    @RequestMapping(value = "/location", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Location> createLocation(@RequestBody Location reqLocation) {
         Location savedLocation = locationService.save(reqLocation);
         return new ResponseEntity<Location>(savedLocation, HttpStatus.CREATED);
@@ -62,10 +60,9 @@ public class LocationController {
 
     /**
      * @param reqLocation
-     *
      * @return
      */
-    @RequestMapping(value = "/location/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Location> updateLocation(@RequestBody Location reqLocation, @PathVariable Long id) {
         if (!id.equals(reqLocation.getLocationId())) {
             return new ResponseEntity<Location>(HttpStatus.BAD_REQUEST);
@@ -77,7 +74,7 @@ public class LocationController {
     /**
      * @return
      */
-    @RequestMapping(value = "/location/all", method = RequestMethod.GET)
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<List<Location>> getAllLocations() {
         List<Location> all = locationService.findAll();
         return new ResponseEntity<List<Location>>(all, HttpStatus.OK);
