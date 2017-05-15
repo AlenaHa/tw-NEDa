@@ -23,10 +23,6 @@ public class SuppliesController {
     @Autowired
     private SuppliesService suppliesService;
 
-    /**
-     * @param id
-     * @return
-     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Supplies> readSupplies(@PathVariable Long id) {
         Supplies supplies = suppliesService.findById(id);
@@ -38,30 +34,18 @@ public class SuppliesController {
 
     }
 
-    /**
-     * @param id
-     * @return
-     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Supplies> deleteSupplies(@PathVariable Long id) {
         suppliesService.delete(id);
         return new ResponseEntity<Supplies>(HttpStatus.NO_CONTENT);
     }
 
-    /**
-     * @param reqSupplies
-     * @return
-     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Supplies> createSupplies(@RequestBody Supplies reqSupplies) {
         Supplies savedSupplies = suppliesService.save(reqSupplies);
         return new ResponseEntity<Supplies>(savedSupplies, HttpStatus.CREATED);
     }
 
-    /**
-     * @param reqSupplies
-     * @return
-     */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Supplies> updateSupplies(@RequestBody Supplies reqSupplies, @PathVariable Long id) {
         if (!id.equals(reqSupplies.getSuppliesId())) {
@@ -71,9 +55,6 @@ public class SuppliesController {
         return new ResponseEntity<Supplies>(savedSupplies, HttpStatus.OK);
     }
 
-    /**
-     * @return
-     */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<List<Supplies>> getAllSupplies() {
         List<Supplies> all = suppliesService.findAll();

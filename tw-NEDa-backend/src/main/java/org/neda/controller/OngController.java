@@ -23,10 +23,6 @@ public class OngController {
     @Autowired
     private OngService ongService;
 
-    /**
-     * @param id
-     * @return
-     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Ong> readOng(@PathVariable Long id) {
         Ong ong = ongService.findById(id);
@@ -37,30 +33,18 @@ public class OngController {
         }
     }
 
-    /**
-     * @param id
-     * @return
-     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Ong> deleteOng(@PathVariable Long id) {
         ongService.delete(id);
         return new ResponseEntity<Ong>(HttpStatus.NO_CONTENT);
     }
 
-    /**
-     * @param reqOng
-     * @return
-     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Ong> createOng(@RequestBody Ong reqOng) {
         Ong savedOng = ongService.save(reqOng);
         return new ResponseEntity<Ong>(savedOng, HttpStatus.CREATED);
     }
 
-    /**
-     * @param reqOng
-     * @return
-     */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Ong> updateOng(@RequestBody Ong reqOng, @PathVariable Long id) {
         if (!id.equals(reqOng.getOngId())) {
@@ -70,9 +54,6 @@ public class OngController {
         return new ResponseEntity<Ong>(savedOng, HttpStatus.OK);
     }
 
-    /**
-     * @return
-     */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<List<Ong>> getAllOngs() {
         List<Ong> all = ongService.findAll();

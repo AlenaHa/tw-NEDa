@@ -23,10 +23,6 @@ public class LocationController {
     @Autowired
     private LocationService locationService;
 
-    /**
-     * @param id
-     * @return
-     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Location> readLocation(@PathVariable Long id) {
         Location location = locationService.findById(id);
@@ -38,30 +34,18 @@ public class LocationController {
 
     }
 
-    /**
-     * @param id
-     * @return
-     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Location> deleteLocation(@PathVariable Long id) {
         locationService.delete(id);
         return new ResponseEntity<Location>(HttpStatus.NO_CONTENT);
     }
 
-    /**
-     * @param reqLocation
-     * @return
-     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Location> createLocation(@RequestBody Location reqLocation) {
         Location savedLocation = locationService.save(reqLocation);
         return new ResponseEntity<Location>(savedLocation, HttpStatus.CREATED);
     }
 
-    /**
-     * @param reqLocation
-     * @return
-     */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Location> updateLocation(@RequestBody Location reqLocation, @PathVariable Long id) {
         if (!id.equals(reqLocation.getLocationId())) {
@@ -71,9 +55,6 @@ public class LocationController {
         return new ResponseEntity<Location>(savedLocation, HttpStatus.OK);
     }
 
-    /**
-     * @return
-     */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<List<Location>> getAllLocations() {
         List<Location> all = locationService.findAll();

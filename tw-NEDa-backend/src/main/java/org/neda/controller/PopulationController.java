@@ -20,10 +20,6 @@ public class PopulationController {
     @Autowired
     private PopulationService populationService;
 
-    /**
-     * @param id
-     * @return
-     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Population> readPopulation(@PathVariable Long id) {
         Population population = populationService.findById(id);
@@ -35,30 +31,18 @@ public class PopulationController {
 
     }
 
-    /**
-     * @param id
-     * @return
-     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Population> deletePopulation(@PathVariable Long id) {
         populationService.delete(id);
         return new ResponseEntity<Population>(HttpStatus.NO_CONTENT);
     }
 
-    /**
-     * @param reqPopulation
-     * @return
-     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Population> createPopulation(@RequestBody Population reqPopulation) {
         Population savedPopulation = populationService.save(reqPopulation);
         return new ResponseEntity<Population>(savedPopulation, HttpStatus.CREATED);
     }
 
-    /**
-     * @param reqPopulation
-     * @return
-     */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Population> updatePopulation(@RequestBody Population reqPopulation, @PathVariable Long id) {
         if (!id.equals(reqPopulation.getPopulationId())) {
@@ -68,9 +52,6 @@ public class PopulationController {
         return new ResponseEntity<Population>(savedPopulation, HttpStatus.OK);
     }
 
-    /**
-     * @return
-     */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<List<Population>> getAllPopulations() {
         List<Population> all = populationService.findAll();
