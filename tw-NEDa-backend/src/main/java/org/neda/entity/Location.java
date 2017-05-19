@@ -23,12 +23,6 @@ public class Location {
     @Column(name = "municipality")
     private String municipality;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "locationListOng")
-    private List<Ong> locationListForOng = new ArrayList<Ong>();
-
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "locationListSupplies")
-    private List<Supplies> locationListForSupplies = new ArrayList<Supplies>();
-
     public Long getLocationId() {
         return locationId;
     }
@@ -51,23 +45,6 @@ public class Location {
 
     public void setMunicipality(String municipality) {
         this.municipality = municipality;
-    }
-
-    public List<Ong> getLocationListForOng() {
-        return locationListForOng;
-    }
-
-    public void setLocationListForOng(List<Ong> locationListOng) {
-        this.locationListForOng = locationListOng;
-    }
-
-
-    public List<Supplies> getLocationListForSupplies() {
-        return locationListForSupplies;
-    }
-
-    public void setLocationListForSupplies(List<Supplies> locationListForSupplies) {
-        this.locationListForSupplies = locationListForSupplies;
     }
 
 }
