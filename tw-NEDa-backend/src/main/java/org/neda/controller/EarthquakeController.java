@@ -1,6 +1,8 @@
 package org.neda.controller;
 
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.neda.entity.Earthquake;
@@ -18,16 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(value = "http://localhost:4200")
+@RequestMapping(value = "/earthquakes")
 public class EarthquakeController {
 
     @Autowired
     private EarthquakeService earthquakeService;
 
-    /**
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/earthquake/{id}", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Earthquake> readEarthquake(@PathVariable Long id) {
         Earthquake earthquake = earthquakeService.findById(id);
         if (earthquake != null) {
@@ -35,35 +35,21 @@ public class EarthquakeController {
         } else {
             return new ResponseEntity<Earthquake>(HttpStatus.NOT_FOUND);
         }
-
     }
 
-    /**
-     *
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/earthquake/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Earthquake> deleteEarthquake(@PathVariable Long id) {
         earthquakeService.delete(id);
         return new ResponseEntity<Earthquake>(HttpStatus.NO_CONTENT);
     }
 
-    /**
-     * @param reqEarthquake
-     * @return
-     */
     @RequestMapping(value = "/earthquake", method = RequestMethod.POST)
     public ResponseEntity<Earthquake> createEarthquake(@RequestBody Earthquake reqEarthquake) {
         Earthquake savedEarthquake = earthquakeService.save(reqEarthquake);
         return new ResponseEntity<Earthquake>(savedEarthquake, HttpStatus.CREATED);
     }
 
-    /**
-     * @param reqEarthquake
-     * @return
-     */
-    @RequestMapping(value = "/earthquake/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Earthquake> updateEarthquake(@RequestBody Earthquake reqEarthquake, @PathVariable Long id) {
         if (!id.equals(reqEarthquake.getEarthquakeId())) {
             return new ResponseEntity<Earthquake>(HttpStatus.BAD_REQUEST);
@@ -72,21 +58,23 @@ public class EarthquakeController {
         return new ResponseEntity<Earthquake>(savedEarthquake, HttpStatus.OK);
     }
 
-    /**
-     *
-     * @return
-     */
-    @RequestMapping(value = "/earthquake/all", method = RequestMethod.GET)
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<List<Earthquake>> getAllEarthquakes() {
         List<Earthquake> all = earthquakeService.findAll();
         return new ResponseEntity<List<Earthquake>>(all, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/earthquake/sqlinjection", method = RequestMethod.POST)
+    @RequestMapping(value = "/sqlinjection", method = RequestMethod.POST)
     public ResponseEntity<List<Earthquake>> sqlInjectionExample(@RequestBody String sqlInjectionId) {
         List<Earthquake> earthquakeSqlInjectionExample = earthquakeService.findEarthquakeSqlInjectionExample(sqlInjectionId);
         return new ResponseEntity<List<Earthquake>>(earthquakeSqlInjectionExample, HttpStatus.OK);
     }
 
+
+    @RequestMapping(value = "/csvExport", method = RequestMethod.POST)
+    public ResponseEntity exportCsv(@RequestBody String filePath) throws IOException, SQLException {
+        earthquakeService.exportCsv(filePath);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
 }

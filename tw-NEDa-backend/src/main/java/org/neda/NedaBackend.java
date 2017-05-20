@@ -8,5 +8,6 @@ public class NedaBackend {
     public static void main(String[] args) throws Exception {
         System.setProperty("spring.config.name", "neda");
         SpringApplication.run(NedaBackend.class);
+
     }
 }

@@ -1,6 +1,9 @@
 package org.neda.service;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -14,12 +17,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * @author Elena Hardon
- * @date 4/11/17.
- */
+
 @Service
-public class EarthquakeServiceImpl implements EarthquakeService {
+public class EarthquakeServiceImpl implements EarthquakeService, CsvService {
     private static final Logger LOGGER = LoggerFactory.getLogger(EarthquakeServiceImpl.class);
 
     @PersistenceContext
@@ -57,9 +57,30 @@ public class EarthquakeServiceImpl implements EarthquakeService {
         return allEarthquakes;
     }
 
-
     @Override
     public void delete(Long id) {
         this.earthquakeRepository.delete(id);
+    }
+
+
+    @Override
+    public void exportCsv(String filePath) throws IOException {
+        String csvFile = filePath;
+        FileWriter writer = new FileWriter(csvFile);
+
+        for (Earthquake earthquake : this.findAll()) {
+            CsvUtils.writeLine(writer, Arrays.asList(
+                    earthquake.getEarthquakeId().toString(),
+                    earthquake.getDepth().toString(),
+                    earthquake.getHappenedOn().toString(),
+                    earthquake.getLatitude().toString(),
+                    earthquake.getLongitude().toString(),
+                    earthquake.getMagnitude().toString()));
+
+        }
+
+        writer.flush();
+        writer.close();
+
     }
 }
