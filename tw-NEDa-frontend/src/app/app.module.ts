@@ -21,11 +21,9 @@ import { Md2DateUtil } from 'md2-datepicker/datepicker/dateUtil';
 import { OngComponent } from './components/ong/ong.component';
 import { OngService } from './services/ong.service';
 import { OngDialog } from './components/ong/ong.dialog';
-
 import { PopulationComponent } from './components/population/population.component';
 import { PopulationService } from './services/population.service';
 import { FooterComponent } from './components/footer/footer.component';
-
 import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
@@ -49,10 +47,10 @@ import { ChartsModule } from 'ng2-charts';
     FormsModule,
     HttpModule,
     ChartsModule,
-
     MaterialModule.forRoot(),
     FlexLayoutModule,
     NgxDatatableModule,
+
     Md2DatepickerModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBCUrIt3JLF2DlRX6pgDA9ulLZl41uHnTY'

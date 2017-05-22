@@ -2,9 +2,9 @@
  * @author Elena Hardon
  * @date 11/04/2017
  */
-import {Injectable} from "@angular/core";
-import {Http, Headers} from "@angular/http";
-import {Earthquake} from "../model/earthquake.model";
+import { Injectable } from '@angular/core';
+import { Http, Headers } from '@angular/http';
+import { Earthquake } from '../model/earthquake.model';
 @Injectable()
 export class EarthquakeService {
 
@@ -19,7 +19,7 @@ export class EarthquakeService {
     headers.append('Content-Type', 'application/json');
 
     return this.http.get(
-      this.backendUrl + '/earthquake/all',
+      this.backendUrl + '/earthquakes/all',
       {headers: headers})
       .map(res => res.json());
   }
