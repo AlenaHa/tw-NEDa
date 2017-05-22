@@ -25,6 +25,7 @@ import { PopulationComponent } from './components/population/population.componen
 import { PopulationService } from './services/population.service';
 import { FooterComponent } from './components/footer/footer.component';
 import { ChartsModule } from 'ng2-charts';
+import { LocationService } from './services/location.service';
 
 @NgModule({
   declarations: [
@@ -50,13 +51,14 @@ import { ChartsModule } from 'ng2-charts';
     MaterialModule.forRoot(),
     FlexLayoutModule,
     NgxDatatableModule,
-
     Md2DatepickerModule,
+
+
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBCUrIt3JLF2DlRX6pgDA9ulLZl41uHnTY'
     })
   ],
-  providers: [EarthquakeService, Md2DateUtil, OngService, PopulationService],
+  providers: [EarthquakeService, Md2DateUtil, OngService, PopulationService, LocationService],
   bootstrap: [AppComponent],
   entryComponents: [EarthquakeDialog, OngDialog]
 })

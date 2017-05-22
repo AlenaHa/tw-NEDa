@@ -35,13 +35,13 @@
                                 <!-- I send the City name to trigger function -->
                                 <select (change)="triggerDistrict($event.target.value)">
                                     <option
-                                            *ngFor="let city of cities"
-                                            [value]="city.value">
-                                        {{ city.viewValue}}
+                                            *ngFor="let district of allDistricts; let i = index"
+                                            [attr.data-index]="i">
+                                        {{ district}}
                                     </option>
                                 </select>
                                 <!--each city has it's coordinates goToCity() moves google map to those coordinates-->
-                                <button (click)="goToDistrict()" id="city" md-button>Search District</button>
+                                <button (click)="goToDistrict()" id="city" md-button>Search By District</button>
                             </div>
                         </form>
                     </div>
@@ -67,13 +67,13 @@
                                 <!-- I send the City name to trigger function -->
                                 <select (change)="triggerMunicipality($event.target.value)">
                                     <option
-                                            *ngFor="let city of cities"
-                                            [value]="city.value">
-                                        {{ city.viewValue}}
+                                            *ngFor="let municipality of allMunicipalities; let i = index"
+                                            [attr.data-index]="i">
+                                        {{ municipality}}
                                     </option>
                                 </select>
                                 <!--each city has it's coordinates goToCity() moves google map to those coordinates-->
-                                <button (click)="goToMunicipality()" md-button>Search</button>
+                                <button (click)="goToMunicipality()" md-button>Search By Municipality</button>
                             </div>
                         </form>
                     </div>

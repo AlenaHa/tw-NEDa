@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LocationService } from '../../services/location.service';
+import { Location } from '../../model/location.model';
 
 // TODO: (Cati) Move this in a model .ts file under the model folder
 export interface coordinates {
@@ -19,148 +21,106 @@ export class LocationComponent implements OnInit {
   /** latitude and longitude for the map (Nepal coordonates) **/
   public lat: number = 28;
   public lng: number = 84;
+  /** to save all the Districts & Municilaties from db **/
+  public allDistricts = Array<string>();
+  public allMunicipalities = Array<string>();
+  public districtSelectedValue: string;
+  public municipalitySelectedValue: string;
 
-  /** array with different city names from which the user will select **/
-  cities = [
-    {value: 'kathmandu-0', viewValue: 'Kathmandu'},
-    {value: 'bhaktapur-1', viewValue: 'Bhaktapur'},
-    {value: 'pyuthan-2', viewValue: 'Pyuthan'}
-  ];
-
-  /**
-   * Function - get coordonates for the specific city and
-   * see the city on map
-   */
-  public districtValue: string;
-  public municipalityValue: string;
-  public nrOfEq: number;
-  public lastEq: number;
-  public highestMagnitude;
-  public lowestMagnitude;
-
-  /** variables for populating the Top **/
-  public oneYear: number;
-  public twoYear: number;
-  public threeYear: number;
-  public oneMagnitude: number;
-  public twoMagnitude: number;
-  public threeMagnitude: number;
-
-  /** object of type coordinates**/
-  public selectedCoordinates: coordinates;
-
-  /**
-   * Createad array of object in which we keep the coordinates for a district/municipality
-   * @type {[{place: string; lat: number; lng: number},{place: string; lat: number; lng: number},{place: string; lat: number; lng: number}]}
-   */
-  public myCoordinates: Array<coordinates> = [
-    {place: 'kathmandu-0', lat: 27.700769, lng: 85.300140},
-    {place: 'bhaktapur-1', lat: 27.6673400, lng: 85.4167300},
-    {place: 'pyuthan-2', lat: 28.083333, lng: 82.83333}
-  ];
-
-  /**
-   * Trigger function from select form
-   * @param value
-   */
-  public triggerDistrict(value) {
-    this.districtValue = value;
-    /**
-     * Find the coordinates for the selected value
-     * @type {any|coordinates}
-     */
-    this.selectedCoordinates = this.myCoordinates.find(item => item.place === this.districtValue);
-    console.log(value);
-    console.log(this.selectedCoordinates.lat, this.selectedCoordinates.lng);
-
-  }
-
-  public triggerMunicipality(value) {
-    this.municipalityValue = value;
-    this.selectedCoordinates = this.myCoordinates.find(item => item.place === this.municipalityValue);
-    console.log(value);
-    console.log(this.selectedCoordinates.lat, this.selectedCoordinates.lng);
+  constructor(private locationService: LocationService) {
   }
 
   /**
-   * using keyup in html I called this function
-   * keep in val what the user wrote
-   * We will show on map all the earthquakes that have the magnitude inserted by the user
-   * @param event
+   * On init save into allDistrict & allMunicipalities the content from db
    */
-  //TODO: validate input(check if is numeric)and make magnitude case(?)
-  //TODO: see how to make more markers for google map(show more pins on the map)
-  /**
-   * User enters a value for magnitude on the map should apear all location which had
-   * a earthquake with this magnitude
-   * @param event
-   */
-  checkMagnitude(event) {
-    const val = event.target.value;
-    console.log(val);
+  ngOnInit() {
+    this.locationService.getAllLocations()
+      .subscribe(
+        (data) => this.retrieveDataLocation(data),
+        (err) => this.showError());
   }
 
+
+  /********************** DISTRICT ****************/
   /**
-   * Calls initMap with location coordinates
-   * Search By Location
+   * Calls the getDistrictData that gets from the db the Locaiton Obj with that District name
+   * @param district
    */
+  getDistrict(district: string) {
+    this.locationService.getDistrictData(district)
+      .subscribe(
+        (data) => this.retrieveDistrict(data),
+        (err) => this.showError()
+      );
+  }
+
+
+  retrieveDistrict(responseData: any) {
+    let location = new Location(responseData);
+    console.log(location.municipality);
+    console.log(location.district);
+  }
+
   goToDistrict() {
+    this.getDistrict(this.districtSelectedValue);
+  }
 
-    this.initMap(this.selectedCoordinates.lat, this.selectedCoordinates.lng);
-    /**
-     * populate pseudo-information for the info card - delete after presentation
-     */
-    this.nrOfEq = 80;
-    this.lastEq = Date.now();
-    this.highestMagnitude = 8;
-    this.lowestMagnitude = 2;
+  /*********************MUNICIPALITY *************/
+  getMunicipality(municipality: string) {
+    this.locationService.getMunicipalityData(municipality)
+      .subscribe(
+        (data) => this.retrieveMunicipality(data),
+        (err) => this.showError()
+      );
+  }
 
-    this.oneYear = 2016;
-    this.twoYear = 1976;
-    this.threeYear = 1998;
-    this.oneMagnitude = 8.6;
-    this.twoMagnitude = 6.5;
-    this.threeMagnitude = 4.5
-
-
+  retrieveMunicipality(responseData: any) {
+    let location = new Location(responseData);
+    console.log(location.municipality);
+    console.log(location.district);
   }
 
   goToMunicipality() {
-
-    this.initMap(this.selectedCoordinates.lat, this.selectedCoordinates.lng);
-    /**
-     * populate pseudo-information for the info card - delete after presentation
-     */
-    this.nrOfEq = 100;
-    this.lastEq = Date.now();
-    this.highestMagnitude = 8.9;
-    this.lowestMagnitude = 2.3;
-
-
-    this.oneYear = 1997;
-    this.twoYear = 2015;
-    this.threeYear = 1980;
-    this.oneMagnitude = 8.9;
-    this.twoMagnitude = 7.5
-    this.threeMagnitude = 4.5
-
+    this.getMunicipality(this.municipalitySelectedValue);
   }
 
   /**
-   * Search By Magnitude
+   * Save District & Municipalities into arrays to show in view
+   * @param responseData
    */
+  retrieveDataLocation(responseData: any) {
 
-  goToCityMagnitude() {
-    console.log("ceva");
-    this.initMap(27.700769, 85.300140);
-
-    console.log("ceva");
-    this.initMap(27.6673400, 85.4167300);
-
-    console.log("ceva");
-    this.initMap(28.083333, 82.83333);
+    for (let index in responseData) {
+      let location = new Location(responseData[index]);
+      this.allDistricts.push(location.district);
+      this.allMunicipalities.push(location.municipality);
+    }
 
   }
+
+  showError() {
+    console.log("Error fetching data from server!");
+  }
+
+
+  /**
+   * Save District that the user selected
+   * @param value
+   */
+  public triggerDistrict(value) {
+    this.districtSelectedValue = value;
+    console.log(this.districtSelectedValue);
+  }
+
+  /**
+   * Save Municipality that the user selected
+   * @param value
+   */
+  public triggerMunicipality(value) {
+    this.municipalitySelectedValue = value;
+    console.log(this.municipalitySelectedValue);
+  }
+
 
   /**
    * Set longitude and latitude for a city/district
@@ -170,13 +130,6 @@ export class LocationComponent implements OnInit {
   initMap(input1: number, input2: number) {
     this.lat = input1;
     this.lng = input2;
-  }
-
-
-  constructor() {
-  }
-
-  ngOnInit() {
   }
 
 }
