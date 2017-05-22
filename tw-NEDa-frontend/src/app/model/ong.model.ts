@@ -6,12 +6,14 @@ export class Ong {
   public ongId: number;
   public ongName: string;
   public activityType: string;
-  public activitySubtype: string;
+  public subactivityType: string;
+  public locationListOng: string;
 
   constructor(object: any) {
     this.ongId = object.ongId;
     this.ongName = object.ongName;
     this.activityType = object.activityType;
-    this.activitySubtype = object.activitySubtype;
+    this.subactivityType = object.subactivityType;
+    this.locationListOng = object.locationListOng;
   }
 }

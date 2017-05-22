@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/location")
+@CrossOrigin("*")
 public class LocationController {
 
     @Autowired
