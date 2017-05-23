@@ -38,6 +38,12 @@ public class EarthquakeServiceImpl implements EarthquakeService, CsvService {
     }
 
     @Override
+    public List<Earthquake> getEarthquakesByLocalizationId(Long localizationId) {
+        List<Earthquake> list = this.earthquakeRepository.findByLocalizationId(localizationId);
+        return list;
+    }
+
+    @Override
     public Earthquake findById(Long id) {
         return this.earthquakeRepository.findOne(id);
     }
