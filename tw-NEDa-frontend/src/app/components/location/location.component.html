@@ -210,9 +210,20 @@
                             [longitude]="lng">
                         <sebm-google-map-info-window
                                 [disableAutoPan]="true">
-                            <p>{{districtSelectedValue }} {{municipalitySelectedValue}} Info Box</p>
-                            <h5>Last Earthquake : {{ lastEq }} </h5>
-                            <h5>Highest Magnitude : {{ highestMagnitude }} </h5>
+                            <p><i class="material-icons">info_outline</i>
+                                {{districtSelectedValue }},{{municipalitySelectedValue}} Info Box</p>
+                            <h5><i class="material-icons">leak_remove</i>
+                                <strong>Last Earthquake :</strong> {{ lastEq }} </h5>
+                            <h5><i class="material-icons">trending_up</i>
+                                <strong>Highest Magnitude :</strong> {{ highestMagnitude }} </h5>
+                            <h6><i class="material-icons">supervisor_account</i>
+                                <strong>List Of ONG</strong></h6>
+                            <h5 style="color:red;"
+                                *ngFor="let ong of allOng; let i = index"
+                                [attr.data-index]="i">
+                                {{i+1}}.{{ong}}
+                            </h5>
+
                         </sebm-google-map-info-window>
 
                     </sebm-google-map-marker>

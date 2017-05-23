@@ -24,6 +24,23 @@ export class OngService {
       .map(res => res.json());
   }
 
+  /**
+   * Get the list with all the Ong that are in that Location Id
+   * @param locationId
+   * @returns {Observable<R>}
+   */
+  getAllOngByLocationId(locationId: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(
+      this.backendUrl + '/ong//location/' + locationId,
+      {headers: headers})
+      .map(res => res.json());
+
+  }
+
+
   addOng(ong: Ong) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');

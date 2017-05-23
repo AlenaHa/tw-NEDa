@@ -3,21 +3,16 @@ import { LocationService } from '../../services/location.service';
 import { Location } from '../../model/location.model';
 import { EarthquakeService } from '../../services/earthquake.service';
 import { Earthquake } from '../../model/earthquake.model';
+import { OngService } from '../../services/ong.service';
+import { Ong } from '../../model/ong.model';
+import { isNumeric } from 'rxjs/util/isNumeric';
 
-// TODO: (Cati) Move this in a model .ts file under the model folder
-export interface coordinates {
-  place: string;
-  lat: number;
-  lng: number;
-}
 
 @Component({
   selector: 'app-location',
   templateUrl: './location.component.html',
   styleUrls: ['./location.component.scss']
 })
-
-
 export class LocationComponent implements OnInit {
 
   /** latitude and longitude for the map (Nepal coordonates) **/
@@ -40,8 +35,10 @@ export class LocationComponent implements OnInit {
   public oneYear: number;
   public twoYear: number;
   public threeYear: number;
+  public allOng = new Set<String>();
 
-  constructor(private locationService: LocationService, private earthquakeService: EarthquakeService) {
+  constructor(private locationService: LocationService, private earthquakeService: EarthquakeService,
+              private ongService: OngService) {
   }
 
   /**
@@ -122,11 +119,14 @@ export class LocationComponent implements OnInit {
     }
 
     let earthquake = new Earthquake(this.earthquakeList[0]);
-    /** Go to the coordinates received **/
+    /***Move the pin from the map to the desired place **/
     this.initMap(earthquake.latitude, earthquake.longitude);
+    /** Call the method to save the list of all the ong from that location id **/
+    this.getOngList(earthquake.localizationId.toString());
 
+    /** Go to the coordinates received **/
 
-    /** Sort descending by magnitude to see the highest magnitude **/
+    /** Sort descending by Date to see the latests Eq **/
     this.earthquakeList.sort(function (obj1: Earthquake, obj2: Earthquake) {
       if (obj1.happenedOn < obj2.happenedOn) {
         return 1;
@@ -137,11 +137,8 @@ export class LocationComponent implements OnInit {
       return 0;
     });
 
-    this.numberOfEq = this.earthquakeList.length;
     earthquake = new Earthquake(this.earthquakeList[0]);
-    this.highestMagnitude = earthquake.magnitude;
-    earthquake = new Earthquake(this.earthquakeList[this.earthquakeList.length - 1]);
-    this.lowestMagnitude = earthquake.magnitude;
+    this.lastEq = earthquake.happenedOn;
 
 
     /** Sort descending by Date to see the last Eq **/
@@ -155,8 +152,13 @@ export class LocationComponent implements OnInit {
       return 0;
     });
 
+    this.numberOfEq = this.earthquakeList.length;
     earthquake = new Earthquake(this.earthquakeList[0]);
-    this.lastEq = earthquake.happenedOn;
+    this.highestMagnitude = earthquake.magnitude;
+
+    earthquake = new Earthquake(this.earthquakeList[this.earthquakeList.length - 1]);
+    this.lowestMagnitude = earthquake.magnitude;
+
     /** With the array sorted by magnitude descending call the function
      * to make top 3 eq
      */
@@ -179,6 +181,7 @@ export class LocationComponent implements OnInit {
     this.threeYear = earthquakeList[2].happenedOn.getFullYear();
     console.log(this.threeYear);
   }
+
   /********************** DISTRICT ****************/
   /**
    * Calls the getDistrictData that gets from the db the Locaiton Obj with that District name
@@ -264,4 +267,24 @@ export class LocationComponent implements OnInit {
     this.lng = input2;
   }
 
+
+  /**** POPUP FROM THE MAP ****/
+  getOngList(localizationId: string) {
+    this.ongService.getAllOngByLocationId(localizationId)
+      .subscribe(
+        (data) => this.retrieveOngList(data),
+        (err) => this.showError()
+      );
+  }
+
+  retrieveOngList(responseData: any) {
+    this.allOng = new Set<string>();
+    for (let index in responseData) {
+      let ong = new Ong(responseData[index]);
+      if (!isNumeric(ong.ongName)) {
+        console.log(ong.ongName);
+        this.allOng.add(ong.ongName);
+      }
+    }
+  }
 }
