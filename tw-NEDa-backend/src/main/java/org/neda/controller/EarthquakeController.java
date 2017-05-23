@@ -1,10 +1,17 @@
 package org.neda.controller;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 import org.neda.entity.Earthquake;
 import org.neda.service.EarthquakeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,11 +77,30 @@ public class EarthquakeController {
         return new ResponseEntity<List<Earthquake>>(earthquakeSqlInjectionExample, HttpStatus.OK);
     }
 
-
-    @RequestMapping(value = "/csvExport", method = RequestMethod.POST)
-    public ResponseEntity exportCsv(@RequestBody String filePath) throws IOException, SQLException {
-        earthquakeService.exportCsv(filePath);
-        return new ResponseEntity(HttpStatus.OK);
+    /**
+     * Implements the end-point that creates the csv file and provides it on the {@link HttpServletResponse}
+     */
+    @RequestMapping(value = "/db.csv", method = RequestMethod.GET)
+    public void exportCsv(HttpServletResponse response) throws IOException, SQLException {
+        String fileName = "D:\\earthquakes.csv";
+        earthquakeService.exportCsv(fileName);
+        InputStream is = null;
+        File file = null;
+        try {
+            file = new File(fileName);
+            is = new FileInputStream(file);
+            IOUtils.copy(is, response.getOutputStream());
+            response.setContentType("application/csv");
+            response.flushBuffer();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            is.close();
+            file.delete();
+        }
     }
-
 }
