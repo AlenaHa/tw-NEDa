@@ -3,8 +3,9 @@
     <!--header card-->
     <md-card id="first" class="card">
         <md-card-content>
-            <h2>Location</h2>
-
+            <h1>Location
+                <i class="material-icons">place</i>
+            </h1>
         </md-card-content>
     </md-card>
 
@@ -20,7 +21,7 @@
                     <div class="panel-heading">
                         <!--title form-->
                         <h2 class="panel-title text-center">
-                            Search By District
+                            <strong>Search By District</strong>
                             <!--insert icon-->
                             <span class="glyphicon glyphicon-map-marker"></span>
                         </h2>
@@ -41,7 +42,7 @@
                                     </option>
                                 </select>
                                 <!--each city has it's coordinates goToCity() moves google map to those coordinates-->
-                                <button (click)="goToDistrict()" id="city" md-button>Search By District</button>
+                                <button (click)="goToDistrict()" id="city" md-raised-button>Search By District</button>
                             </div>
                         </form>
                     </div>
@@ -53,7 +54,7 @@
                     <div class="panel-heading">
                         <!--title form-->
                         <h2 class="panel-title text-center">
-                            Search By Municipality
+                            <strong>Search By Municipality</strong>
                             <!--insert icon-->
                             <span class="glyphicon glyphicon-map-marker"></span>
                         </h2>
@@ -73,7 +74,7 @@
                                     </option>
                                 </select>
                                 <!--each city has it's coordinates goToCity() moves google map to those coordinates-->
-                                <button (click)="goToMunicipality()" md-button>Search By Municipality</button>
+                                <button (click)="goToMunicipality()" md-raised-button>Search By Municipality</button>
                             </div>
                         </form>
                     </div>
@@ -87,7 +88,7 @@
                     <div class="panel-heading">
                         <!--title form-->
                         <h2 class="panel-title text-center">
-                            Search by Magnitude
+                            <strong>Search by Magnitude</strong>
                             <!--insert icon-->
                             <span class="glyphicon glyphicon-map-marker"></span>
                         </h2>
@@ -98,12 +99,16 @@
                         <form name="earthquakeForm" novalidate>
                             <div class="form-group">
                                 <!--selects names for the cities from location.component.ts -->
-                                <input
-
-                                        (keyup)='checkMagnitude($event)'
-                                        placeholder="Magnitude"
-                                        type="text">
-                                <button (click)="goToCityMagnitude()" id="earthquake" md-button>Search Cities</button>
+                                <select (change)="triggerMagnitude($event.target.value)">
+                                    <option
+                                            *ngFor="let magnitude of allMagnitudes; let i = index"
+                                            [attr.data-index]="i">
+                                        {{ magnitude}}
+                                    </option>
+                                </select>
+                                <button (click)="goToCityMagnitude()" id="earthquake" md-raised-button>Search By
+                                    Magnitude
+                                </button>
                             </div>
                         </form>
 
@@ -115,48 +120,44 @@
                 <!--INFORMATION CARD-->
                 <md-card id="info" class="example-card">
                     <md-card-header>
-                        <md-card-title>Earthquake Informations</md-card-title>
+                        <md-card-title>
+                            <h4 style="color: black;">
+                                <strong>Earthquake Information</strong>
+                                <i style="color: #e62739;" class="material-icons">info</i>
+                            </h4>
+                        </md-card-title>
                     </md-card-header>
                     <md-card-content (click)="goToDistrict(); goToMunicipality()" required>
-                        <p>District <b>{{districtSelectedValue}}</b></p>
-                        <p>Municipality <b>{{municipalitySelectedValue}}</b></p>
-                        <p>Number of earhquakes <b>{{numberOfEq}}</b></p>
-                        <p>Last Earthquake <b>{{lastEq}}</b></p>
-                        <p>Highest Magnitude <b>{{highestMagnitude}}</b></p>
-                        <p>Lowest Magnitude <b>{{lowestMagnitude}}</b></p>
+                        <p><strong>District</strong> <b>{{districtSelectedValue}}</b></p>
+                        <p><strong>Municipality</strong> <b>{{municipalitySelectedValue}}</b></p>
+                        <p><strong>Number of earhquakes</strong> <b>{{numberOfEq}}</b></p>
+                        <p><strong>Last Earthquake</strong> <b>{{lastEq}}</b></p>
+                        <p><strong>Highest Magnitude</strong> <b>{{highestMagnitude}}</b></p>
+                        <p><strong>Lowest Magnitude</strong> <b>{{lowestMagnitude}}</b></p>
 
                     </md-card-content>
 
                 </md-card>
 
-
                 <!--showing top 3 earthquakes for the picked location-->
                 <md-card class="top-eq" layout="row" layout-sm="column">
-                    <md-card-header>
-                        <md-card-title>
-                            <h3>Top 3 earthquakes
-                                <i class="material-icons">grade</i>
-                            </h3>
-                        </md-card-title>
-                    </md-card-header>
-
                     <!--content-->
                     <md-card-content (click)="goToDistrict(); goToMunicipality()" required class="md-padding">
 
-                        <md-grid-list cols="4" [rowHeight]="basicRowHeight" layout="row" layout-sm="column">
+                        <md-grid-list cols="3" [rowHeight]="basicRowHeight" layout="row" layout-sm="column">
                             <!-- first earthquake-->
                             <md-grid-tile layout="row" layout-sm="column">
                                 <md-card class="top-eq1">
                                     <!--header for the card-->
                                     <md-card-header>
                                         <md-card-title>
-                                            <h3>One</h3>
+                                            <i class="material-icons">looks_one</i>
                                         </md-card-title>
                                     </md-card-header>
                                     <!--content ( order by magnitude)-->
                                     <md-card-content>
-                                        <p>Year <b>{{oneYear}}</b></p>
-                                        <p>Magnitude <b>{{oneMagnitude}}</b></p>
+                                        <p><strong>Year <b>{{oneYear}}</b></strong></p>
+                                        <p><strong>Magnitude <b>{{oneMagnitude}}</b></strong></p>
                                     </md-card-content>
                                 </md-card>
                             </md-grid-tile>
@@ -166,12 +167,12 @@
                                 <md-card class="top-eq2" layout="row" layout-sm="column">
                                     <md-card-header>
                                         <md-card-title>
-                                            <h3>Two</h3>
+                                            <i class="material-icons">looks_two</i>
                                         </md-card-title>
                                     </md-card-header>
                                     <md-card-content>
-                                        <p>Year <b>{{twoYear}}</b></p>
-                                        <p>Magnitude <b>{{twoMagnitude}}</b></p>
+                                        <p><strong>Year <b>{{twoYear}}</b></strong></p>
+                                        <p><strong>Magnitude <b>{{twoMagnitude}}</b></strong></p>
                                     </md-card-content>
                                 </md-card>
                             </md-grid-tile>
@@ -181,12 +182,12 @@
                                 <md-card class="top-eq3" layout="row" layout-sm="column">
                                     <md-card-header>
                                         <md-card-title>
-                                            <h3>Three</h3>
+                                            <i class="material-icons">looks_3</i>
                                         </md-card-title>
                                     </md-card-header>
                                     <md-card-content>
-                                        <p>Year <b>{{threeYear}}</b></p>
-                                        <p>Magnitude <b>{{threeMagnitude}}</b></p>
+                                        <p><strong>Year <b>{{threeYear}}</b></strong></p>
+                                        <p><strong>Magnitude <b>{{threeMagnitude}}</b></strong></p>
                                     </md-card-content>
                                 </md-card>
                             </md-grid-tile>

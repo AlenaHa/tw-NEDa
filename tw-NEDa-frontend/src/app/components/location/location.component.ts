@@ -26,6 +26,7 @@ export class LocationComponent implements OnInit {
   /** to save all the Districts & Municilaties from db **/
   public allDistricts = Array<string>();
   public allMunicipalities = Array<string>();
+  public allMagnitudes = new Set<number>();
   public districtSelectedValue: string;
   public municipalitySelectedValue: string;
   public earthquakeList = Array<Earthquake>();
@@ -33,19 +34,66 @@ export class LocationComponent implements OnInit {
   public lowestMagnitude: number;
   public numberOfEq: number;
   public lastEq: Date;
+  public oneMagnitude: number;
+  public twoMagnitude: number;
+  public threeMagnitude: number;
+  public oneYear: number;
+  public twoYear: number;
+  public threeYear: number;
 
   constructor(private locationService: LocationService, private earthquakeService: EarthquakeService) {
   }
 
   /**
-   * On init save into allDistrict & allMunicipalities the content from db
+   * On init save into allDistrict & allMunicipalities & all the magnitudes
+   * found in the database
+   *
    */
   ngOnInit() {
     this.locationService.getAllLocations()
       .subscribe(
         (data) => this.retrieveDataLocation(data),
         (err) => this.showError());
+    this.earthquakeService.getAllEarthquakes()
+      .subscribe(
+        (date) => this.retrieveMagnitude(date),
+        (err) => this.showError()
+      );
   }
+
+  /**
+   * Save District & Municipalities & Magnitudes into arrays to show in view
+   * @param responseData
+   */
+  retrieveDataLocation(responseData: any) {
+
+    for (let index in responseData) {
+      let location = new Location(responseData[index]);
+      this.allDistricts.push(location.district);
+      this.allMunicipalities.push(location.municipality);
+    }
+
+  }
+
+  /**
+   * Error message function
+   */
+  showError() {
+    console.log("Error fetching data from server!");
+  }
+
+  /**
+   * Make the magnitudes Set with unique values
+   * @param responseData
+   */
+  retrieveMagnitude(responseData: any) {
+    for (let index in responseData) {
+      let earthquake = new Earthquake(responseData[index]);
+      this.allMagnitudes.add(earthquake.magnitude);
+    }
+
+  }
+
 
   /**
    * Get the list of earthquake from that idLocation
@@ -60,7 +108,7 @@ export class LocationComponent implements OnInit {
   }
 
   /**
-   * Make a new Eartquake object where we save the list
+   * Make a new Earthquake object where we save the list
    * @param responseData
    */
   retrieveListEq(responseData: any) {
@@ -74,23 +122,8 @@ export class LocationComponent implements OnInit {
     }
 
     let earthquake = new Earthquake(this.earthquakeList[0]);
-    /** Go to the coordinates receive **/
+    /** Go to the coordinates received **/
     this.initMap(earthquake.latitude, earthquake.longitude);
-
-
-    /** Sort descending by Date to see the last Eq **/
-    this.earthquakeList.sort(function (obj1: Earthquake, obj2: Earthquake) {
-      if (obj1.magnitude < obj2.magnitude) {
-        return 1;
-      }
-      if (obj1.magnitude > obj2.magnitude) {
-        return -1;
-      }
-      return 0;
-    });
-
-    earthquake = new Earthquake(this.earthquakeList[0]);
-    this.lastEq = earthquake.happenedOn;
 
 
     /** Sort descending by magnitude to see the highest magnitude **/
@@ -110,10 +143,42 @@ export class LocationComponent implements OnInit {
     earthquake = new Earthquake(this.earthquakeList[this.earthquakeList.length - 1]);
     this.lowestMagnitude = earthquake.magnitude;
 
-    console.log('DUPA SORTARE ' + earthquake.magnitude);
 
+    /** Sort descending by Date to see the last Eq **/
+    this.earthquakeList.sort(function (obj1: Earthquake, obj2: Earthquake) {
+      if (obj1.magnitude < obj2.magnitude) {
+        return 1;
+      }
+      if (obj1.magnitude > obj2.magnitude) {
+        return -1;
+      }
+      return 0;
+    });
+
+    earthquake = new Earthquake(this.earthquakeList[0]);
+    this.lastEq = earthquake.happenedOn;
+    /** With the array sorted by magnitude descending call the function
+     * to make top 3 eq
+     */
+    this.topThreeContent(this.earthquakeList);
   }
 
+  /**
+   * Top three infoBox
+   * @param earthquakeList
+   */
+  topThreeContent(earthquakeList: Array<Earthquake>) {
+
+    this.oneMagnitude = earthquakeList[0].magnitude;
+    this.oneYear = earthquakeList[0].happenedOn.getFullYear();
+    console.log(this.oneYear);
+    this.twoMagnitude = earthquakeList[1].magnitude;
+    this.twoYear = earthquakeList[1].happenedOn.getFullYear();
+    console.log(this.twoYear);
+    this.threeMagnitude = earthquakeList[2].magnitude;
+    this.threeYear = earthquakeList[2].happenedOn.getFullYear();
+    console.log(this.threeYear);
+  }
   /********************** DISTRICT ****************/
   /**
    * Calls the getDistrictData that gets from the db the Locaiton Obj with that District name
@@ -166,23 +231,8 @@ export class LocationComponent implements OnInit {
     this.getMunicipality(this.municipalitySelectedValue);
   }
 
-  /**
-   * Save District & Municipalities into arrays to show in view
-   * @param responseData
-   */
-  retrieveDataLocation(responseData: any) {
+  /**************************End Municipality******/
 
-    for (let index in responseData) {
-      let location = new Location(responseData[index]);
-      this.allDistricts.push(location.district);
-      this.allMunicipalities.push(location.municipality);
-    }
-
-  }
-
-  showError() {
-    console.log("Error fetching data from server!");
-  }
 
 
   /**
