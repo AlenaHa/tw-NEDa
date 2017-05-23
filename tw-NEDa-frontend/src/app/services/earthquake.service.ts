@@ -24,6 +24,22 @@ export class EarthquakeService {
       .map(res => res.json());
   }
 
+  /**
+   * Get the list of Earthquakes by LocationId
+   * @param locationId
+   * @returns {Observable<R>}
+   */
+  getListEarthquake(locationId: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(
+      this.backendUrl + '/earthquakes/location/' + locationId,
+      {headers: headers})
+      .map(res => res.json());
+
+  }
+
   addEarthquake(earthquake: Earthquake) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');

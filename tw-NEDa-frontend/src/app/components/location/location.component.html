@@ -118,9 +118,9 @@
                         <md-card-title>Earthquake Informations</md-card-title>
                     </md-card-header>
                     <md-card-content (click)="goToDistrict(); goToMunicipality()" required>
-                        <p>District <b>{{districtValue}}</b></p>
-                        <p>Municipality <b>{{municipalityValue}}</b></p>
-                        <p>Number of earhquakes <b>{{nrOfEq}}</b></p>
+                        <p>District <b>{{districtSelectedValue}}</b></p>
+                        <p>Municipality <b>{{municipalitySelectedValue}}</b></p>
+                        <p>Number of earhquakes <b>{{numberOfEq}}</b></p>
                         <p>Last Earthquake <b>{{lastEq}}</b></p>
                         <p>Highest Magnitude <b>{{highestMagnitude}}</b></p>
                         <p>Lowest Magnitude <b>{{lowestMagnitude}}</b></p>
@@ -209,7 +209,9 @@
                             [longitude]="lng">
                         <sebm-google-map-info-window
                                 [disableAutoPan]="true">
-                            Hi, this is the content of the <strong>{{districtValue }}</strong>
+                            <p>{{districtSelectedValue }} {{municipalitySelectedValue}} Info Box</p>
+                            <h5>Last Earthquake : {{ lastEq }} </h5>
+                            <h5>Highest Magnitude : {{ highestMagnitude }} </h5>
                         </sebm-google-map-info-window>
 
                     </sebm-google-map-marker>

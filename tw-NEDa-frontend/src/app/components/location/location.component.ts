@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationService } from '../../services/location.service';
 import { Location } from '../../model/location.model';
+import { EarthquakeService } from '../../services/earthquake.service';
+import { Earthquake } from '../../model/earthquake.model';
 
 // TODO: (Cati) Move this in a model .ts file under the model folder
 export interface coordinates {
@@ -26,8 +28,13 @@ export class LocationComponent implements OnInit {
   public allMunicipalities = Array<string>();
   public districtSelectedValue: string;
   public municipalitySelectedValue: string;
+  public earthquakeList = Array<Earthquake>();
+  public highestMagnitude: number;
+  public lowestMagnitude: number;
+  public numberOfEq: number;
+  public lastEq: Date;
 
-  constructor(private locationService: LocationService) {
+  constructor(private locationService: LocationService, private earthquakeService: EarthquakeService) {
   }
 
   /**
@@ -40,6 +47,72 @@ export class LocationComponent implements OnInit {
         (err) => this.showError());
   }
 
+  /**
+   * Get the list of earthquake from that idLocation
+   * @param locationId
+   */
+  getEarthquakeListByLocationId(locationId: string) {
+    this.earthquakeService.getListEarthquake(locationId)
+      .subscribe(
+        (data) => this.retrieveListEq(data),
+        (err) => this.showError()
+      );
+  }
+
+  /**
+   * Make a new Eartquake object where we save the list
+   * @param responseData
+   */
+  retrieveListEq(responseData: any) {
+
+    this.earthquakeList = [];
+
+    /**Make the array with Eq **/
+    for (let index in responseData) {
+      let earthquake = new Earthquake(responseData[index]);
+      this.earthquakeList.push(earthquake);
+    }
+
+    let earthquake = new Earthquake(this.earthquakeList[0]);
+    /** Go to the coordinates receive **/
+    this.initMap(earthquake.latitude, earthquake.longitude);
+
+
+    /** Sort descending by Date to see the last Eq **/
+    this.earthquakeList.sort(function (obj1: Earthquake, obj2: Earthquake) {
+      if (obj1.magnitude < obj2.magnitude) {
+        return 1;
+      }
+      if (obj1.magnitude > obj2.magnitude) {
+        return -1;
+      }
+      return 0;
+    });
+
+    earthquake = new Earthquake(this.earthquakeList[0]);
+    this.lastEq = earthquake.happenedOn;
+
+
+    /** Sort descending by magnitude to see the highest magnitude **/
+    this.earthquakeList.sort(function (obj1: Earthquake, obj2: Earthquake) {
+      if (obj1.happenedOn < obj2.happenedOn) {
+        return 1;
+      }
+      if (obj1.happenedOn > obj2.happenedOn) {
+        return -1;
+      }
+      return 0;
+    });
+
+    this.numberOfEq = this.earthquakeList.length;
+    earthquake = new Earthquake(this.earthquakeList[0]);
+    this.highestMagnitude = earthquake.magnitude;
+    earthquake = new Earthquake(this.earthquakeList[this.earthquakeList.length - 1]);
+    this.lowestMagnitude = earthquake.magnitude;
+
+    console.log('DUPA SORTARE ' + earthquake.magnitude);
+
+  }
 
   /********************** DISTRICT ****************/
   /**
@@ -54,11 +127,17 @@ export class LocationComponent implements OnInit {
       );
   }
 
-
+  /**
+   * Get the Location object with the wanted District
+   * Calls the method to get all the earthquakes from that area
+   * @param responseData
+   */
   retrieveDistrict(responseData: any) {
     let location = new Location(responseData);
+    this.municipalitySelectedValue = location.district;
     console.log(location.municipality);
     console.log(location.district);
+    this.getEarthquakeListByLocationId(location.locationId.toString());
   }
 
   goToDistrict() {
@@ -76,8 +155,11 @@ export class LocationComponent implements OnInit {
 
   retrieveMunicipality(responseData: any) {
     let location = new Location(responseData);
+    this.districtSelectedValue = location.district;
     console.log(location.municipality);
     console.log(location.district);
+    this.getEarthquakeListByLocationId(location.locationId.toString());
+
   }
 
   goToMunicipality() {
