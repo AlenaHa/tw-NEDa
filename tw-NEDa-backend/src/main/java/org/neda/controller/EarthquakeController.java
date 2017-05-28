@@ -124,4 +124,34 @@ public class EarthquakeController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    /**
+     * Get the latest Earthquake
+     *
+     * @return Earthquake Object and a message if we found the object successfully or not
+     */
+    @RequestMapping(value = "/latest", method = RequestMethod.GET)
+    public ResponseEntity<Earthquake> getLatestEarthquake() {
+        Earthquake earthquake = earthquakeService.getLatestEarthquake();
+        if (earthquake.equals(null)) {
+            return new ResponseEntity<Earthquake>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<Earthquake>(earthquake, HttpStatus.OK);
+    }
+
+    /**
+     * Get the list of earthquakes that have this magnitude
+     *
+     * @param magnitude
+     *
+     * @return List of earthquakes
+     */
+    @RequestMapping(value = "/magnitude/{magnitude}", method = RequestMethod.GET)
+    public ResponseEntity<List<Earthquake>> getListByMagnitude(@PathVariable Double magnitude) {
+        List<Earthquake> list = this.earthquakeService.getListEarthquakeByMagnitude(magnitude);
+        if (list.equals(null)) {
+            return new ResponseEntity<List<Earthquake>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Earthquake>>(list, HttpStatus.OK);
+    }
+
 }

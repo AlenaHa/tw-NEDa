@@ -24,7 +24,9 @@ export class LocationComponent implements OnInit {
   public allMagnitudes = new Set<number>();
   public districtSelectedValue: string;
   public municipalitySelectedValue: string;
+  public magnitudeSelectedValue: number;
   public earthquakeList = Array<Earthquake>();
+  public earthquakeMagnitudeList = Array<Earthquake>();
   public highestMagnitude: number;
   public lowestMagnitude: number;
   public numberOfEq: number;
@@ -36,7 +38,19 @@ export class LocationComponent implements OnInit {
   public twoYear: number;
   public threeYear: number;
   public allOng = new Set<String>();
+  public counter: number;
+  public mapPopupCheck: number;
+  /* MAGNITUDE SEARCH */
+  public eqMagnitudeDate: string;
+  public eqMagnitudeDepth: number;
+  public eqMagnitude: number;
 
+  /**
+   * Inject all the services I need
+   * @param locationService
+   * @param earthquakeService
+   * @param ongService
+   */
   constructor(private locationService: LocationService, private earthquakeService: EarthquakeService,
               private ongService: OngService) {
   }
@@ -184,7 +198,7 @@ export class LocationComponent implements OnInit {
 
   /********************** DISTRICT ****************/
   /**
-   * Calls the getDistrictData that gets from the db the Locaiton Obj with that District name
+   * Calls the getDistrictData that gets from the db the Location Obj with that District name
    * @param district
    */
   getDistrict(district: string) {
@@ -237,12 +251,104 @@ export class LocationComponent implements OnInit {
   /**************************End Municipality******/
 
 
+  /** MAGNITUDE **/
+
+  getMagnitudeList(magnitude: number) {
+    this.earthquakeService.getListEarthquakesByMagnitude(magnitude)
+      .subscribe(
+        (data) => this.retrieveListEqMagnitude(data),
+        (err) => this.showError()
+      );
+  }
+
+  /**
+   * Get the earthquake list that have the magnitude that the user
+   * selected
+   * For the first earthquake the pin from the map is moved to that coordonate
+   * @param responseData
+   */
+  private retrieveListEqMagnitude(responseData: any) {
+    this.earthquakeMagnitudeList = [];
+    this.counter = 0;
+    for (let index in responseData) {
+      let earthquake = new Earthquake(responseData[index]);
+      this.earthquakeMagnitudeList.push(earthquake);
+    }
+
+    /** Move the pin for the first element in the array **/
+    let earthquake = new Earthquake(this.earthquakeMagnitudeList[0]);
+    this.eqMagnitude = earthquake.magnitude;
+    this.eqMagnitudeDate = earthquake.happenedOn.toDateString();
+    this.eqMagnitudeDepth = earthquake.depth;
+
+    this.populatePopup(earthquake.localizationId);
+    this.initMap(earthquake.latitude, earthquake.longitude);
+  }
+
+  /**
+   * Function that loops through the eq list while pressing the
+   * button Next in the view
+   * The pin in the map is moved with the coordinates that the
+   * earthquake from that position has
+   * We call the function to populate the popup from the pin on the map
+   */
+  private goToNextPlace() {
+    this.counter = this.counter + 1;
+    if (this.counter === this.earthquakeMagnitudeList.length) {
+      this.counter = 0;
+      console.log(this.counter);
+      let earthquake = new Earthquake(this.earthquakeMagnitudeList[this.counter]);
+      this.eqMagnitude = earthquake.magnitude;
+      this.eqMagnitudeDate = earthquake.happenedOn.toDateString();
+      this.eqMagnitudeDepth = earthquake.depth;
+      this.populatePopup(earthquake.localizationId);
+      this.initMap(earthquake.latitude, earthquake.longitude);
+
+
+    } else {
+      console.log(this.counter);
+      let earthquake = new Earthquake(this.earthquakeMagnitudeList[this.counter]);
+      this.eqMagnitude = earthquake.magnitude;
+      this.eqMagnitudeDate = earthquake.happenedOn.toDateString();
+      this.eqMagnitudeDepth = earthquake.depth;
+      this.populatePopup(earthquake.localizationId);
+      this.initMap(earthquake.latitude, earthquake.longitude);
+    }
+  }
+
+  /**
+   * Funtion to be called on click and calls all the function
+   * to get the list of eq by magnitude
+   */
+  goToCityMagnitude() {
+    this.getMagnitudeList(this.magnitudeSelectedValue);
+  }
+
+  private populatePopup(id: number) {
+    this.locationService.getLocationByLocationId(id.toString())
+      .subscribe(
+        (data) => this.getDataForMagnitudePopup(data),
+        (err) => this.showError()
+      );
+  }
+
+  public districtMagnitude: string;
+  public municipalityMagnitude: string;
+
+  private getDataForMagnitudePopup(responseData: any) {
+    let location = new Location(responseData);
+    this.districtMagnitude = location.district;
+    this.municipalityMagnitude = location.municipality;
+  }
+
+  /** END MAGNITUDE **/
 
   /**
    * Save District that the user selected
    * @param value
    */
   public triggerDistrict(value) {
+    this.mapPopupCheck = 1;
     this.districtSelectedValue = value;
     console.log(this.districtSelectedValue);
   }
@@ -252,13 +358,23 @@ export class LocationComponent implements OnInit {
    * @param value
    */
   public triggerMunicipality(value) {
+    this.mapPopupCheck = 1;
     this.municipalitySelectedValue = value;
     console.log(this.municipalitySelectedValue);
   }
 
-
+  /**
+   * Save the magnitude selected by the user
+   * @param value
+   */
+  public triggerMagnitude(value) {
+    this.mapPopupCheck = 2;
+    this.magnitudeSelectedValue = value;
+    console.log(this.magnitudeSelectedValue);
+  }
   /**
    * Set longitude and latitude for a city/district
+   * Move the pin on the map
    * @param input1 - latitude
    * @param input2 - longitude
    */
@@ -269,6 +385,11 @@ export class LocationComponent implements OnInit {
 
 
   /**** POPUP FROM THE MAP ****/
+  /**
+   * Return ONG list for that location
+   * This is show in the popup from the pin on the map
+   * @param localizationId
+   */
   getOngList(localizationId: string) {
     this.ongService.getAllOngByLocationId(localizationId)
       .subscribe(

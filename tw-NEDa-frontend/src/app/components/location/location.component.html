@@ -109,7 +109,11 @@
                                 <button (click)="goToCityMagnitude()" id="earthquake" md-raised-button>Search By
                                     Magnitude
                                 </button>
+                                <button
+                                        (click)="goToNextPlace()" md-raised-button>Next
+                                </button>
                             </div>
+
                         </form>
 
 
@@ -210,19 +214,34 @@
                             [longitude]="lng">
                         <sebm-google-map-info-window
                                 [disableAutoPan]="true">
-                            <p><i class="material-icons">info_outline</i>
-                                {{districtSelectedValue }},{{municipalitySelectedValue}} Info Box</p>
-                            <h5><i class="material-icons">leak_remove</i>
-                                <strong>Last Earthquake :</strong> {{ lastEq }} </h5>
-                            <h5><i class="material-icons">trending_up</i>
-                                <strong>Highest Magnitude :</strong> {{ highestMagnitude }} </h5>
-                            <h6><i class="material-icons">supervisor_account</i>
-                                <strong>List Of ONG</strong></h6>
-                            <h5 style="color:red;"
-                                *ngFor="let ong of allOng; let i = index"
-                                [attr.data-index]="i">
-                                {{i+1}}.{{ong}}
-                            </h5>
+                            <div *ngIf="mapPopupCheck==1">
+                                <p><i class="material-icons">info_outline</i>
+                                    {{districtSelectedValue }},{{municipalitySelectedValue}} Info Box</p>
+                                <h5><i class="material-icons">leak_remove</i>
+                                    <strong>Last Earthquake :</strong> {{ lastEq }} </h5>
+                                <h5><i class="material-icons">trending_up</i>
+                                    <strong>Highest Magnitude :</strong> {{ highestMagnitude }} </h5>
+                                <h6><i class="material-icons">supervisor_account</i>
+                                    <strong>List Of ONG</strong></h6>
+                                <h5 style="color:red;"
+                                    *ngFor="let ong of allOng; let i = index"
+                                    [attr.data-index]="i">
+                                    {{i+1}}.{{ong}}
+                                </h5>
+                            </div>
+
+                            <div *ngIf="mapPopupCheck==2">
+                                <h5><i class="material-icons">trending_down</i>
+                                    <strong>Depth : {{eqMagnitudeDepth}} </strong></h5>
+                                <h5><i class="material-icons">date_range</i>
+                                    <strong>Happened On: {{eqMagnitudeDate}} </strong></h5>
+                                <h5><i class="material-icons">warning</i>
+                                    <strong>Magnitude : {{eqMagnitude}} </strong></h5>
+                                <h5><i class="material-icons">location_city</i>
+                                    <strong>Municipality : {{municipalityMagnitude}} </strong></h5>
+                                <h5><i class="material-icons">location_city</i>
+                                    <strong>District : {{districtMagnitude}}</strong></h5>
+                            </div>
 
                         </sebm-google-map-info-window>
 

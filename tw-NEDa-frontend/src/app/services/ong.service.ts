@@ -34,7 +34,7 @@ export class OngService {
     headers.append('Content-Type', 'application/json');
 
     return this.http.get(
-      this.backendUrl + '/ong//location/' + locationId,
+      this.backendUrl + '/ong/location/' + locationId,
       {headers: headers})
       .map(res => res.json());
 

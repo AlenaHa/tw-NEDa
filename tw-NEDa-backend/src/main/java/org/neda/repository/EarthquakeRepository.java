@@ -18,4 +18,18 @@ public interface EarthquakeRepository extends CrudRepository<Earthquake, Long> {
      * @return
      */
     List<Earthquake> findByLocalizationId(Long localizationId);
+
+    /**
+     * Find the latest earthquake
+     *
+     * @return Earthquake object
+     */
+    Earthquake findFirstByOrderByHappenedOnDesc();
+
+    /**
+     * Find the list of Earthquakes with a given magnitude
+     *
+     * @return List Of earthquakes
+     */
+    List<Earthquake> findByMagnitude(Double magnitude);
 }

@@ -40,6 +40,42 @@ export class EarthquakeService {
 
   }
 
+  /**
+   * Get the latest Earthquake
+   * @returns {Observable<R>}
+   */
+  getLatestEarthquake() {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(
+      this.backendUrl + '/earthquakes/latest',
+      {headers: headers})
+      .map(res => res.json());
+
+  }
+
+  /**
+   * Get the list of earthquake thate have the magnitude
+   * from the parameter
+   * @param magnitude
+   * @returns {Observable<R>}
+   */
+  getListEarthquakesByMagnitude(magnitude: number) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(
+      this.backendUrl + '/earthquakes/magnitude/' + magnitude,
+      {headers: headers})
+      .map(res => res.json()
+      );
+  }
+
+  /**
+   * I think this should be deleted (?) - we don't add eq
+   * @param earthquake
+   * @returns {Observable<R>}
+   */
   addEarthquake(earthquake: Earthquake) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');

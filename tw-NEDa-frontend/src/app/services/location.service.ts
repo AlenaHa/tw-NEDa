@@ -53,4 +53,13 @@ export class LocationService {
       .map(res => res.json());
 
   }
+
+  getLocationByLocationId(id: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(
+      this.backendUrl + '/location/' + id,
+      {headers: headers})
+      .map(res => res.json());
+  }
 }
