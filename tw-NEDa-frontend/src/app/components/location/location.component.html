@@ -35,6 +35,7 @@
                                 <!-- (change)- sort of function which will keep up with every change-->
                                 <!-- I send the City name to trigger function -->
                                 <select (change)="triggerDistrict($event.target.value)">
+                                    <option selected disabled>Choose District</option>
                                     <option
                                             *ngFor="let district of allDistricts; let i = index"
                                             [attr.data-index]="i">
@@ -43,6 +44,7 @@
                                 </select>
                                 <!--each city has it's coordinates goToCity() moves google map to those coordinates-->
                                 <button (click)="goToDistrict()" id="city" md-raised-button>Search By District</button>
+                                <h3 style="color:red;"><span (click)="goToDistrict()">{{errorDistrict}}</span></h3>
                             </div>
                         </form>
                     </div>
@@ -67,6 +69,7 @@
                                 <!-- (change)- sort of function which will keep up with every change-->
                                 <!-- I send the City name to trigger function -->
                                 <select (change)="triggerMunicipality($event.target.value)">
+                                    <option selected disabled>Choose Municipality</option>
                                     <option
                                             *ngFor="let municipality of allMunicipalities; let i = index"
                                             [attr.data-index]="i">
@@ -75,6 +78,7 @@
                                 </select>
                                 <!--each city has it's coordinates goToCity() moves google map to those coordinates-->
                                 <button (click)="goToMunicipality()" md-raised-button>Search By Municipality</button>
+                                <h3><span (click)="goToMunicipality()">{{errorDistrict}}</span></h3>
                             </div>
                         </form>
                     </div>
@@ -100,6 +104,7 @@
                             <div class="form-group">
                                 <!--selects names for the cities from location.component.ts -->
                                 <select (change)="triggerMagnitude($event.target.value)">
+                                    <option selected disabled>Choose Magnitude</option>
                                     <option
                                             *ngFor="let magnitude of allMagnitudes; let i = index"
                                             [attr.data-index]="i">
@@ -109,7 +114,7 @@
                                 <button (click)="goToCityMagnitude()" id="earthquake" md-raised-button>Search By
                                     Magnitude
                                 </button>
-                                <button
+                                <button style="margin-left: 40%; margin-top: 4%"
                                         (click)="goToNextPlace()" md-raised-button>Next
                                 </button>
                             </div>

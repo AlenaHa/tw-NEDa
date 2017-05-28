@@ -118,6 +118,7 @@ export class LocationComponent implements OnInit {
       );
   }
 
+
   /**
    * Make a new Earthquake object where we save the list
    * @param responseData

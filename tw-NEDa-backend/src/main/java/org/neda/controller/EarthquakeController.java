@@ -106,9 +106,9 @@ public class EarthquakeController {
      *
      * @param localizationId the location id by which the query is made
      *
-     * @return List with all the query and the message if the list was found or nor
+     * @return List with all the query and the message if the list was found or not
      */
-    @RequestMapping(value = "location/{localizationId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/location/{localizationId}", method = RequestMethod.GET)
     public ResponseEntity<List<Earthquake>> getListByLocId(@PathVariable Long localizationId) {
         List<Earthquake> list = this.earthquakeService.getEarthquakesByLocalizationId(localizationId);
         if (list.isEmpty()) {

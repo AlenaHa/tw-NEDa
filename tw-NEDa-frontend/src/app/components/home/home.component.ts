@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   public day: number;
   public month: number;
   public district: string;
-
+  public time: number;
   constructor(private earthquakeService: EarthquakeService, private locationService: LocationService) {
   }
 
@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
     let earthquake = new Earthquake(retrieveData);
 
     this.getLocation(earthquake.localizationId.toString());
-    this.hour = earthquake.happenedOn.getHours();
+    // this.hour = earthquake.happenedOn.getHours();
     this.day = earthquake.happenedOn.getDate();
     this.month = earthquake.happenedOn.getMonth();
     this.magnitude = earthquake.magnitude;
