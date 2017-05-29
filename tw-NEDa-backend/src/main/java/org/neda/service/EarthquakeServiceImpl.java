@@ -28,6 +28,7 @@ public class EarthquakeServiceImpl implements EarthquakeService, CsvService {
     @Autowired
     private EarthquakeRepository earthquakeRepository;
 
+
     @Override
     public List<Earthquake> findEarthquakeSqlInjectionExample(String id) {
         Query query = entityManager.createNativeQuery("SELECT * FROM earthquake where e_id = " + id, Earthquake.class);
@@ -35,6 +36,12 @@ public class EarthquakeServiceImpl implements EarthquakeService, CsvService {
         LOGGER.info("Sql injection happened!");
 
         return resultList;
+    }
+
+    @Override
+    public List<Earthquake> getEarthquakesByLocalizationId(Long localizationId) {
+        List<Earthquake> list = this.earthquakeRepository.findByLocalizationId(localizationId);
+        return list;
     }
 
     @Override
@@ -81,6 +88,24 @@ public class EarthquakeServiceImpl implements EarthquakeService, CsvService {
 
         writer.flush();
         writer.close();
+
+    }
+
+
+    /**
+     * Call the query to get the latest Earthquake
+     *
+     * @return
+     */
+    @Override
+    public Earthquake getLatestEarthquake() {
+        return this.earthquakeRepository.findFirstByOrderByHappenedOnDesc();
+    }
+
+    @Override
+    public List<Earthquake> getListEarthquakeByMagnitude(Double magnitude) {
+        List<Earthquake> list = this.earthquakeRepository.findByMagnitude(magnitude);
+        return list;
 
     }
 }

@@ -26,7 +26,13 @@ public class EarthquakeController {
     @Autowired
     private EarthquakeService earthquakeService;
 
-
+    /**
+     * Find an Earthquake Object by Id
+     *
+     * @param id the Id to search by
+     *
+     * @return An Earthquake Object / message if the object was successfully found or not
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Earthquake> readEarthquake(@PathVariable Long id) {
         Earthquake earthquake = earthquakeService.findById(id);
@@ -37,18 +43,34 @@ public class EarthquakeController {
         }
     }
 
+    /**
+     * Delete a particular Earthquake Object from database
+     * @param id the id of the Earthquake to delete
+     * @return message if the object was successfully deleted
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Earthquake> deleteEarthquake(@PathVariable Long id) {
         earthquakeService.delete(id);
         return new ResponseEntity<Earthquake>(HttpStatus.NO_CONTENT);
     }
 
+    /**
+     * Add a new Earthquake Object and add it into the database
+     * @param reqEarthquake the object to add into the database
+     * @return the new Earthquake Object / message if the object was successfully inserted into the db
+     */
     @RequestMapping(value = "/earthquake", method = RequestMethod.POST)
     public ResponseEntity<Earthquake> createEarthquake(@RequestBody Earthquake reqEarthquake) {
         Earthquake savedEarthquake = earthquakeService.save(reqEarthquake);
         return new ResponseEntity<Earthquake>(savedEarthquake, HttpStatus.CREATED);
     }
 
+    /**
+     * Update a particular Earthquake Object
+     * @param reqEarthquake the object that needs to be updated
+     * @param id the id of the object
+     * @return message if the update was successfully or not
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Earthquake> updateEarthquake(@RequestBody Earthquake reqEarthquake, @PathVariable Long id) {
         if (!id.equals(reqEarthquake.getEarthquakeId())) {
@@ -58,16 +80,41 @@ public class EarthquakeController {
         return new ResponseEntity<Earthquake>(savedEarthquake, HttpStatus.OK);
     }
 
+    /**
+     * Get a list with all the Earthquake objects from database
+     * @return List with the Earthquake Object and a message if the request was successfully
+     */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<List<Earthquake>> getAllEarthquakes() {
         List<Earthquake> all = earthquakeService.findAll();
         return new ResponseEntity<List<Earthquake>>(all, HttpStatus.OK);
     }
 
+    /**
+     * Method that shows sql injection
+     * @param sqlInjectionId
+     * @return
+     */
     @RequestMapping(value = "/sqlinjection", method = RequestMethod.POST)
     public ResponseEntity<List<Earthquake>> sqlInjectionExample(@RequestBody String sqlInjectionId) {
         List<Earthquake> earthquakeSqlInjectionExample = earthquakeService.findEarthquakeSqlInjectionExample(sqlInjectionId);
         return new ResponseEntity<List<Earthquake>>(earthquakeSqlInjectionExample, HttpStatus.OK);
+    }
+
+    /**
+     * Get a list with all the Earthquakes that happened in a location with the location id given
+     *
+     * @param localizationId the location id by which the query is made
+     *
+     * @return List with all the query and the message if the list was found or not
+     */
+    @RequestMapping(value = "/location/{localizationId}", method = RequestMethod.GET)
+    public ResponseEntity<List<Earthquake>> getListByLocId(@PathVariable Long localizationId) {
+        List<Earthquake> list = this.earthquakeService.getEarthquakesByLocalizationId(localizationId);
+        if (list.isEmpty()) {
+            return new ResponseEntity<List<Earthquake>>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<List<Earthquake>>(list, HttpStatus.OK);
     }
 
 
@@ -75,6 +122,36 @@ public class EarthquakeController {
     public ResponseEntity exportCsv(@RequestBody String filePath) throws IOException, SQLException {
         earthquakeService.exportCsv(filePath);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    /**
+     * Get the latest Earthquake
+     *
+     * @return Earthquake Object and a message if we found the object successfully or not
+     */
+    @RequestMapping(value = "/latest", method = RequestMethod.GET)
+    public ResponseEntity<Earthquake> getLatestEarthquake() {
+        Earthquake earthquake = earthquakeService.getLatestEarthquake();
+        if (earthquake.equals(null)) {
+            return new ResponseEntity<Earthquake>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<Earthquake>(earthquake, HttpStatus.OK);
+    }
+
+    /**
+     * Get the list of earthquakes that have this magnitude
+     *
+     * @param magnitude
+     *
+     * @return List of earthquakes
+     */
+    @RequestMapping(value = "/magnitude/{magnitude}", method = RequestMethod.GET)
+    public ResponseEntity<List<Earthquake>> getListByMagnitude(@PathVariable Double magnitude) {
+        List<Earthquake> list = this.earthquakeService.getListEarthquakeByMagnitude(magnitude);
+        if (list.equals(null)) {
+            return new ResponseEntity<List<Earthquake>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Earthquake>>(list, HttpStatus.OK);
     }
 
 }

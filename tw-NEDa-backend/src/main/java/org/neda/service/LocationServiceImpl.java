@@ -18,6 +18,9 @@ import org.springframework.stereotype.Service;
 public class LocationServiceImpl implements LocationService {
     private static final Logger LOGGER = LoggerFactory.getLogger(LocationServiceImpl.class);
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Autowired
     private LocationRepository LocationRepository;
 
@@ -46,4 +49,31 @@ public class LocationServiceImpl implements LocationService {
     public void delete(Long id) {
         this.LocationRepository.delete(id);
     }
+
+    /**
+     * Implements the method from LocationService that searches into the database
+     * a Location row with the district received as a parameter
+     *
+     * @param district
+     *
+     * @return
+     */
+    @Override
+    public Location getLocationDistrict(String district) {
+        return this.LocationRepository.findByDistrict(district);
+    }
+
+    /**
+     * Implements the method from LocationService that searches into the database
+     * a Location row with the municipality received as a parameter
+     *
+     * @param municipality
+     *
+     * @return
+     */
+    @Override
+    public Location getLocationMunicipality(String municipality) {
+        return this.LocationRepository.findByMunicipality(municipality);
+    }
+
 }

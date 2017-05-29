@@ -9,8 +9,8 @@ spring:
      name: neda # Service name
   datasource:
     url: jdbc:oracle:thin:@localhost:1521:xe
-    username: NEDA
-    password: NEDA
+    username: neda
+    password: neda
     driver-class-name: com.oracle.jdbc.OracleDriver
   jpa:
     database-platform: org.hibernate.dialect.Oracle10gDialect

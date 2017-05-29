@@ -1,7 +1,13 @@
 package org.neda.entity;
 
-import javax.persistence.*;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Make Earthquake table with the related columns
@@ -16,7 +22,7 @@ public class Earthquake {
     private Long earthquakeId;
 
     @Column(name = "e_location_id")
-    private long localizationId;
+    private Long localizationId;
 
     @Column(name = "latitude")
     private Double latitude;
