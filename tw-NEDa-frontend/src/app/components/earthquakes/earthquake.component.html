@@ -1,158 +1,129 @@
-<div class="page-content">
+<div class="container">
+  <md-card class="my-header">
+    <md-card-content>
+      <h2>Earthquakes</h2>
+      <div class="table-eq">
+        <ngx-datatable
+          id="eq-table"
+          #table
+          class='material'
+          [columns]='columns'
+          [columnMode]="'force'"
+          [footerHeight]="50"
+          [rowHeight]="'auto'"
+          (rowContextmenu)="onContextMenu($event)"
+          [limit]="10"
+          [rows]='rows'
+          [loadingIndicator]="loadingIndicator"
+          [headerHeight]="50"
+        >
+        </ngx-datatable>
+        <template #hdrTpl>
+        </template>
+        <template #editTmpl let-row="row" let-value="value" let-i="index">
+          <button md-icon-button [mdMenuTriggerFor]="rowMenu">
+            <md-icon>more_vert</md-icon>
+          </button>
+          <md-menu #rowMenu="mdMenu">
+            <button md-menu-item (click)="edit(row)">
+              <md-icon>edit</md-icon>
+              Edit
+            </button>
+            <button md-menu-item (click)="delete(row)">
+              <md-icon>delete</md-icon>
+              Delete
+            </button>
+          </md-menu>
+        </template>
+      </div>
+    </md-card-content>
+  </md-card>
+  <ul class="timeline">
+    <li>
+      <div class="timeline-badge"><i class="glyphicon glyphicon-search"></i></div>
+      <div class="timeline-panel">
+        <div class="timeline-body">
+          <form name="significantEarthquakeForm" novalidate>
+            <div class="form-group">
+              <h3>Filter Earthquakes By Id</h3>
+              <md-input-container>
+                <input
+                  class="eq-id-filter-input"
+                  mdInput
+                  type='text'
+                  placeholder='Type to filter '
+                  (keyup)='updateFilter($event)'
+                />
+              </md-input-container>
+              <button md-button (click)="addEarthquake()">Add earthquake</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </li>
 
-    <!--header card-->
-    <md-card id="first" class="card">
-        <md-card-content>
-            <h2>Earthquake</h2>
+    <li class="timeline-inverted">
+      <div class="timeline-badge warning"><i class="glyphicon glyphicon-bullhorn"></i></div>
+      <div class="timeline-panel">
+        <div class="timeline-body">
+          <form name="significantEarthquakeForm" novalidate>
+            <div class="form-group">
+              <h3>Search By Year</h3>
+              <md-input-container>
+                <input
+                  (keyup)='checkYear($event)'
+                  placeholder="Year"
+                  mdInput
+                  type="text">
+              </md-input-container>
+              <button
+                (click)="addEarthquakeInfo()"
+                md-button>
+                Search Earthquakes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </li>
 
-        </md-card-content>
-    </md-card>
+    <li>
+      <div class="timeline-badge danger"><i class="glyphicon glyphicon-magnet"></i></div>
+      <div class="timeline-panel">
+        <div class="timeline-body">
+          <form name="significantEarthquakeForm" novalidate>
+            <div class="form-group">
+              <h3>Filter Earthquakes By Magnitude</h3>
+              <md-card-content>
+                <md-input-container>
+                  <input
+                    class="eq-id-filter-input"
+                    mdInput
+                    type='text'
+                    placeholder='Type to filter '
+                    (keyup)='updateFilter($event)'
+                  />
+                </md-input-container>
+              </md-card-content>
+            </div>
+          </form>
+        </div>
+      </div>
+    </li>
 
-
-    <div class="jumbotron">
-
-
-        <div class="col-md-5 ng-scope">
-
-            <!--input field where the user will write year-->
-            <md-card class="card-input">
-                <md-card-content>
-
-                    <form name="significantEarthquakeForm" novalidate>
-                        <div class="form-group">
-                            <!--selects names for the cities from location.component.ts -->
-                            <h3>Search By Year</h3>
-                            <input
-
-                                    (keyup)='checkYear($event)'
-                                    placeholder="Year"
-                                    type="text">
-                            <button
-                                    (click)="addEarthquakeInfo()"
-                                    md-button>
-                                Search Earthquakes
-                            </button>
-                        </div>
-                    </form>
-
-                </md-card-content>
-            </md-card>
-        </div><!--final col-md-5-->
-
-        <div class="col-md-7 map-responsive">
-            <md-card class="earthquake-year">
-                <md-card-content>
-                    <p> Magnitude <b>{{magnitude}}</b> Place <b>{{place}}</b> Depth <b>{{depth}}</b></p>
-                    <p> Magnitude <b>{{magnitude}}</b> Place <b>{{place}}</b> Depth <b>{{depth}}</b></p>
-                    <p> Magnitude <b>{{magnitude}}</b> Place <b>{{place}}</b> Depth <b>{{depth}}</b></p>
-                    <p> Magnitude <b>{{magnitude}}</b> Place <b>{{place}}</b> Depth <b>{{depth}}</b></p>
-                    <p> Magnitude <b>{{magnitude}}</b> Place <b>{{place}}</b> Depth <b>{{depth}}</b></p>
-                    <p> Magnitude <b>{{magnitude}}</b> Place <b>{{place}}</b> Depth <b>{{depth}}</b></p>
-
-
-                </md-card-content>
-            </md-card>
-
-        </div><!--final col-md07-->
-        <div class="row content">
-            <div class="col-md-5 ng-scope">
-                <!--filter by Id-->
-                <md-card class="card-filter">
-                    <md-card-header>
-                        <md-card-title>Filter Earthquakes By Id</md-card-title>
-                    </md-card-header>
-
-                    <md-card-content>
-                        <md-input-container>
-                            <input
-                                    class="eq-id-filter-input"
-                                    mdInput
-                                    type='text'
-                                    placeholder='Type to filter '
-                                    (keyup)='updateFilter($event)'
-                            />
-                        </md-input-container>
-                    </md-card-content>
-
-                    <md-card-actions>
-                        <button md-button (click)="addEarthquake()">Add earthquake</button>
-                    </md-card-actions>
-                </md-card><!--final filter by Id-->
-
-
-                <!--filter by Magnitude poate ceva de genu >= ca magnitudinea pe care o scrie-->
-                <md-card class="card-filter-2">
-                    <md-card-header>
-                        <md-card-title>Filter Earthquakes By Magnitude</md-card-title>
-                    </md-card-header>
-
-                    <md-card-content>
-                        <md-input-container>
-                            <input
-                                    class="eq-id-filter-input"
-                                    mdInput
-                                    type='text'
-                                    placeholder='Type to filter '
-                                    (keyup)='updateFilter($event)'
-                            />
-                        </md-input-container>
-                    </md-card-content>
-                </md-card><!--final filter by Magnitude-->
-            </div><!--final col-md-5-->
-
-
-            <!--table-->
-            <div class="col-md-7 map-responsive">
-
-
-                <!-- NGX Datatable used for table view of the earthquakes-->
-                <div class="table-eq">
-                    <ngx-datatable
-                            id="eq-table"
-                            #table
-                            class='material'
-                            [columns]='columns'
-                            [columnMode]="'force'"
-                            [footerHeight]="50"
-                            [rowHeight]="'auto'"
-                            (rowContextmenu)="onContextMenu($event)"
-                            [limit]="10"
-                            [rows]='rows'
-                            [loadingIndicator]="loadingIndicator"
-                            [headerHeight]="50"
-                    >
-                    </ngx-datatable>
-
-
-                    <!-- Templates for the last cell in the table-->
-                    <template #hdrTpl>
-
-                    </template>
-                    <template #editTmpl let-row="row" let-value="value" let-i="index">
-                        <button md-icon-button [mdMenuTriggerFor]="rowMenu">
-                            <md-icon>more_vert</md-icon>
-                        </button>
-
-                        <md-menu #rowMenu="mdMenu">
-                            <button md-menu-item (click)="edit(row)">
-                                <md-icon>edit</md-icon>
-                                Edit
-                            </button>
-
-                            <button md-menu-item (click)="delete(row)">
-                                <md-icon>delete</md-icon>
-                                Delete
-                            </button>
-                        </md-menu>
-                    </template>
-
-                </div>
-
-            </div> <!--final col-md-7-->
-
-
-        </div><!--final row content-->
-
-    </div><!--final jumbotron-->
-
+    <li class="timeline-inverted">
+      <div class="timeline-badge warning"><i class="glyphicon glyphicon-export"></i></div>
+      <div class="timeline-panel">
+        <div class="timeline-body">
+          <div class="form-group">
+            <button
+              (click)="exportCsv()"
+              md-button>
+              Export table as CSV
+            </button>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>
