@@ -113,7 +113,7 @@ public class EarthquakeServiceImpl implements EarthquakeService, CsvService {
     @Override
     public List<CompleteEarthquake> getAllEarthquakeInformation() {
         List<CompleteEarthquake> earthquakes;
-        earthquakes = entityManager.createNativeQuery("SELECT e.latitude, e.longitude, e.depth, e.magnitude," +
+        earthquakes = entityManager.createNativeQuery("SELECT e.latitude, e.longitude, e.eq_depth, e.magnitude," +
                 " e.happened_on, l.district, l.municipality from earthquake e join location l " +
                 "on e.e_location_id = l.location_id ").getResultList();
 
