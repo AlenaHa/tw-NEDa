@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.neda.entity.CompleteEarthquake;
 import org.neda.entity.Earthquake;
 import org.neda.repository.EarthquakeRepository;
 import org.slf4j.Logger;
@@ -107,5 +108,15 @@ public class EarthquakeServiceImpl implements EarthquakeService, CsvService {
         List<Earthquake> list = this.earthquakeRepository.findByMagnitude(magnitude);
         return list;
 
+    }
+
+    @Override
+    public List<CompleteEarthquake> getAllEarthquakeInformation() {
+        List<CompleteEarthquake> earthquakes;
+        earthquakes = entityManager.createNativeQuery("SELECT e.latitude, e.longitude, e.depth, e.magnitude," +
+                " e.happened_on, l.district, l.municipality from earthquake e join location l " +
+                "on e.e_location_id = l.location_id ").getResultList();
+
+        return earthquakes;
     }
 }

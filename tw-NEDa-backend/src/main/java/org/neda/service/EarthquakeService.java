@@ -2,6 +2,7 @@ package org.neda.service;
 
 import java.util.List;
 
+import org.neda.entity.CompleteEarthquake;
 import org.neda.entity.Earthquake;
 
 public interface EarthquakeService extends CrudService<Earthquake>, CsvService {
@@ -40,4 +41,11 @@ public interface EarthquakeService extends CrudService<Earthquake>, CsvService {
      * @return List of earthquakes
      */
     List<Earthquake> getListEarthquakeByMagnitude(Double magnitude);
+
+    /**
+     * Gets all the earthquakes and the information regarding the location(municipality and district)
+     *
+     * @return The list of all the earthquakes in the database and their complete location.
+     */
+    List<CompleteEarthquake> getAllEarthquakeInformation();
 }

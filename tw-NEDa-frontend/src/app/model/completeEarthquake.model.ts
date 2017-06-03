@@ -1,19 +1,19 @@
-export class Earthquake {
-  public earthquakeId: number;
-  public localizationId: number;
+export class CompleteEarthquake {
   public latitude: number;
   public longitude: number;
   public depth: number;
   public magnitude: number;
   public happenedOn: Date;
+  public district: string;
+  public municipality: string;
 
   constructor(object: any) {
-    this.earthquakeId = object.earthquakeId;
-    this.localizationId = object.localizationId;
     this.latitude = object.latitude;
     this.longitude = object.longitude;
     this.depth = object.depth;
     this.magnitude = object.magnitude;
     this.happenedOn = new Date(object.happenedOn);
+    this.district = object.district;
+    this.municipality = object.municipality;
   }
 }

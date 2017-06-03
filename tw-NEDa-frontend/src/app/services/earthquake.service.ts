@@ -3,7 +3,7 @@
  * @date 11/04/2017
  */
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Headers, Http } from '@angular/http';
 import { Earthquake } from '../model/earthquake.model';
 @Injectable()
 export class EarthquakeService {
@@ -20,6 +20,16 @@ export class EarthquakeService {
 
     return this.http.get(
       this.backendUrl + '/earthquakes/all',
+      {headers: headers})
+      .map(res => res.json());
+  }
+
+  getAllCompleteEarthquales() {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(
+      this.backendUrl + '/earthquakes/complete',
       {headers: headers})
       .map(res => res.json());
   }

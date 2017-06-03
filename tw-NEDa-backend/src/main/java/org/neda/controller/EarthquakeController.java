@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.neda.entity.CompleteEarthquake;
 import org.neda.entity.Earthquake;
 import org.neda.service.EarthquakeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,6 +153,16 @@ public class EarthquakeController {
             return new ResponseEntity<List<Earthquake>>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<List<Earthquake>>(list, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/complete", method = RequestMethod.GET)
+    public ResponseEntity<List<CompleteEarthquake>> getAllCompleteEarthquakes(@PathVariable Long earthquakeId) {
+        List<CompleteEarthquake> allCompleteEarthquakes = earthquakeService.getAllEarthquakeInformation();
+
+        if (allCompleteEarthquakes.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity(allCompleteEarthquakes, HttpStatus.OK);
     }
 
 }

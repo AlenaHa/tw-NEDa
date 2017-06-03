@@ -4,6 +4,7 @@ import { EarthquakeService } from '../../services/earthquake.service';
 import { Earthquake } from '../../model/earthquake.model';
 import { MdDialog, MdMenuTrigger } from '@angular/material';
 import { EarthquakeDialog } from './earthquake.dialog';
+import { CompleteEarthquake } from '../../model/completeEarthquake.model';
 
 @Component({
   selector: 'filter-demo',
@@ -30,13 +31,13 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // Init table's columns
     this.columns = [
-      {prop: 'earthquakeId', name: 'Earthquake ID'},
-      {prop: 'localizationId', name: 'Location ID'},
       {prop: 'latitude', name: 'Latitude'},
       {prop: 'longitude', name: 'Longitude'},
       {prop: 'depth', name: 'Depth'},
       {prop: 'magnitude', name: 'Magnitude'},
       {prop: 'happenedOn', name: 'Date'},
+      {prop: 'district', name: 'Earthquake District'},
+      {prop: 'municipality', name: 'Earthquake Municipality'},
       {
         cellTemplate: this.editTmpl,
         headerTemplate: this.hdrTpl,
@@ -48,10 +49,11 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     // Get all the earthquakes from the backend
-    this.earthquakeService.getAllEarthquakes()
+    this.earthquakeService.getAllCompleteEarthquales()
       .subscribe(
         (data) => this.retrieveData(data),
         (err) => this.showError());
+
   }
 
   /**
@@ -62,7 +64,7 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
     let allEarthquakes = [];
 
     for (let index in responseData) {
-      let earthquake = new Earthquake(responseData[index]);
+      let earthquake = new CompleteEarthquake(responseData[index]);
       allEarthquakes.push(earthquake);
     }
 
