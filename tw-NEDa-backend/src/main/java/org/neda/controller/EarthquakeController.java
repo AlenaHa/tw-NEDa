@@ -156,7 +156,7 @@ public class EarthquakeController {
     }
 
     @RequestMapping(value = "/complete", method = RequestMethod.GET)
-    public ResponseEntity<List<CompleteEarthquake>> getAllCompleteEarthquakes(@PathVariable Long earthquakeId) {
+    public ResponseEntity<List<CompleteEarthquake>> getAllCompleteEarthquakes() {
         List<CompleteEarthquake> allCompleteEarthquakes = earthquakeService.getAllEarthquakeInformation();
 
         if (allCompleteEarthquakes.isEmpty()) {
