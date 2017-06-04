@@ -4,6 +4,7 @@ package org.neda.controller;
 import java.util.List;
 
 import org.neda.entity.Ong;
+import org.neda.entity.OngDetails;
 import org.neda.service.OngService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -67,12 +68,44 @@ public class OngController {
      *
      * @return List of Ong Object / message if list was successfully populated or not
      */
-    @RequestMapping(value = "/location/{locationId}", method = RequestMethod.GET)
-    public ResponseEntity<List<Ong>> getListOngByLocation(@PathVariable Long locationId) {
-        List<Ong> list = this.ongService.findOngListByLocationId(locationId.toString());
-        if (list.isEmpty()) {
-            return new ResponseEntity<List<Ong>>(HttpStatus.NO_CONTENT);
+//    @RequestMapping(value = "/location/{locationId}", method = RequestMethod.GET)
+//    public ResponseEntity<List<Ong>> getListOngByLocation(@PathVariable Long locationId) {
+//        List<Ong> list = this.ongService.findOngListByLocationId(locationId.toString());
+//        if (list.isEmpty()) {
+//            return new ResponseEntity<List<Ong>>(HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<List<Ong>>(list, HttpStatus.OK);
+//    }
+    @RequestMapping(value = "ongName/{ongName}", method = RequestMethod.GET)
+    public ResponseEntity<List<OngDetails>> getOngByName(@PathVariable String ongName) {
+        List<OngDetails> ong = ongService.getAllOngDetailsByOngName(ongName);
+        if (ong.equals(null)) {
+            return new ResponseEntity<List<OngDetails>>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<List<Ong>>(list, HttpStatus.OK);
+        return new ResponseEntity<List<OngDetails>>(ong, HttpStatus.OK);
+
     }
+
+//    @RequestMapping(value = "ongActivity/{ongActivity}", method = RequestMethod.GET)
+//    public ResponseEntity<List<Ong>> getOngByActivity(@PathVariable String ongActivity) {
+//        List<Ong> ong = ongService.findOngListByActivity(ongActivity);
+//        if (ong.equals(null)) {
+//            return new ResponseEntity<List<Ong>>(HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<List<Ong>>(ong, HttpStatus.OK);
+//
+//    }
+
+    @RequestMapping(value = "/ongDetails", method = RequestMethod.GET)
+    public ResponseEntity<List<OngDetails>> getAllOngDetails() {
+        List<OngDetails> allOngDetailsList = ongService.getAllOngDetailsInformation();
+
+        if (allOngDetailsList.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity(allOngDetailsList, HttpStatus.OK);
+
+    }
+
+
 }

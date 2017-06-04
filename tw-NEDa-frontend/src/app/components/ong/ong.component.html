@@ -59,12 +59,17 @@
           <div class="panel-body">
             <form name="earthquakeForm" novalidate>
               <div class="form-group">
-                <input
 
-                  (keyup)='checkMagnitude($event)'
-                  placeholder="NGO name"
-                  type="text">
-                <button md-button>Search</button>
+                <select (change)="triggerOngName($event.target.value)">
+                  <option selected disabled>NGO name</option>
+                  <option
+                    *ngFor="let ongName of allOngNames; let i = index"
+                    [attr.data-index]="i">
+                    {{ ongName}}
+                  </option>
+                </select>
+
+                <button (click)="goToOngName()" md-button>Search</button>
               </div>
             </form>
 

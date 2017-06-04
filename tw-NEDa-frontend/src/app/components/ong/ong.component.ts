@@ -4,7 +4,7 @@ import { OngService } from '../../services/ong.service';
 import { Ong } from '../../model/ong.model';
 import { MdDialog, MdMenuTrigger } from '@angular/material';
 import { OngDialog } from './ong.dialog';
-
+import { OngDetails } from '../../model/ongDetails.model'
 
 @Component({
   selector: 'filter-demo',
@@ -14,7 +14,11 @@ import { OngDialog } from './ong.dialog';
 })
 
 export class OngComponent implements OnInit, AfterViewInit {
-  OngService: any;
+
+  public nameSelectedValue: string;
+  public allOng = Array<string>();
+  public allOngNames = new Set<string>();
+  public ongNameTable: string;
 
   @ViewChild(DatatableComponent) table: DatatableComponent;
   @ViewChild(MdMenuTrigger) trigger: MdMenuTrigger;
@@ -31,13 +35,12 @@ export class OngComponent implements OnInit, AfterViewInit {
 
 
   ngAfterViewInit(): void {
-    // Init table's columns
     this.columns = [
-      {prop: 'location', name: 'Location'},
+      {prop: 'district', name: 'Location'},
       {prop: 'ongName', name: 'Ong Name'},
       {prop: 'activityType', name: 'Activity Type'},
       {prop: 'activitySubtype', name: 'Activity Subtype'},
-      {prop: 'supplies', name: 'Supplies'},
+      {prop: 'supplyName', name: 'Supplies'},
       {
         cellTemplate: this.editTmpl,
         headerTemplate: this.hdrTpl,
@@ -48,24 +51,64 @@ export class OngComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.ongService.getAllOng()
+    this.ongService.getAllOngDetails()
       .subscribe(
         (data) => this.retrieveData(data),
         (err) => this.showError());
+
   }
 
   retrieveData(responseData: any) {
     let allOng = [];
 
     for (let index in responseData) {
-      let ong = new Ong(responseData[index]);
+      let ong = new OngDetails(responseData[index]);
       allOng.push(ong);
+      this.allOngNames.add(ong.ongName);
+      // this.populateTable(this.nameSelectedValue);
     }
 
     this.temp = [...allOng];
 
     // Populate the table
     this.rows = allOng;
+  }
+
+
+  /*************Ong Name*****************/
+
+  goToOngName() {
+    this.getOngName((this.nameSelectedValue));
+  }
+
+  getOngName(ongName: string) {
+    this.ongService.getOngNameData(ongName)
+      .subscribe(
+        (data) => this.retrieveOngNameData(data),
+        (err) => this.showError()
+      );
+  }
+
+  retrieveOngNameData(responseData: any) {
+    let allOng = [];
+
+    for (let index in responseData) {
+      let ong = new OngDetails(responseData[index]);
+      allOng.push(ong);
+      console.log(ong.ongName);
+    }
+    this.temp = [...allOng];
+
+    // Populate the table
+    this.rows = allOng;
+
+  }
+
+  /***************************************/
+
+  public triggerOngName(value) {
+    this.nameSelectedValue = value;
+    console.log(this.nameSelectedValue);
   }
 
   showError() {
@@ -84,21 +127,6 @@ export class OngComponent implements OnInit, AfterViewInit {
       }
     });
   }
-
-  updateFilter(event) {
-    const val = event.target.value;
-
-    // filter our data
-    const temp = this.temp.filter(function (d) {
-      return d.ongId.toString().toLowerCase().indexOf(val) !== -1 || !val;
-    });
-
-    // update the rows
-    this.rows = temp;
-    // Whenever the filter changes, always go back to the first page
-    this.table.offset = 0;
-  }
-
 
   /**
    * Handles table's context menu event
