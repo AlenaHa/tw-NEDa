@@ -22,11 +22,14 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
   temp = [];
   rows = [];
   columns = [];
+  public district = "";
+  public magnitude: number;
+  public depth: number;
+  public csvExportUrl: string;
 
   constructor(private earthquakeService: EarthquakeService,
               public dialog: MdDialog) {
   }
-
 
   ngAfterViewInit(): void {
     // Init table's columns
@@ -36,14 +39,14 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
       {prop: 'depth', name: 'Depth'},
       {prop: 'magnitude', name: 'Magnitude'},
       {prop: 'happenedOn', name: 'Date'},
-      {prop: 'district', name: 'Earthquake District'},
-      {prop: 'municipality', name: 'Earthquake Municipality'},
-      {
-        cellTemplate: this.editTmpl,
-        headerTemplate: this.hdrTpl,
-        name: 'Actions',
-        width: 30
-      }
+      {prop: 'district', name: ' District'},
+      {prop: 'municipality', name: ' Municipality'}
+      // {
+      //   cellTemplate: this.editTmpl,
+      //   headerTemplate: this.hdrTpl,
+      //   name: 'Actions',
+      //   width: 30
+      // }
     ];
   }
 
@@ -53,6 +56,8 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
       .subscribe(
         (data) => this.retrieveData(data),
         (err) => this.showError());
+
+    this.csvExportUrl = this.earthquakeService.getCsv();
 
   }
 
@@ -105,22 +110,6 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
     });
   }
 
-  /**
-   * Updates table's filter
-   * @param event
-   */
-  updateFilter(event) {
-    const val = event.target.value;
-
-    // Filter the data
-    const temp = this.temp.filter(function (d) {
-      return d.earthquakeId.toString().toLowerCase().indexOf(val) !== -1 || !val;
-    });
-
-    this.rows = temp;
-    // Whenever the filter changes, always go back to the first page
-    this.table.offset = 0;
-  }
 
   /**
    * Handles table's context menu event
@@ -197,17 +186,33 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
 
   }
 
-  /**just for presentation**/
-  public magnitude: number = 8.9;
-  public place: string = 'Kathmandu';
-  public depth: string = '12 km';
-
 
   public year: any;
 
   checkYear(event) {
     this.year = event.target.value;
     console.log(this.year);
+  }
+
+  getEqByMagnitude() {
+
+    this.earthquakeService.getListOfEarthquakesByMagnitude(this.magnitude).subscribe(
+      (data) => this.retrieveData(data),
+      (err) => this.showError());
+  }
+
+  getEqByDepth() {
+    this.earthquakeService.getListOfEarthquakesByDepth(this.depth).subscribe(
+      (data) => this.retrieveData(data),
+      (err) => this.showError()
+    );
+  }
+
+  getEqByDistrict() {
+    this.earthquakeService.getListOfEarthquakesByDistrict(this.district).subscribe(
+      (data) => this.retrieveData(data),
+      (err) => this.showError()
+    );
   }
 
 }

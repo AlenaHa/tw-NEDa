@@ -18,26 +18,10 @@
           [headerHeight]="50"
         >
         </ngx-datatable>
-        <template #hdrTpl>
-        </template>
-        <template #editTmpl let-row="row" let-value="value" let-i="index">
-          <button md-icon-button [mdMenuTriggerFor]="rowMenu">
-            <md-icon>more_vert</md-icon>
-          </button>
-          <md-menu #rowMenu="mdMenu">
-            <button md-menu-item (click)="edit(row)">
-              <md-icon>edit</md-icon>
-              Edit
-            </button>
-            <button md-menu-item (click)="delete(row)">
-              <md-icon>delete</md-icon>
-              Delete
-            </button>
-          </md-menu>
-        </template>
       </div>
     </md-card-content>
   </md-card>
+
   <ul class="timeline">
     <li>
       <div class="timeline-badge"><i class="glyphicon glyphicon-search"></i></div>
@@ -45,17 +29,18 @@
         <div class="timeline-body">
           <form name="significantEarthquakeForm" novalidate>
             <div class="form-group">
-              <h3>Filter Earthquakes By Id</h3>
+              <h3>Search By District</h3>
               <md-input-container>
-                <input
-                  class="eq-id-filter-input"
-                  mdInput
-                  type='text'
-                  placeholder='Type to filter '
-                  (keyup)='updateFilter($event)'
-                />
+                <input mdInput [(ngModel)]="district" [ngModelOptions]="{standalone: true}"
+                       placeholder="District..."
+                       mdInput
+                       type="text">
               </md-input-container>
-              <button md-button (click)="addEarthquake()">Add earthquake</button>
+              <button
+                (click)="getEqByDistrict()"
+                md-button>
+                Search Earthquakes By District
+              </button>
             </div>
           </form>
         </div>
@@ -68,18 +53,17 @@
         <div class="timeline-body">
           <form name="significantEarthquakeForm" novalidate>
             <div class="form-group">
-              <h3>Search By Year</h3>
+              <h3>Search By Magnitude</h3>
               <md-input-container>
-                <input
-                  (keyup)='checkYear($event)'
-                  placeholder="Year"
-                  mdInput
-                  type="text">
+                <input mdInput [(ngModel)]="magnitude" [ngModelOptions]="{standalone: true}"
+                       placeholder="Magnitude..."
+                       mdInput
+                       type="text">
               </md-input-container>
               <button
-                (click)="addEarthquakeInfo()"
+                (click)="getEqByMagnitude()"
                 md-button>
-                Search Earthquakes
+                Search Earthquakes by Magnitude
               </button>
             </div>
           </form>
@@ -93,18 +77,18 @@
         <div class="timeline-body">
           <form name="significantEarthquakeForm" novalidate>
             <div class="form-group">
-              <h3>Filter Earthquakes By Magnitude</h3>
-              <md-card-content>
-                <md-input-container>
-                  <input
-                    class="eq-id-filter-input"
-                    mdInput
-                    type='text'
-                    placeholder='Type to filter '
-                    (keyup)='updateFilter($event)'
-                  />
-                </md-input-container>
-              </md-card-content>
+              <h3>Filter By Depth</h3>
+              <md-input-container>
+                <input mdInput [(ngModel)]="depth" [ngModelOptions]="{standalone: true}"
+                       placeholder="Depth..."
+                       mdInput
+                       type="text">
+              </md-input-container>
+              <button
+                (click)="getEqByDepth()"
+                md-button>
+                Filter Earthquakes by Depth
+              </button>
             </div>
           </form>
         </div>
@@ -115,12 +99,8 @@
       <div class="timeline-badge warning"><i class="glyphicon glyphicon-export"></i></div>
       <div class="timeline-panel">
         <div class="timeline-body">
-          <div class="form-group">
-            <button
-              (click)="exportCsv()"
-              md-button>
-              Export table as CSV
-            </button>
+          <div>
+            <a href="{{csvExportUrl}}">Export table as CSV</a>
           </div>
         </div>
       </div>

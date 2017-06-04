@@ -1,10 +1,17 @@
 package org.neda.controller;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.neda.entity.CompleteEarthquake;
 import org.neda.entity.Earthquake;
 import org.neda.service.EarthquakeService;
@@ -69,7 +76,7 @@ public class EarthquakeController {
     /**
      * Update a particular Earthquake Object
      * @param reqEarthquake the object that needs to be updated
-     * @param id the id of the object
+     * @param id            the id of the object
      * @return message if the update was successfully or not
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
@@ -119,10 +126,26 @@ public class EarthquakeController {
     }
 
 
-    @RequestMapping(value = "/csvExport", method = RequestMethod.POST)
-    public ResponseEntity exportCsv(@RequestBody String filePath) throws IOException, SQLException {
-        earthquakeService.exportCsv(filePath);
-        return new ResponseEntity(HttpStatus.OK);
+    @RequestMapping(value = "/db.csv", method = RequestMethod.GET)
+    public void exportCsv(HttpServletResponse response) throws IOException, SQLException {
+        String fileName = "D:\\earthquakes.csv";
+        earthquakeService.exportCsv(fileName);
+        InputStream is = null;
+        File file = null;
+        try {
+            file = new File(fileName);
+            is = new FileInputStream(file);
+            IOUtils.copy(is, response.getOutputStream());
+            response.setContentType("application/csv");
+            response.flushBuffer();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            is.close();
+            file.delete();
+        }
     }
 
     /**
@@ -139,22 +162,6 @@ public class EarthquakeController {
         return new ResponseEntity<Earthquake>(earthquake, HttpStatus.OK);
     }
 
-    /**
-     * Get the list of earthquakes that have this magnitude
-     *
-     * @param magnitude
-     *
-     * @return List of earthquakes
-     */
-    @RequestMapping(value = "/magnitude/{magnitude}", method = RequestMethod.GET)
-    public ResponseEntity<List<Earthquake>> getListByMagnitude(@PathVariable Double magnitude) {
-        List<Earthquake> list = this.earthquakeService.getListEarthquakeByMagnitude(magnitude);
-        if (list.equals(null)) {
-            return new ResponseEntity<List<Earthquake>>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<List<Earthquake>>(list, HttpStatus.OK);
-    }
-
     @RequestMapping(value = "/complete", method = RequestMethod.GET)
     public ResponseEntity<List<CompleteEarthquake>> getAllCompleteEarthquakes() {
         List<CompleteEarthquake> allCompleteEarthquakes = earthquakeService.getAllEarthquakeInformation();
@@ -165,4 +172,36 @@ public class EarthquakeController {
         return new ResponseEntity(allCompleteEarthquakes, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/magnitude/{magnitude}", method = RequestMethod.GET)
+    public ResponseEntity<List<CompleteEarthquake>> getEarthquakesByMangitude(@PathVariable Double magnitude) {
+        List<CompleteEarthquake> allEarthquakesByMagnitude = earthquakeService.getAllEarthquakesByMagnitude(magnitude);
+        return new ResponseEntity<List<CompleteEarthquake>>(allEarthquakesByMagnitude, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/depth/{depth}", method = RequestMethod.GET)
+    public ResponseEntity<List<CompleteEarthquake>> getEarthquakesByDepth(@PathVariable Double depth) {
+        List<CompleteEarthquake> allEarthquakesByDepth = earthquakeService.getAllEarthquakesByDepth(depth);
+        if (allEarthquakesByDepth.isEmpty()) {
+            return new ResponseEntity<List<CompleteEarthquake>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<CompleteEarthquake>>(allEarthquakesByDepth, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/year/{year}", method = RequestMethod.GET)
+    public ResponseEntity<List<CompleteEarthquake>> getEarthquakesByYear(@PathVariable Integer year) {
+        List<CompleteEarthquake> allEarthquakesByYear = earthquakeService.getAllEarthquakesByYear(year);
+        if (allEarthquakesByYear.isEmpty()) {
+            return new ResponseEntity<List<CompleteEarthquake>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<CompleteEarthquake>>(allEarthquakesByYear, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/district/{district}", method = RequestMethod.GET)
+    public ResponseEntity<List<CompleteEarthquake>> getEarthquakesByYear(@PathVariable String district) {
+        List<CompleteEarthquake> allEarthquakesByDistrict = earthquakeService.getAllEarthquakesByDistrict(district);
+        if (allEarthquakesByDistrict.isEmpty()) {
+            return new ResponseEntity<List<CompleteEarthquake>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<CompleteEarthquake>>(allEarthquakesByDistrict, HttpStatus.OK);
+    }
 }

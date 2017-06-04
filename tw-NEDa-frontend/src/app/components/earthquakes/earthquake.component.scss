@@ -70,31 +70,31 @@
 }
 
 .timeline-heading {
-  color: papayawhip;
+  color: #090506;
 }
 
 .my-header h2 {
   text-align: center;
-  color: white;
+  color: coral;
   z-index: 1;
 }
 
 .my-header {
-  background-color: #18121E;
+  background-color: #f6f7ff;
   margin-top: 20px;
-  border: 1px solid white;
+  border: 3px solid white;
 }
 
 .timeline-body md-input-container {
-  color: navajowhite;
+  color: coral;
 }
 
 .timeline-body input {
-  color: white;
+  color: coral;
 }
 
 .timeline-body {
-  color: navajowhite;
+  color: coral;
 }
 .my-header img {
   height: 80px;
@@ -107,6 +107,7 @@
   list-style: none;
   padding: 20px 0 20px;
   position: relative;
+  background-color: white;
 }
 
 .timeline:before {
@@ -201,6 +202,7 @@
 
 .timeline > li.timeline-inverted > .timeline-panel {
   float: right;
+  background-color: white;
 }
 
 .timeline > li.timeline-inverted > .timeline-panel:before {
@@ -208,6 +210,7 @@
   border-right-width: 15px;
   left: -15px;
   right: auto;
+
 }
 
 .timeline > li.timeline-inverted > .timeline-panel:after {
@@ -219,22 +222,6 @@
 
 .timeline-badge.primary {
   background-color: #2e6da4 !important;
-}
-
-.timeline-badge.success {
-  background-color: #3f903f !important;
-}
-
-.timeline-badge.warning {
-  background-color: #f0ad4e !important;
-}
-
-.timeline-badge.danger {
-  background-color: #d9534f !important;
-}
-
-.timeline-badge.info {
-  background-color: #5bc0de !important;
 }
 
 .timeline-title {

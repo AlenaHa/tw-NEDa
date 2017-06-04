@@ -66,12 +66,12 @@ export class EarthquakeService {
   }
 
   /**
-   * Get the list of earthquake thate have the magnitude
+   * Get the list of earthquakes that have the magnitude
    * from the parameter
    * @param magnitude
    * @returns {Observable<R>}
    */
-  getListEarthquakesByMagnitude(magnitude: number) {
+  getListOfEarthquakesByMagnitude(magnitude: number) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.get(
@@ -81,6 +81,25 @@ export class EarthquakeService {
       );
   }
 
+  getListOfEarthquakesByDepth(depth: number) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(
+      this.backendUrl + '/earthquakes/depth/' + depth,
+      {headers: headers})
+      .map(res => res.json()
+      );
+  }
+
+  getListOfEarthquakesByDistrict(district: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(
+      this.backendUrl + '/earthquakes/district/' + district,
+      {headers: headers})
+      .map(res => res.json()
+      );
+  }
   /**
    * I think this should be deleted (?) - we don't add eq
    * @param earthquake
@@ -97,5 +116,9 @@ export class EarthquakeService {
       earthquakeString,
       {headers: headers})
       .map(res => res.json());
+  }
+
+  getCsv() {
+    return this.backendUrl + '/earthquakes/db.csv';
   }
 }
