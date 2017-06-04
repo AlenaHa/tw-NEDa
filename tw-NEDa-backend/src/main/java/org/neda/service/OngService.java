@@ -14,4 +14,9 @@ public interface OngService extends CrudService<Ong> {
 
     List<OngDetails> getAllOngDetailsByOngName(String name);
 
+    List<OngDetails> getAllOngDetailsByDistrict(String s);
+
+    List<OngDetails> getAllOngDetailsByActivityType(String ongActivity);
+
+    List<OngDetails> getAllOngDetailsBySupplies(String supply);
 }

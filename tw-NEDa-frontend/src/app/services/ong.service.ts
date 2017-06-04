@@ -45,7 +45,40 @@ export class OngService {
     headers.append('Content-Type', 'application/json');
 
     return this.http.get(
-      this.backendUrl + '/ong/ongName/' + ongName,
+      this.backendUrl + '/ong/ongDetails/ongName/' + ongName,
+      {headers: headers})
+      .map(res => res.json());
+
+  }
+
+  getDistrictData(district: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(
+      this.backendUrl + '/ong/ongDetails/district/' + district,
+      {headers: headers})
+      .map(res => res.json());
+
+  }
+
+  getActivityData(ongActivity: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(
+      this.backendUrl + '/ong/ongDetails/ongActivityType/' + ongActivity,
+      {headers: headers})
+      .map(res => res.json());
+
+  }
+
+  getSuppliesData(supply: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(
+      this.backendUrl + '/ong/ongDetails/supplies/' + supply,
       {headers: headers})
       .map(res => res.json());
 

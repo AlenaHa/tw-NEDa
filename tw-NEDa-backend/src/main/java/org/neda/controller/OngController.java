@@ -61,22 +61,17 @@ public class OngController {
         return new ResponseEntity<List<Ong>>(all, HttpStatus.OK);
     }
 
-    /**
-     * Get the list with all the ONG that are in that Location Id
-     *
-     * @param locationId the Location Id by which the search is made
-     *
-     * @return List of Ong Object / message if list was successfully populated or not
-     */
-//    @RequestMapping(value = "/location/{locationId}", method = RequestMethod.GET)
-//    public ResponseEntity<List<Ong>> getListOngByLocation(@PathVariable Long locationId) {
-//        List<Ong> list = this.ongService.findOngListByLocationId(locationId.toString());
-//        if (list.isEmpty()) {
-//            return new ResponseEntity<List<Ong>>(HttpStatus.NO_CONTENT);
-//        }
-//        return new ResponseEntity<List<Ong>>(list, HttpStatus.OK);
-//    }
-    @RequestMapping(value = "ongName/{ongName}", method = RequestMethod.GET)
+
+    @RequestMapping(value = "ongDetails/district/{district}", method = RequestMethod.GET)
+    public ResponseEntity<List<OngDetails>> getListOngByLocation(@PathVariable String district) {
+        List<OngDetails> list = this.ongService.getAllOngDetailsByDistrict(district);
+        if (list.isEmpty()) {
+            return new ResponseEntity<List<OngDetails>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<OngDetails>>(list, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "ongDetails/ongName/{ongName}", method = RequestMethod.GET)
     public ResponseEntity<List<OngDetails>> getOngByName(@PathVariable String ongName) {
         List<OngDetails> ong = ongService.getAllOngDetailsByOngName(ongName);
         if (ong.equals(null)) {
@@ -86,15 +81,25 @@ public class OngController {
 
     }
 
-//    @RequestMapping(value = "ongActivity/{ongActivity}", method = RequestMethod.GET)
-//    public ResponseEntity<List<Ong>> getOngByActivity(@PathVariable String ongActivity) {
-//        List<Ong> ong = ongService.findOngListByActivity(ongActivity);
-//        if (ong.equals(null)) {
-//            return new ResponseEntity<List<Ong>>(HttpStatus.NOT_FOUND);
-//        }
-//        return new ResponseEntity<List<Ong>>(ong, HttpStatus.OK);
-//
-//    }
+    @RequestMapping(value = "ongDetails/ongActivityType/{ongActivity}", method = RequestMethod.GET)
+    public ResponseEntity<List<OngDetails>> getOngByActivity(@PathVariable String ongActivity) {
+        List<OngDetails> ong = ongService.getAllOngDetailsByActivityType(ongActivity);
+        if (ong.equals(null)) {
+            return new ResponseEntity<List<OngDetails>>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<List<OngDetails>>(ong, HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "ongDetails/supplies/{supply}", method = RequestMethod.GET)
+    public ResponseEntity<List<OngDetails>> getOngBySupplies(@PathVariable String supply) {
+        List<OngDetails> ong = ongService.getAllOngDetailsBySupplies(supply);
+        if (ong.equals(null)) {
+            return new ResponseEntity<List<OngDetails>>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<List<OngDetails>>(ong, HttpStatus.OK);
+
+    }
 
     @RequestMapping(value = "/ongDetails", method = RequestMethod.GET)
     public ResponseEntity<List<OngDetails>> getAllOngDetails() {
