@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -112,11 +113,22 @@ public class EarthquakeServiceImpl implements EarthquakeService, CsvService {
 
     @Override
     public List<CompleteEarthquake> getAllEarthquakeInformation() {
-        List<CompleteEarthquake> earthquakes;
-        earthquakes = entityManager.createNativeQuery("SELECT e.latitude, e.longitude, e.eq_depth, e.magnitude," +
-                " e.happened_on, l.district, l.municipality from earthquake e join location l " +
+        List<CompleteEarthquake> earthquakes = new ArrayList<CompleteEarthquake>();
+        List<Object[]> results = entityManager.createNativeQuery("SELECT e.eq_depth, l.district,e.happened_on,e.latitude, e.longitude,  e.magnitude," +
+                "  l.municipality from earthquake e join location l " +
                 "on e.e_location_id = l.location_id ").getResultList();
 
+        for (Object[] result : results) {
+            CompleteEarthquake completeEarthquake = new CompleteEarthquake();
+            completeEarthquake.setDepth(Double.parseDouble(result[0].toString()));
+            completeEarthquake.setDistrict(result[1].toString());
+            completeEarthquake.setHappenedOn((Date) result[2]);
+            completeEarthquake.setLatitude(Double.parseDouble(result[3].toString()));
+            completeEarthquake.setLongitude(Double.parseDouble(result[4].toString()));
+            completeEarthquake.setMagnitude(Double.parseDouble(result[5].toString()));
+            completeEarthquake.setMunicipality((String) result[6]);
+            earthquakes.add(completeEarthquake);
+        }
         return earthquakes;
     }
 }
