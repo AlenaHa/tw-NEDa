@@ -61,6 +61,14 @@ public class OngController {
         return new ResponseEntity<List<Ong>>(all, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/location/{locationId}", method = RequestMethod.GET)
+    public ResponseEntity<List<Ong>> getListOngByLocation(@PathVariable Long locationId) {
+        List<Ong> list = this.ongService.findOngListByLocationId(locationId.toString());
+        if (list.isEmpty()) {
+            return new ResponseEntity<List<Ong>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Ong>>(list, HttpStatus.OK);
+    }
 
     @RequestMapping(value = "ongDetails/district/{district}", method = RequestMethod.GET)
     public ResponseEntity<List<OngDetails>> getListOngByLocation(@PathVariable String district) {

@@ -10,6 +10,8 @@ import org.neda.entity.OngDetails;
  */
 public interface OngService extends CrudService<Ong> {
 
+    List<Ong> findOngListByLocationId(String locationId);
+
     List<OngDetails> getAllOngDetailsInformation();
 
     List<OngDetails> getAllOngDetailsByOngName(String name);

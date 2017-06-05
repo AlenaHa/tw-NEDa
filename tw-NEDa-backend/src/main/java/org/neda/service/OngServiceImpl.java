@@ -53,6 +53,16 @@ public class OngServiceImpl implements OngService {
         this.ongRepository.delete(id);
     }
 
+    @Override
+    public List<Ong> findOngListByLocationId(String locationId) {
+
+        Query query = entityManager.createNativeQuery(
+                "SELECT * FROM ong o JOIN ONG_LOCATION ol on ol.ONG_ID = o.ONG_ID WHERE ol.LOCATION_ID = " + locationId, Ong.class);
+        List resultList = query.getResultList();
+
+        return resultList;
+
+    }
 
     @Override
     public List<OngDetails> getAllOngDetailsInformation() {
