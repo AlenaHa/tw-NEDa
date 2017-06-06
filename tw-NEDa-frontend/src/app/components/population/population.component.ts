@@ -176,17 +176,6 @@ export class PopulationComponent {
   public doughnutChartType: string = 'doughnut';
 
 
-  //barChart
-  public barChartOptions: any = {
-    scaleShowVerticalLines: false,
-    // responsive: true
-  };
-  public barChartLabels: string[] = ['Earthquake 1', 'Earthquake 2', 'Earthquake 3', 'Earthquake 4', 'Earthquake 5', 'Earthquake 6', 'Earthquake 7'];
-  public barChartType: string = 'bar';
-  // public barChartLegend:boolean = true;
-  public barChartData: any[] = [{data: [400, 600, 800, 450, 700, 900, 700], label: 'Number of People'}
-  ];
-
   // events
   public chartClicked(e: any): void {
     console.log(e);
