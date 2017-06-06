@@ -172,10 +172,27 @@ public class EarthquakeController {
         return new ResponseEntity(allCompleteEarthquakes, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/magnitude/{magnitude}", method = RequestMethod.GET)
+    @RequestMapping(value = "/complete/magnitude/{magnitude}", method = RequestMethod.GET)
     public ResponseEntity<List<CompleteEarthquake>> getEarthquakesByMangitude(@PathVariable Double magnitude) {
         List<CompleteEarthquake> allEarthquakesByMagnitude = earthquakeService.getAllEarthquakesByMagnitude(magnitude);
         return new ResponseEntity<List<CompleteEarthquake>>(allEarthquakesByMagnitude, HttpStatus.OK);
+    }
+
+
+    /**
+     * Get the list of earthquakes that have this magnitude
+     *
+     * @param magnitude
+     *
+     * @return List of earthquakes
+     */
+    @RequestMapping(value = "/magnitude/{magnitude}", method = RequestMethod.GET)
+    public ResponseEntity<List<Earthquake>> getListByMagnitude(@PathVariable Double magnitude) {
+        List<Earthquake> list = this.earthquakeService.getListEarthquakeByMagnitude(magnitude);
+        if (list.equals(null)) {
+            return new ResponseEntity<List<Earthquake>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Earthquake>>(list, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/depth/{depth}", method = RequestMethod.GET)

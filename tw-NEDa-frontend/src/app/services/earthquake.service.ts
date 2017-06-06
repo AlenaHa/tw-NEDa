@@ -75,6 +75,22 @@ export class EarthquakeService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.get(
+      this.backendUrl + '/earthquakes/complete/magnitude/' + magnitude,
+      {headers: headers})
+      .map(res => res.json()
+      );
+  }
+
+  /**
+   * Get the list of earthquake thate have the magnitude -> used in location
+   * from the parameter
+   * @param magnitude
+   * @returns {Observable<R>}
+   */
+  getListEarthquakesByMagnitude(magnitude: number) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(
       this.backendUrl + '/earthquakes/magnitude/' + magnitude,
       {headers: headers})
       .map(res => res.json()
