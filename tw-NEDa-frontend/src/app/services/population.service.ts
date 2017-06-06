@@ -39,4 +39,70 @@ export class PopulationService {
       {headers: headers})
       .map(res => res.json());
   }
+
+  getFemaleNumber(district: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(
+      this.backendUrl + '/population/female/' + district,
+      {headers: headers})
+      .map(res => res.json());
+
+  }
+
+  getMaleNumber(district: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(
+      this.backendUrl + '/population/male/' + district,
+      {headers: headers})
+      .map(res => res.json());
+
+  }
+
+  getAge15(district: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(
+      this.backendUrl + '/population/age/15/' + district,
+      {headers: headers})
+      .map(res => res.json());
+
+  }
+
+  getAge25(district: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(
+      this.backendUrl + '/population/age/25/' + district,
+      {headers: headers})
+      .map(res => res.json());
+
+  }
+
+  getAge40(district: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(
+      this.backendUrl + '/population/age/40/' + district,
+      {headers: headers})
+      .map(res => res.json());
+
+  }
+
+  getAge55(district: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(
+      this.backendUrl + '/population/age/55/' + district,
+      {headers: headers})
+      .map(res => res.json());
+
+  }
 }

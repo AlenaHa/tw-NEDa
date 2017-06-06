@@ -43,10 +43,18 @@
         <div class="panel-body">
           <form name="earthquakeForm" novalidate>
             <div class="form-group input-search">
-              <input
-                placeholder="District"
-                type="text">
-              <button md-button>Search</button>
+
+              <select (change)="triggerDistrict($event.target.value)">
+                <option selected disabled>District</option>
+                <option
+                  *ngFor="let district of allDistrictNames; let i = index"
+                  [attr.data-index]="i">
+                  {{ district }}
+                </option>
+              </select>
+
+              <button (click)="goToCharts()" md-button>Search</button>
+
             </div>
           </form>
         </div>
@@ -58,31 +66,31 @@
     <md-card class="charts ">
 
       <!--Bar chart-->
-      <div>
-        <div class="chart-pop-bar">
-          <md-card>
-            <canvas baseChart
-                    [datasets]="barChartData"
-                    [labels]="barChartLabels"
-                    [options]="barChartOptions"
-                    [legend]="barChartLegend"
-                    [chartType]="barChartType"
-                    (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)"></canvas>
+      <!--<div>-->
+      <!--<div class="col-md-6">-->
+      <!--<md-card>-->
+      <!--<canvas baseChart-->
+      <!--[datasets]="barChartData"-->
+      <!--[labels]="barChartLabels"-->
+      <!--[options]="barChartOptions"-->
+      <!--[legend]="barChartLegend"-->
+      <!--[chartType]="barChartType"-->
+      <!--(chartHover)="chartHovered($event)"-->
+      <!--(chartClick)="chartClicked($event)"></canvas>-->
 
-            <!--chart name-->
-            <div class="panel-heading">
-              <h2 class="panel-title text-center">
-                Earthquakes
-              </h2>
-            </div>
+      <!--&lt;!&ndash;chart name&ndash;&gt;-->
+      <!--<div class="panel-heading">-->
+      <!--<h2 class="panel-title text-center">-->
+      <!--Earthquakes-->
+      <!--</h2>-->
+      <!--</div>-->
 
-          </md-card>
-        </div>
-      </div>
+      <!--</md-card>-->
+      <!--</div>-->
+      <!--</div>-->
 
       <!--Area chart-->
-      <div class="chart-pop-1">
+      <div class="col-md-6">
         <md-card>
           <canvas baseChart
                   [data]="polarAreaChartData"
@@ -103,7 +111,7 @@
 
 
       <!--Doughnut chart-->
-      <div class="chart-pop-2">
+      <div class="col-md-6">
         <md-card>
           <canvas baseChart
                   [data]="doughnutChartData"
