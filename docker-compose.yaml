@@ -1,0 +1,41 @@
+version: '2'
+services:
+  db:
+    image: sath89/oracle-12c
+    ports:
+      - "1521:1521"
+    environment:
+      - WEB_CONSOLE=false
+      - IMPORT_FROM_VOLUME=false
+    entrypoint:
+      - bash
+      - entrypoint.sh
+
+  neda-backend:
+    image: neda/backend
+    ports:
+      - "8666:8666"
+    restart: always
+    depends_on:
+      - db
+    links:
+      - db
+    entrypoint:
+      - java
+      - -jar
+      - -Dspring.datasource.username=system
+      - -Dspring.datasource.password=oracle
+      - -Dspring.datasource.url=jdbc:oracle:thin:@db:1521:xe
+      - tw-NEDa-1.5.2.RELEASE.jar
+
+  neda-frontend:
+    image: neda/frontend
+    ports:
+      - "4200:4200"
+    depends_on:
+      - neda-backend
+    links:
+      - neda-backend
+    entrypoint:
+      - npm
+      - start
