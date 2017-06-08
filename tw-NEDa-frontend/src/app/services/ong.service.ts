@@ -3,7 +3,7 @@
  *
  */
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Headers, Http } from '@angular/http';
 import { Ong } from '../model/ong.model';
 @Injectable()
 export class OngService {
@@ -40,6 +40,49 @@ export class OngService {
 
   }
 
+  getOngNameData(ongName: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(
+      this.backendUrl + '/ong/ongDetails/ongName/' + ongName,
+      {headers: headers})
+      .map(res => res.json());
+
+  }
+
+  getDistrictData(district: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(
+      this.backendUrl + '/ong/ongDetails/district/' + district,
+      {headers: headers})
+      .map(res => res.json());
+
+  }
+
+  getActivityData(ongActivity: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(
+      this.backendUrl + '/ong/ongDetails/ongActivityType/' + ongActivity,
+      {headers: headers})
+      .map(res => res.json());
+
+  }
+
+  getSuppliesData(supply: string) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(
+      this.backendUrl + '/ong/ongDetails/supplies/' + supply,
+      {headers: headers})
+      .map(res => res.json());
+
+  }
 
   addOng(ong: Ong) {
     let headers = new Headers();
@@ -52,5 +95,16 @@ export class OngService {
       ongString,
       {headers: headers})
       .map(res => res.json());
+  }
+
+  getAllOngDetails() {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(
+      this.backendUrl + '/ong/ongDetails',
+      {headers: headers})
+      .map(res => res.json());
+
   }
 }

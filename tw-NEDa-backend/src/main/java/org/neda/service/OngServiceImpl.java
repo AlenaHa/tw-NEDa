@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.neda.entity.Ong;
+import org.neda.entity.OngDetails;
 import org.neda.repository.OngRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,4 +63,125 @@ public class OngServiceImpl implements OngService {
         return resultList;
 
     }
+
+    @Override
+    public List<OngDetails> getAllOngDetailsInformation() {
+        List<OngDetails> ongDetails = new ArrayList<OngDetails>();
+
+        List<Object[]> results = entityManager.createNativeQuery("select l.DISTRICT,o.ONG_NAME, o.ACTIVITY_TYPE, o.ACTIVITY_SUBTYPE, s.S_NAME " +
+                "from ong o join ONG_LOCATION ol on ol.ONG_ID = o.ONG_ID " +
+                "join LOCATION l on l.LOCATION_ID = ol.LOCATION_ID " +
+                "join SUPPLIES_LOCATION sl on sl.LOCATION_ID = l.LOCATION_ID " +
+                "join SUPPLIES s on s.SUPPLIES_ID = sl.SUPPLIES_ID").getResultList();
+
+        for (Object[] result : results) {
+            OngDetails ong = new OngDetails();
+            ong.setDistrict((String) result[0]);
+            ong.setOngName((String) result[1]);
+            ong.setActivityType((String) result[2]);
+            ong.setActivitySubtype((String) result[3]);
+            ong.setSupplyName((String) result[4]);
+            ongDetails.add(ong);
+        }
+
+        return ongDetails;
+
+    }
+
+    @Override
+    public List<OngDetails> getAllOngDetailsByOngName(String name) {
+        List<OngDetails> ongDetails = new ArrayList<OngDetails>();
+
+        List<Object[]> results = entityManager.createNativeQuery("select l.DISTRICT,o.ONG_NAME, o.ACTIVITY_TYPE, o.ACTIVITY_SUBTYPE, s.S_NAME " +
+                "from ong o join ONG_LOCATION ol on ol.ONG_ID = o.ONG_ID " +
+                "join LOCATION l on l.LOCATION_ID = ol.LOCATION_ID " +
+                "join SUPPLIES_LOCATION sl on sl.LOCATION_ID = l.LOCATION_ID " +
+                "join SUPPLIES s on s.SUPPLIES_ID = sl.SUPPLIES_ID " +
+                "where o.ONG_NAME = '" + name + "'").getResultList();
+
+        for (Object[] result : results) {
+            OngDetails ong = new OngDetails();
+            ong.setDistrict((String) result[0]);
+            ong.setOngName((String) result[1]);
+            ong.setActivityType((String) result[2]);
+            ong.setActivitySubtype((String) result[3]);
+            ong.setSupplyName((String) result[4]);
+            ongDetails.add(ong);
+        }
+
+        return ongDetails;
+    }
+
+    @Override
+    public List<OngDetails> getAllOngDetailsByDistrict(String district) {
+        List<OngDetails> ongDetails = new ArrayList<OngDetails>();
+
+        List<Object[]> results = entityManager.createNativeQuery("select l.DISTRICT,o.ONG_NAME, o.ACTIVITY_TYPE, o.ACTIVITY_SUBTYPE, s.S_NAME " +
+                "from ong o join ONG_LOCATION ol on ol.ONG_ID = o.ONG_ID " +
+                "join LOCATION l on l.LOCATION_ID = ol.LOCATION_ID " +
+                "join SUPPLIES_LOCATION sl on sl.LOCATION_ID = l.LOCATION_ID " +
+                "join SUPPLIES s on s.SUPPLIES_ID = sl.SUPPLIES_ID " +
+                "where l.DISTRICT = '" + district + "'").getResultList();
+
+        for (Object[] result : results) {
+            OngDetails ong = new OngDetails();
+            ong.setDistrict((String) result[0]);
+            ong.setOngName((String) result[1]);
+            ong.setActivityType((String) result[2]);
+            ong.setActivitySubtype((String) result[3]);
+            ong.setSupplyName((String) result[4]);
+            ongDetails.add(ong);
+        }
+
+        return ongDetails;
+    }
+
+    @Override
+    public List<OngDetails> getAllOngDetailsByActivityType(String ongActivity) {
+        List<OngDetails> ongDetails = new ArrayList<OngDetails>();
+
+        List<Object[]> results = entityManager.createNativeQuery("select l.DISTRICT,o.ONG_NAME, o.ACTIVITY_TYPE, o.ACTIVITY_SUBTYPE, s.S_NAME " +
+                "from ong o join ONG_LOCATION ol on ol.ONG_ID = o.ONG_ID " +
+                "join LOCATION l on l.LOCATION_ID = ol.LOCATION_ID " +
+                "join SUPPLIES_LOCATION sl on sl.LOCATION_ID = l.LOCATION_ID " +
+                "join SUPPLIES s on s.SUPPLIES_ID = sl.SUPPLIES_ID " +
+                "where o.ACTIVITY_TYPE = '" + ongActivity + "'").getResultList();
+
+        for (Object[] result : results) {
+            OngDetails ong = new OngDetails();
+            ong.setDistrict((String) result[0]);
+            ong.setOngName((String) result[1]);
+            ong.setActivityType((String) result[2]);
+            ong.setActivitySubtype((String) result[3]);
+            ong.setSupplyName((String) result[4]);
+            ongDetails.add(ong);
+        }
+
+        return ongDetails;
+    }
+
+    @Override
+    public List<OngDetails> getAllOngDetailsBySupplies(String supply) {
+        List<OngDetails> ongDetails = new ArrayList<OngDetails>();
+
+        List<Object[]> results = entityManager.createNativeQuery("select l.DISTRICT,o.ONG_NAME, o.ACTIVITY_TYPE, o.ACTIVITY_SUBTYPE, s.S_NAME " +
+                "from ong o join ONG_LOCATION ol on ol.ONG_ID = o.ONG_ID " +
+                "join LOCATION l on l.LOCATION_ID = ol.LOCATION_ID " +
+                "join SUPPLIES_LOCATION sl on sl.LOCATION_ID = l.LOCATION_ID " +
+                "join SUPPLIES s on s.SUPPLIES_ID = sl.SUPPLIES_ID " +
+                "where s.S_NAME = '" + supply + "'").getResultList();
+
+        for (Object[] result : results) {
+            OngDetails ong = new OngDetails();
+            ong.setDistrict((String) result[0]);
+            ong.setOngName((String) result[1]);
+            ong.setActivityType((String) result[2]);
+            ong.setActivitySubtype((String) result[3]);
+            ong.setSupplyName((String) result[4]);
+            ongDetails.add(ong);
+        }
+
+        return ongDetails;
+    }
+
 }

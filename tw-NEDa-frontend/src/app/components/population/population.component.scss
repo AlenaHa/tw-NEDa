@@ -26,9 +26,21 @@
   display: block;
   float: right;
   position: relative;
-  width: 65%;
+  width: 100%;
   background-color: whitesmoke;
-  margin-right: 18%;
+  //margin-right: 18%;
+}
+
+.form-group {
+  margin-left: 20%;
+  margin-right: 5%;
+  margin-top: 3%;
+
+}
+
+.image-pop {
+  margin-right: 0;
+  margin-left: 0;
 }
 
 .chart-pop-1, .chart-pop-2 {

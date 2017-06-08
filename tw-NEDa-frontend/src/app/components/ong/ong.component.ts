@@ -4,7 +4,7 @@ import { OngService } from '../../services/ong.service';
 import { Ong } from '../../model/ong.model';
 import { MdDialog, MdMenuTrigger } from '@angular/material';
 import { OngDialog } from './ong.dialog';
-
+import { OngDetails } from '../../model/ongDetails.model'
 
 @Component({
   selector: 'filter-demo',
@@ -14,7 +14,16 @@ import { OngDialog } from './ong.dialog';
 })
 
 export class OngComponent implements OnInit, AfterViewInit {
-  OngService: any;
+
+  public nameSelectedValue: string;
+  public allOng = Array<string>();
+  public allOngNames = new Set<string>();
+  public allDistrict = new Set<string>();
+  public allActivityTypes = new Set<string>();
+  public allSupplies = new Set<string>();
+
+
+  // public ongNameTable: string;
 
   @ViewChild(DatatableComponent) table: DatatableComponent;
   @ViewChild(MdMenuTrigger) trigger: MdMenuTrigger;
@@ -31,13 +40,12 @@ export class OngComponent implements OnInit, AfterViewInit {
 
 
   ngAfterViewInit(): void {
-    // Init table's columns
     this.columns = [
-      {prop: 'location', name: 'Location'},
+      {prop: 'district', name: 'Location'},
       {prop: 'ongName', name: 'Ong Name'},
       {prop: 'activityType', name: 'Activity Type'},
       {prop: 'activitySubtype', name: 'Activity Subtype'},
-      {prop: 'supplies', name: 'Supplies'},
+      {prop: 'supplyName', name: 'Supplies'},
       {
         cellTemplate: this.editTmpl,
         headerTemplate: this.hdrTpl,
@@ -48,18 +56,23 @@ export class OngComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.ongService.getAllOng()
+    this.ongService.getAllOngDetails()
       .subscribe(
         (data) => this.retrieveData(data),
         (err) => this.showError());
+
   }
 
   retrieveData(responseData: any) {
     let allOng = [];
 
     for (let index in responseData) {
-      let ong = new Ong(responseData[index]);
+      let ong = new OngDetails(responseData[index]);
       allOng.push(ong);
+      this.allOngNames.add(ong.ongName);
+      this.allDistrict.add(ong.district);
+      this.allActivityTypes.add(ong.activityType);
+      this.allSupplies.add(ong.supplyName);
     }
 
     this.temp = [...allOng];
@@ -67,6 +80,150 @@ export class OngComponent implements OnInit, AfterViewInit {
     // Populate the table
     this.rows = allOng;
   }
+
+
+  /*************Ong Name*****************/
+
+  goToOngName() {
+    this.getOngName((this.nameSelectedValue));
+  }
+
+  getOngName(ongName: string) {
+    this.ongService.getOngNameData(ongName)
+      .subscribe(
+        (data) => this.retrieveOngNameData(data),
+        (err) => this.showError()
+      );
+  }
+
+  retrieveOngNameData(responseData: any) {
+    let allOng = [];
+
+    for (let index in responseData) {
+      let ong = new OngDetails(responseData[index]);
+      allOng.push(ong);
+    }
+    this.temp = [...allOng];
+
+    // Populate the table
+    this.rows = allOng;
+
+  }
+
+  public triggerOngName(value) {
+    this.nameSelectedValue = value;
+    console.log(this.nameSelectedValue);
+  }
+
+  /***************************************/
+
+
+  /*************District*****************/
+
+  goToDistrict() {
+    this.getDistrict((this.nameSelectedValue));
+  }
+
+  getDistrict(ongName: string) {
+    this.ongService.getDistrictData(ongName)
+      .subscribe(
+        (data) => this.retrieveDistrictData(data),
+        (err) => this.showError()
+      );
+  }
+
+  retrieveDistrictData(responseData: any) {
+    let allDistrict = [];
+
+    for (let index in responseData) {
+      let ong = new OngDetails(responseData[index]);
+      allDistrict.push(ong);
+    }
+    this.temp = [...allDistrict];
+
+    // Populate the table
+    this.rows = allDistrict;
+
+  }
+
+  public triggerDistrict(value) {
+    this.nameSelectedValue = value;
+    console.log(this.nameSelectedValue);
+  }
+
+  /***************************************/
+
+
+  /*************Activity Type*****************/
+
+  goToActivityType() {
+    this.getActivity((this.nameSelectedValue));
+  }
+
+  getActivity(ongName: string) {
+    this.ongService.getActivityData(ongName)
+      .subscribe(
+        (data) => this.retrieveActivityData(data),
+        (err) => this.showError()
+      );
+  }
+
+  retrieveActivityData(responseData: any) {
+    let allActivity = [];
+
+    for (let index in responseData) {
+      let ong = new OngDetails(responseData[index]);
+      allActivity.push(ong);
+    }
+    this.temp = [...allActivity];
+
+    // Populate the table
+    this.rows = allActivity;
+
+  }
+
+  public triggerActivity(value) {
+    this.nameSelectedValue = value;
+    console.log(this.nameSelectedValue);
+  }
+
+  /***************************************/
+
+
+  /*************Supplies*****************/
+
+  goToSupplies() {
+    this.getSupplies((this.nameSelectedValue));
+  }
+
+  getSupplies(ongName: string) {
+    this.ongService.getSuppliesData(ongName)
+      .subscribe(
+        (data) => this.retrieveSuppliesData(data),
+        (err) => this.showError()
+      );
+  }
+
+  retrieveSuppliesData(responseData: any) {
+    let allSupplies = [];
+
+    for (let index in responseData) {
+      let ong = new OngDetails(responseData[index]);
+      allSupplies.push(ong);
+    }
+    this.temp = [...allSupplies];
+
+    // Populate the table
+    this.rows = allSupplies;
+
+  }
+
+  public triggerSupplies(value) {
+    this.nameSelectedValue = value;
+  }
+
+  /***************************************/
+
 
   showError() {
     console.log("Failed to retrieve data from server.")
@@ -84,21 +241,6 @@ export class OngComponent implements OnInit, AfterViewInit {
       }
     });
   }
-
-  updateFilter(event) {
-    const val = event.target.value;
-
-    // filter our data
-    const temp = this.temp.filter(function (d) {
-      return d.ongId.toString().toLowerCase().indexOf(val) !== -1 || !val;
-    });
-
-    // update the rows
-    this.rows = temp;
-    // Whenever the filter changes, always go back to the first page
-    this.table.offset = 0;
-  }
-
 
   /**
    * Handles table's context menu event

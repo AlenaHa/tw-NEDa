@@ -59,12 +59,17 @@
           <div class="panel-body">
             <form name="earthquakeForm" novalidate>
               <div class="form-group">
-                <input
 
-                  (keyup)='checkMagnitude($event)'
-                  placeholder="NGO name"
-                  type="text">
-                <button md-button>Search</button>
+                <select (change)="triggerOngName($event.target.value)">
+                  <option selected disabled>NGO name</option>
+                  <option
+                    *ngFor="let ongName of allOngNames; let i = index"
+                    [attr.data-index]="i">
+                    {{ ongName}}
+                  </option>
+                </select>
+
+                <button (click)="goToOngName()" md-button>Search</button>
               </div>
             </form>
 
@@ -86,12 +91,17 @@
           <div class="panel-body">
             <form name="earthquakeForm" novalidate>
               <div class="form-group">
-                <input
 
-                  (keyup)='checkMagnitude($event)'
-                  placeholder="Location"
-                  type="text">
-                <button md-button>Search</button>
+                <select (change)="triggerDistrict($event.target.value)">
+                  <option selected disabled>Location</option>
+                  <option
+                    *ngFor="let district of allDistrict; let i = index"
+                    [attr.data-index]="i">
+                    {{ district}}
+                  </option>
+                </select>
+
+                <button (click)="goToDistrict()" md-button>Search</button>
               </div>
             </form>
 
@@ -112,12 +122,17 @@
           <div class="panel-body">
             <form name="earthquakeForm" novalidate>
               <div class="form-group">
-                <input
 
-                  (keyup)='checkMagnitude($event)'
-                  placeholder="Activity"
-                  type="text">
-                <button md-button>Search</button>
+                <select (change)="triggerActivity($event.target.value)">
+                  <option selected disabled>Activity Type</option>
+                  <option
+                    *ngFor="let activity of allActivityTypes; let i = index"
+                    [attr.data-index]="i">
+                    {{ activity}}
+                  </option>
+                </select>
+
+                <button (click)="goToActivityType()" md-button>Search</button>
               </div>
             </form>
 
@@ -139,12 +154,17 @@
           <div class="panel-body">
             <form name="earthquakeForm" novalidate>
               <div class="form-group">
-                <input
 
-                  (keyup)='checkMagnitude($event)'
-                  placeholder="Supplies"
-                  type="text">
-                <button md-button>Search</button>
+                <select (change)="triggerSupplies($event.target.value)">
+                  <option selected disabled>Supplies</option>
+                  <option
+                    *ngFor="let supply of allSupplies; let i = index"
+                    [attr.data-index]="i">
+                    {{ supply}}
+                  </option>
+                </select>
+
+                <button (click)="goToSupplies()" md-button>Search</button>
               </div>
             </form>
 

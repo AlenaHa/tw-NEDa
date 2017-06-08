@@ -2,32 +2,20 @@
   <!--Cover picture-->
   <div class="image-pop">
     <img
-      src="https://scontent.fotp3-1.fna.fbcdn.net/v/t35.0-12/18110121_1522407781125863_1860674748_o.png?oh=9c52cc1e1be7ffd52b546782921fa1c8&oe=58FCB1F9"
+      src="people2.png"
       alt="Smiley face" height=100% width=100%>
   </div>
 
   <!--main page-->
   <div class='container' id="container-population">
 
-    <!--text information-->
+    text information
     <div class="page-header">
       <h1 class="text-pop">Nepal Population</h1>
       <br>
-      <h4 class="text-pop">Help for survivors. Collaborating with local groups who
-        already work in the region,
-        AmeriCares is bringing community-based psychosocial health programs to remote and
-        isolated earthquake-affected communities. In a public space, trained performers act
-        out the range of stress symptoms that can afflict earthquake survivors. The training
-        adds to health workers’ knowledge of mental health and psychosocial issues, building
-        local capacity that will help the community for years to come. The program will reach
-        more than 1,000 communities and train more than 2,900 community health workers through
-        June 2017. Over 550 performances thus far have reached an estimated audience of 172,000
-        community members in 6 districts.</h4>
-
     </div>
 
-    <br>
-    <br>
+    <br><br><br><br>
 
     <!--Serach by District-->
     <div class="column-search">
@@ -43,46 +31,31 @@
         <div class="panel-body">
           <form name="earthquakeForm" novalidate>
             <div class="form-group input-search">
-              <input
-                placeholder="District"
-                type="text">
-              <button md-button>Search</button>
+
+              <select (change)="triggerDistrict($event.target.value)">
+                <option selected disabled>District</option>
+                <option
+                  *ngFor="let district of allDistrictNames; let i = index"
+                  [attr.data-index]="i">
+                  {{ district }}
+                </option>
+              </select>
+
+              <button (click)="goToCharts()" md-button>Search</button>
+
             </div>
           </form>
         </div>
       </div>
     </div>
 
+    <br><br><br><br><br><br><br><br><br><br>
 
     <!--All the charts-->
     <md-card class="charts ">
 
-      <!--Bar chart-->
-      <div>
-        <div class="chart-pop-bar">
-          <md-card>
-            <canvas baseChart
-                    [datasets]="barChartData"
-                    [labels]="barChartLabels"
-                    [options]="barChartOptions"
-                    [legend]="barChartLegend"
-                    [chartType]="barChartType"
-                    (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)"></canvas>
-
-            <!--chart name-->
-            <div class="panel-heading">
-              <h2 class="panel-title text-center">
-                Earthquakes
-              </h2>
-            </div>
-
-          </md-card>
-        </div>
-      </div>
-
       <!--Area chart-->
-      <div class="chart-pop-1">
+      <div class="col-md-6">
         <md-card>
           <canvas baseChart
                   [data]="polarAreaChartData"
@@ -103,7 +76,7 @@
 
 
       <!--Doughnut chart-->
-      <div class="chart-pop-2">
+      <div class="col-md-6">
         <md-card>
           <canvas baseChart
                   [data]="doughnutChartData"
@@ -124,3 +97,6 @@
     </md-card>
   </div>
 </div>
+
+
+<br><br>

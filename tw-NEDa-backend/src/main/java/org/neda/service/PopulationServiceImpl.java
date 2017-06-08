@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.neda.entity.Population;
 import org.neda.repository.PopulationRepository;
@@ -19,6 +20,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class PopulationServiceImpl implements PopulationService {
     private static final Logger LOGGER = LoggerFactory.getLogger(PopulationServiceImpl.class);
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Autowired
     private PopulationRepository populationRepository;
@@ -47,5 +51,69 @@ public class PopulationServiceImpl implements PopulationService {
     public void delete(Long id) {
         this.populationRepository.delete(id);
     }
+
+
+    public Integer getFemaleNumber(String district) {
+
+        Query query = entityManager.createNativeQuery(
+                "select * from POPULATION p join location l on p.POPULATION_ID = l.LOCATION_ID " +
+                        "where p.GENDER like 'female' and l.district = '" + district + "'", Population.class);
+        List resultList = query.getResultList();
+
+        return resultList.size();
+
+    }
+
+    public Integer getMaleNumber(String district) {
+
+        Query query = entityManager.createNativeQuery(
+                "select * from POPULATION p join location l on p.POPULATION_ID = l.LOCATION_ID " +
+                        "where p.GENDER like 'male' and l.district = '" + district + "'", Population.class);
+        List resultList = query.getResultList();
+
+        return resultList.size();
+
+    }
+
+    @Override
+    public Integer getAgeNumber15_24(String district) {
+        Query query = entityManager.createNativeQuery(
+                "select * from POPULATION p join location l on p.POPULATION_ID = l.LOCATION_ID " +
+                        "where p.AGE_DISTRIBUTION like '%15%'  and l.district = '" + district + "'", Population.class);
+        List resultList = query.getResultList();
+
+        return resultList.size();
+    }
+
+    @Override
+    public Integer getAgeNumber25_39(String district) {
+        Query query = entityManager.createNativeQuery(
+                "select * from POPULATION p join location l on p.POPULATION_ID = l.LOCATION_ID " +
+                        "where p.AGE_DISTRIBUTION like '%25%'  and l.district = '" + district + "'", Population.class);
+        List resultList = query.getResultList();
+
+        return resultList.size();
+    }
+
+    @Override
+    public Integer getAgeNumber40_54(String district) {
+        Query query = entityManager.createNativeQuery(
+                "select * from POPULATION p join location l on p.POPULATION_ID = l.LOCATION_ID " +
+                        "where p.AGE_DISTRIBUTION like '%40%'  and l.district = '" + district + "'", Population.class);
+        List resultList = query.getResultList();
+
+        return resultList.size();
+    }
+
+    @Override
+    public Integer getAgeNumber55(String district) {
+        Query query = entityManager.createNativeQuery(
+                "select * from POPULATION p join location l on p.POPULATION_ID = l.LOCATION_ID " +
+                        "where p.AGE_DISTRIBUTION like '%55%'  and l.district = '" + district + "'", Population.class);
+        List resultList = query.getResultList();
+
+        return resultList.size();
+    }
+
 }
 
