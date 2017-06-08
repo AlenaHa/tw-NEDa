@@ -4,12 +4,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.neda.entity.CompleteEarthquake;
 import org.neda.entity.Earthquake;
 import org.neda.repository.EarthquakeRepository;
 import org.slf4j.Logger;
@@ -107,5 +109,110 @@ public class EarthquakeServiceImpl implements EarthquakeService, CsvService {
         List<Earthquake> list = this.earthquakeRepository.findByMagnitude(magnitude);
         return list;
 
+    }
+
+    @Override
+    public List<CompleteEarthquake> getAllEarthquakeInformation() {
+        List<CompleteEarthquake> earthquakes = new ArrayList<CompleteEarthquake>();
+        List<Object[]> results = entityManager.createNativeQuery("SELECT e.eq_depth, l.district,e.happened_on,e.latitude, e.longitude,  e.magnitude," +
+                "  l.municipality from earthquake e join location l " +
+                "on e.e_location_id = l.location_id ").getResultList();
+
+        for (Object[] result : results) {
+            CompleteEarthquake completeEarthquake = new CompleteEarthquake();
+            completeEarthquake.setDepth(Double.parseDouble(result[0].toString()));
+            completeEarthquake.setDistrict(result[1].toString());
+            completeEarthquake.setHappenedOn((Date) result[2]);
+            completeEarthquake.setLatitude(Double.parseDouble(result[3].toString()));
+            completeEarthquake.setLongitude(Double.parseDouble(result[4].toString()));
+            completeEarthquake.setMagnitude(Double.parseDouble(result[5].toString()));
+            completeEarthquake.setMunicipality((String) result[6]);
+            earthquakes.add(completeEarthquake);
+        }
+        return earthquakes;
+    }
+
+    @Override
+    public List<CompleteEarthquake> getAllEarthquakesByMagnitude(Double magnitude) {
+        List<CompleteEarthquake> earthquakes = new ArrayList<CompleteEarthquake>();
+        List<Object[]> results = entityManager.createNativeQuery("SELECT e.eq_depth, l.district,e.happened_on,e.latitude, e.longitude,  e.magnitude," +
+                "  l.municipality from earthquake e join location l " +
+                "on e.e_location_id = l.location_id  where e.magnitude = " + magnitude).getResultList();
+
+        for (Object[] result : results) {
+            CompleteEarthquake completeEarthquake = new CompleteEarthquake();
+            completeEarthquake.setDepth(Double.parseDouble(result[0].toString()));
+            completeEarthquake.setDistrict(result[1].toString());
+            completeEarthquake.setHappenedOn((Date) result[2]);
+            completeEarthquake.setLatitude(Double.parseDouble(result[3].toString()));
+            completeEarthquake.setLongitude(Double.parseDouble(result[4].toString()));
+            completeEarthquake.setMagnitude(Double.parseDouble(result[5].toString()));
+            completeEarthquake.setMunicipality((String) result[6]);
+            earthquakes.add(completeEarthquake);
+        }
+        return earthquakes;
+    }
+
+    @Override
+    public List<CompleteEarthquake> getAllEarthquakesByDepth(Double depth) {
+        List<CompleteEarthquake> earthquakes = new ArrayList<CompleteEarthquake>();
+        List<Object[]> results = entityManager.createNativeQuery("SELECT e.eq_depth, l.district,e.happened_on,e.latitude, e.longitude,  e.magnitude," +
+                "  l.municipality from earthquake e join location l " +
+                "on e.e_location_id = l.location_id where e.eq_depth = " + depth).getResultList();
+
+        for (Object[] result : results) {
+            CompleteEarthquake completeEarthquake = new CompleteEarthquake();
+            completeEarthquake.setDepth(Double.parseDouble(result[0].toString()));
+            completeEarthquake.setDistrict(result[1].toString());
+            completeEarthquake.setHappenedOn((Date) result[2]);
+            completeEarthquake.setLatitude(Double.parseDouble(result[3].toString()));
+            completeEarthquake.setLongitude(Double.parseDouble(result[4].toString()));
+            completeEarthquake.setMagnitude(Double.parseDouble(result[5].toString()));
+            completeEarthquake.setMunicipality((String) result[6]);
+            earthquakes.add(completeEarthquake);
+        }
+        return earthquakes;
+    }
+
+    @Override
+    public List<CompleteEarthquake> getAllEarthquakesByYear(Integer year) {
+        List<CompleteEarthquake> earthquakes = new ArrayList<CompleteEarthquake>();
+        List<Object[]> results = entityManager.createNativeQuery("SELECT e.eq_depth, l.district,e.happened_on,e.latitude, e.longitude,  e.magnitude," +
+                "  l.municipality from earthquake e join location l " +
+                "on e.e_location_id = l.location_id where extract(YEAR from e.happened_on) = " + year).getResultList();
+
+        for (Object[] result : results) {
+            CompleteEarthquake completeEarthquake = new CompleteEarthquake();
+            completeEarthquake.setDepth(Double.parseDouble(result[0].toString()));
+            completeEarthquake.setDistrict(result[1].toString());
+            completeEarthquake.setHappenedOn((Date) result[2]);
+            completeEarthquake.setLatitude(Double.parseDouble(result[3].toString()));
+            completeEarthquake.setLongitude(Double.parseDouble(result[4].toString()));
+            completeEarthquake.setMagnitude(Double.parseDouble(result[5].toString()));
+            completeEarthquake.setMunicipality((String) result[6]);
+            earthquakes.add(completeEarthquake);
+        }
+        return earthquakes;
+    }
+
+    @Override
+    public List<CompleteEarthquake> getAllEarthquakesByDistrict(String district) {
+        List<CompleteEarthquake> earthquakes = new ArrayList<CompleteEarthquake>();
+        List<Object[]> results = entityManager.createNativeQuery("SELECT e.eq_depth, l.district,e.happened_on,e.latitude, e.longitude,  e.magnitude," +
+                "  l.municipality from earthquake e join location l " +
+                "on e.e_location_id = l.location_id where l.district = '" + district + "'").getResultList();
+
+        for (Object[] result : results) {
+            CompleteEarthquake completeEarthquake = new CompleteEarthquake();
+            completeEarthquake.setDepth(Double.parseDouble(result[0].toString()));
+            completeEarthquake.setDistrict(result[1].toString());
+            completeEarthquake.setHappenedOn((Date) result[2]);
+            completeEarthquake.setLatitude(Double.parseDouble(result[3].toString()));
+            completeEarthquake.setLongitude(Double.parseDouble(result[4].toString()));
+            completeEarthquake.setMagnitude(Double.parseDouble(result[5].toString()));
+            completeEarthquake.setMunicipality((String) result[6]);
+            earthquakes.add(completeEarthquake);
+        }
+        return earthquakes;
     }
 }
