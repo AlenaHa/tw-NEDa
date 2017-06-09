@@ -14,7 +14,7 @@ import { OngDetails } from '../../model/ongDetails.model';
 
 export class OngComponent implements OnInit, AfterViewInit {
 
-  public exportCsvUrl: string;
+  public csvExportUrl: string;
   public nameSelectedValue: string;
   public allOng = Array<string>();
   public allOngNames = new Set<string>();
@@ -54,7 +54,7 @@ export class OngComponent implements OnInit, AfterViewInit {
       }
     ];
 
-    this.exportCsvUrl = this.ongService.getCsv();
+    this.csvExportUrl = this.ongService.getCsv();
   }
 
   ngOnInit(): void {
