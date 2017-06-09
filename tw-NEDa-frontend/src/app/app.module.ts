@@ -51,6 +51,7 @@ import { LocationService } from './services/location.service';
     MaterialModule.forRoot(),
     FlexLayoutModule,
     NgxDatatableModule,
+
     Md2DatepickerModule,
 
 

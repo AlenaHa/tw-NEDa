@@ -1,5 +1,11 @@
 package org.neda.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.neda.entity.District;
 import org.neda.entity.Location;
 import org.neda.repository.LocationRepository;
@@ -7,11 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Service
@@ -79,11 +80,11 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public List<District> getAllDistricts() {
         List<District> districts = new ArrayList<District>();
-        List<Object[]> results = entityManager.createNativeQuery("SELECT district from location").getResultList();
+        List<Object> list = entityManager.createNativeQuery("SELECT district from location").getResultList();
+        for (Object result : list) {
 
-        for (Object[] result : results) {
             District district = new District();
-            district.setName(result[0].toString());
+            district.setName(result.toString());
             districts.add(district);
         }
         return districts;

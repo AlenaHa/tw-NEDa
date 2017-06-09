@@ -142,7 +142,7 @@ export class EarthquakeService {
      let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         return this.http.get(
-          this.backendUrl + '/districts/',
+          this.backendUrl + '/location/districts',
           {headers: headers})
           .map(res => res.json());
   }

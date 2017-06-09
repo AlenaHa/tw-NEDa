@@ -28,7 +28,7 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
   public magnitude: number;
   public depth: number;
   public csvExportUrl: string;
-
+  public districtForView = Array<String>();
   constructor(private earthquakeService: EarthquakeService,
               public dialog: MdDialog) {
   }
@@ -71,7 +71,10 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
   let allDistricts = [];
      for (let index in responseData) {
       let district = new District(responseData[index]);
-      allDistricts.push(district);
+       this.districtForView.push(district.name);
+
+       console.log(district.name);
+       allDistricts.push(district);
 
       this.temp = [...allDistricts];
 
@@ -213,9 +216,18 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
     console.log(this.year);
   }
 
+  public selectedLocation: string;
+
+  triggerDistrict(value) {
+
+    this.selectedLocation = value.toString();
+    console.log("Selected value : " + this.selectedLocation);
+  }
   getEqByMagnitude() {
 
-    this.earthquakeService.getListOfEarthquakesByMagnitude(this.magnitude).subscribe(
+    console.log(this.magnitude);
+
+    this.earthquakeService.getListOfEarthquakesByMagnitude(Number(this.magnitude)).subscribe(
       (data) => this.retrieveData(data),
       (err) => this.showError());
   }
@@ -228,7 +240,7 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
   }
 
   getEqByDistrict() {
-    this.earthquakeService.getListOfEarthquakesByDistrict(this.district.name).subscribe(
+    this.earthquakeService.getListOfEarthquakesByDistrict(this.selectedLocation).subscribe(
       (data) => this.retrieveData(data),
       (err) => this.showError()
     );
