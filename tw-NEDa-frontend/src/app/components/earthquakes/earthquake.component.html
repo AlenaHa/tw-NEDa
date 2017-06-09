@@ -30,17 +30,19 @@
           <form name="significantEarthquakeForm" novalidate>
             <div class="form-group">
               <h3>Search By District</h3>
-              <md-input-container>
-                <input mdInput [(ngModel)]="district" [ngModelOptions]="{standalone: true}"
-                       placeholder="District..."
-                       mdInput
-                       type="text">
-              </md-input-container>
-              <button
-                (click)="getEqByDistrict()"
-                md-button>
-                Search Earthquakes By District
-              </button>
+              <div>
+                <md-select placeholder="District">
+                  <md-option *ngFor="let district of districts" [value]="district.name">
+                    {{ district.name }}
+                  </md-option>
+                </md-select>
+
+                <button
+                  (click)="getEqByDistrict()"
+                  md-button>
+                  Search Earthquakes By District
+                </button>
+              </div>
             </div>
           </form>
         </div>
