@@ -12,9 +12,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.neda.db.EarthquakeAndLocation;
 import org.neda.entity.CompleteEarthquake;
 import org.neda.entity.Earthquake;
+import org.neda.entity.Location;
 import org.neda.service.EarthquakeService;
+import org.neda.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +30,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@CrossOrigin(value = "http://localhost:4200")
+@CrossOrigin(value = "*")
 @RequestMapping(value = "/earthquakes")
 public class EarthquakeController {
 
     @Autowired
     private EarthquakeService earthquakeService;
+
+    @Autowired
+    private LocationService locationService;
 
     /**
      * Find an Earthquake Object by Id
@@ -220,5 +226,17 @@ public class EarthquakeController {
             return new ResponseEntity<List<CompleteEarthquake>>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<List<CompleteEarthquake>>(allEarthquakesByDistrict, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/e-l", method = RequestMethod.POST)
+    public ResponseEntity<EarthquakeAndLocation> createEarthquakeAndLocation(@RequestBody EarthquakeAndLocation earthquakeAndLocation) {
+
+        Location savedLocation = locationService.save(earthquakeAndLocation.getLocation());
+        Earthquake requestEarthquake = earthquakeAndLocation.getEarthquake();
+        requestEarthquake.setLocalizationId(savedLocation.getLocationId());
+
+        earthquakeService.save(requestEarthquake);
+
+        return new ResponseEntity<EarthquakeAndLocation>(HttpStatus.CREATED);
     }
 }
