@@ -1,8 +1,17 @@
 package org.neda.controller;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.neda.entity.Ong;
 import org.neda.entity.OngDetails;
 import org.neda.service.OngService;
@@ -120,5 +129,26 @@ public class OngController {
 
     }
 
+    @RequestMapping(value = "/ong.csv", method = RequestMethod.GET)
+    public void exportCsv(HttpServletResponse response) throws IOException, SQLException {
+        String fileName = "D:\\ong.csv";
+        ongService.exportCsv(fileName);
+        InputStream is = null;
+        File file = null;
+        try {
+            file = new File(fileName);
+            is = new FileInputStream(file);
+            IOUtils.copy(is, response.getOutputStream());
+            response.setContentType("application/csv");
+            response.flushBuffer();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            is.close();
+            file.delete();
+        }
+    }
 
 }
