@@ -1,6 +1,9 @@
 package org.neda.service;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -19,7 +22,7 @@ import org.springframework.stereotype.Service;
  * Created by Cami on 2017-05-04.
  */
 @Service
-public class OngServiceImpl implements OngService {
+public class OngServiceImpl implements OngService, CsvService {
     private static final Logger LOGGER = LoggerFactory.getLogger(OngServiceImpl.class);
 
     @PersistenceContext
@@ -184,4 +187,20 @@ public class OngServiceImpl implements OngService {
         return ongDetails;
     }
 
+    @Override
+    public void exportCsv(String filePath) throws IOException {
+        String csvFile = filePath;
+        FileWriter writer = new FileWriter(csvFile);
+
+        for (Ong ong : this.findAll()) {
+            CsvUtils.writeLine(writer, Arrays.asList(
+                    ong.getOngId().toString(),
+                    ong.getOngName(),
+                    ong.getActivityType(),
+                    ong.getSubactivityType()));
+        }
+
+        writer.flush();
+        writer.close();
+    }
 }

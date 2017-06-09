@@ -1,7 +1,9 @@
 <div class="container">
   <md-card class="my-header">
     <md-card-content>
-      <h2>Earthquakes</h2>
+      <h2>Earthquakes
+        <i class="material-icons">&#xE85A;</i>
+      </h2>
       <div class="table-eq">
         <ngx-datatable
           id="eq-table"
@@ -29,18 +31,26 @@
         <div class="timeline-body">
           <form name="significantEarthquakeForm" novalidate>
             <div class="form-group">
-              <h3>Search By District</h3>
-              <md-input-container>
-                <input mdInput [(ngModel)]="district" [ngModelOptions]="{standalone: true}"
-                       placeholder="District..."
-                       mdInput
-                       type="text">
-              </md-input-container>
-              <button
-                (click)="getEqByDistrict()"
-                md-button>
-                Search Earthquakes By District
-              </button>
+              <h3>Search By District
+                <i class="material-icons">&#xE0C8;</i></h3>
+              <div>
+
+
+                <select (change)="triggerDistrict($event.target.value)">
+                  <option selected disabled>Choose District</option>
+                  <option
+                          *ngFor="let district of districtForView ; let i = index"
+                          [attr.data-index]="i">
+                    {{ district }}
+                  </option>
+                </select>
+
+                <button
+                  (click)="getEqByDistrict()"
+                  md-button>
+                  Search Earthquakes By District
+                </button>
+              </div>
             </div>
           </form>
         </div>
@@ -77,7 +87,8 @@
         <div class="timeline-body">
           <form name="significantEarthquakeForm" novalidate>
             <div class="form-group">
-              <h3>Filter By Depth</h3>
+              <h3>Filter By Depth
+                <i class="material-icons">&#xE0C8;</i></h3>
               <md-input-container>
                 <input mdInput [(ngModel)]="depth" [ngModelOptions]="{standalone: true}"
                        placeholder="Depth..."

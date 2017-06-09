@@ -1,6 +1,9 @@
 package org.neda.service;
 
+import org.neda.entity.District;
 import org.neda.entity.Location;
+
+import java.util.List;
 
 
 public interface LocationService extends CrudService<Location> {
@@ -24,6 +27,10 @@ public interface LocationService extends CrudService<Location> {
      */
     Location getLocationMunicipality(String municipality);
 
+    /**
+     * @return Returns a list of districts.
+     */
+    List<District> getAllDistricts();
 
 }
 

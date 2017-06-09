@@ -1,5 +1,6 @@
 package org.neda.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.neda.entity.Ong;
@@ -21,4 +22,6 @@ public interface OngService extends CrudService<Ong> {
     List<OngDetails> getAllOngDetailsByActivityType(String ongActivity);
 
     List<OngDetails> getAllOngDetailsBySupplies(String supply);
+
+    public void exportCsv(String filePath) throws IOException;
 }

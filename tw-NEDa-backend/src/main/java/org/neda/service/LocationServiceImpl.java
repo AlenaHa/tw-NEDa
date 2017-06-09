@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.neda.entity.District;
 import org.neda.entity.Location;
 import org.neda.repository.LocationRepository;
 import org.slf4j.Logger;
@@ -76,4 +77,16 @@ public class LocationServiceImpl implements LocationService {
         return this.LocationRepository.findByMunicipality(municipality);
     }
 
+    @Override
+    public List<District> getAllDistricts() {
+        List<District> districts = new ArrayList<District>();
+        List<Object> list = entityManager.createNativeQuery("SELECT district from location").getResultList();
+        for (Object result : list) {
+
+            District district = new District();
+            district.setName(result.toString());
+            districts.add(district);
+        }
+        return districts;
+    }
 }

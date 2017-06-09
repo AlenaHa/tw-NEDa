@@ -3,6 +3,7 @@ package org.neda.controller;
 
 import java.util.List;
 
+import org.neda.entity.District;
 import org.neda.entity.Location;
 import org.neda.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,7 +126,16 @@ public class LocationController {
     }
 
 
-
+    /**
+     * Get a list of all districts.
+     * @return The list of all districts.
+     */
+    @RequestMapping(value = "/districts", method = RequestMethod.GET)
+    public ResponseEntity<List<District>> getDistrictsList() {
+        List<District> districts = locationService.getAllDistricts();
+        if (districts.isEmpty()) return new ResponseEntity<List<District>>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<List<District>>(districts, HttpStatus.OK);
+    }
 
 
 }

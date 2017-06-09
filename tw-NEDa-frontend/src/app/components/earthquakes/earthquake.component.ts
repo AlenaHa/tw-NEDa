@@ -5,6 +5,7 @@ import { Earthquake } from '../../model/earthquake.model';
 import { MdDialog, MdMenuTrigger } from '@angular/material';
 import { EarthquakeDialog } from './earthquake.dialog';
 import { CompleteEarthquake } from '../../model/completeEarthquake.model';
+import { District } from '../../model/district.model';
 
 @Component({
   selector: 'filter-demo',
@@ -22,11 +23,12 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
   temp = [];
   rows = [];
   columns = [];
-  public district = "";
+  districts = [];
+  public district : District;
   public magnitude: number;
   public depth: number;
   public csvExportUrl: string;
-
+  public districtForView = Array<String>();
   constructor(private earthquakeService: EarthquakeService,
               public dialog: MdDialog) {
   }
@@ -58,8 +60,28 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
         (err) => this.showError());
 
     this.csvExportUrl = this.earthquakeService.getCsv();
-
+      // Get all the districts from location table.
+      this.earthquakeService.getAllDistricts()
+        .subscribe(
+          (data) => this.retrieveDistricts(data),
+          (err) => this.showError());
   }
+
+  retrieveDistricts(responseData : any){
+  let allDistricts = [];
+     for (let index in responseData) {
+      let district = new District(responseData[index]);
+       this.districtForView.push(district.name);
+
+       console.log(district.name);
+       allDistricts.push(district);
+
+      this.temp = [...allDistricts];
+
+      this.districts = allDistricts;
+    }
+  }
+
 
   /**
    * Adds the data retrieved from the server to the table
@@ -194,9 +216,18 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
     console.log(this.year);
   }
 
+  public selectedLocation: string;
+
+  triggerDistrict(value) {
+
+    this.selectedLocation = value.toString();
+    console.log("Selected value : " + this.selectedLocation);
+  }
   getEqByMagnitude() {
 
-    this.earthquakeService.getListOfEarthquakesByMagnitude(this.magnitude).subscribe(
+    console.log(this.magnitude);
+
+    this.earthquakeService.getListOfEarthquakesByMagnitude(Number(this.magnitude)).subscribe(
       (data) => this.retrieveData(data),
       (err) => this.showError());
   }
@@ -209,7 +240,7 @@ export class EarthquakeComponent implements OnInit, AfterViewInit {
   }
 
   getEqByDistrict() {
-    this.earthquakeService.getListOfEarthquakesByDistrict(this.district).subscribe(
+    this.earthquakeService.getListOfEarthquakesByDistrict(this.selectedLocation).subscribe(
       (data) => this.retrieveData(data),
       (err) => this.showError()
     );

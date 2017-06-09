@@ -75,7 +75,7 @@
 
 .my-header h2 {
   text-align: center;
-  color: coral;
+  color: black;
   z-index: 1;
 }
 
@@ -86,15 +86,15 @@
 }
 
 .timeline-body md-input-container {
-  color: coral;
+  color: black;
 }
 
 .timeline-body input {
-  color: coral;
+  color: black;
 }
 
 .timeline-body {
-  color: coral;
+  color: black;
 }
 .my-header img {
   height: 80px;
@@ -107,7 +107,6 @@
   list-style: none;
   padding: 20px 0 20px;
   position: relative;
-  background-color: white;
 }
 
 .timeline:before {
@@ -155,6 +154,7 @@
   position: relative;
   -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+  background-color: white;
 }
 
 .timeline > li > .timeline-panel:before {
@@ -226,7 +226,7 @@
 
 .timeline-title {
   margin-top: 0;
-  color: coral;
+  color: black;
 }
 
 .timeline-body > p,

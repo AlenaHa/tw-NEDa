@@ -107,4 +107,8 @@ export class OngService {
       .map(res => res.json());
 
   }
+
+  getCsv() {
+    return this.backendUrl + '/ong/ong.csv';
+  }
 }

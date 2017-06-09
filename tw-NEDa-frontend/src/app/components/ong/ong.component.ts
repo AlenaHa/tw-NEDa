@@ -1,10 +1,9 @@
 import { AfterViewInit, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { OngService } from '../../services/ong.service';
-import { Ong } from '../../model/ong.model';
 import { MdDialog, MdMenuTrigger } from '@angular/material';
 import { OngDialog } from './ong.dialog';
-import { OngDetails } from '../../model/ongDetails.model'
+import { OngDetails } from '../../model/ongDetails.model';
 
 @Component({
   selector: 'filter-demo',
@@ -15,6 +14,7 @@ import { OngDetails } from '../../model/ongDetails.model'
 
 export class OngComponent implements OnInit, AfterViewInit {
 
+  public csvExportUrl: string;
   public nameSelectedValue: string;
   public allOng = Array<string>();
   public allOngNames = new Set<string>();
@@ -53,6 +53,8 @@ export class OngComponent implements OnInit, AfterViewInit {
         width: 100
       }
     ];
+
+    this.csvExportUrl = this.ongService.getCsv();
   }
 
   ngOnInit(): void {
